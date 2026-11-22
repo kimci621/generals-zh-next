@@ -1,0 +1,26 @@
+# R3.9: каждая сила генерала Russia с ЦУ слота 0 по отдельной цели слота 1; tally до и после.
+30    spawn      0  RussiaPowerPlant      1   start0:-200:-250
+30    spawn      0  RussiaPowerPlant      1   start0:-200:-400
+30    spawn      0  RussiaCommandCenter   1   start0:-300:250
+30    spawn      1  ChinaBarracks         1   start1:-450:-350
+30    spawn      1  ChinaBarracks         1   start1:-320:-350
+30    spawn      1  ChinaBarracks         1   start1:-190:-350
+30    spawn      1  ChinaBarracks         1   start1:-60:-350
+30    spawn      1  ChinaBarracks         1   start1:70:-350
+30    spawn      1  ChinaBarracks         1   start1:200:-350
+30    spawn      1  ChinaBarracks         1   start1:330:-350
+30    spawn      1  ChinaBarracks         1   start1:460:-350
+100   tally      1  ChinaBarracks
+150   power      0  RussiaCommandCenter   start1:-450:-350  SuperweaponRussiaTornadoS
+210   power      0  RussiaCommandCenter   start1:-320:-350  SuperweaponRussiaFAB
+270   power      0  RussiaCommandCenter   start1:-190:-350  SuperweaponRussiaKinzhal
+330   power      0  RussiaCommandCenter   start1:-60:-350  SuperweaponRussiaCyber
+390   power      0  RussiaCommandCenter   start1:70:-350  SuperweaponRussiaEWSuppress
+450   power      0  RussiaCommandCenter   start1:200:-350  SuperweaponRussiaVDV
+510   power      0  RussiaCommandCenter   start1:330:-350  SuperweaponRussiaReservists
+570   power      0  RussiaCommandCenter   start1:460:-350  SuperweaponRussiaOrlanRecon
+1800  tally      1  ChinaBarracks
+1800  tally      0  RussiaInfantryReservist
+1800  tally      0  RussiaInfantryMotorRifle
+700   tally      0  RussiaInfantryReservist
+700   tally      0  RussiaInfantryMotorRifle

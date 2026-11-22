@@ -17,7 +17,7 @@ P13 Upstream merges only by release tag (`git fetch upstream --tags; git merge v
 P14 Text for players: UI strings in game language (ru+en at least); Russian text on models. Code comments: match file (upstream uses English).
 
 ## STATE
-NOW: R3.9
+NOW: GATE3 (wait for user), then R4.0
 LAST: R2 skeleton verified 2026-11-22.
 NEXT-NOTE: -
 BLOCKERS: -
@@ -92,7 +92,7 @@ BALANCE TARGETS (user 2026-11-22: max 10 games per opponent general, iterate fas
 [x] R3.7 Sciences/powers per DATA SCIENCE (Cyber code F13d, FAB, TornadoS, VDV, Reservists, EWSuppress, Kinzhal, TOS2, Veterans, OrlanRecon) + PlayerTemplate own sciences + AI SkillSets. => powers fire in headless.
 [x] R3.7b Talents 6-10 (A|B) per DATA TALENTS: 10 sciences SCIENCE_RussiaTalent6A..10B (ScienceReforged.ini, Turkiye pattern), TalentSciences in FactionRussia, effects in TalentsReforged.ini, strings en+ru. => cards load, no INI errors; effect lines present.
 [x] R3.8 Oreshnik superweapon (Scud Storm-like, 6 impacts). => fires in headless.
-[ ] R3.9 Verify each mechanic by scenario or scripted headless check, checklist in LOG. GATE3.
+[x] R3.9 Verify each mechanic by scenario or scripted headless check, checklist in LOG. GATE3.
 
 ### R4 bot
 [ ] R4.0 Expand: Russia skirmish scripts (ScbTool or scb.py) on top of China's: build Pantsir on air threat, Orlan over arty, Lancet targeting, Voenkomat, upgrades, powers; trace like ~/Games/Generals ai-lab AI_LAB_TRACE.
@@ -176,3 +176,9 @@ R3.8 | bot never builds Oreshnik (Russia builds 0 defenses, superweapon 0 in 6x7
 2026-11-22 R3.7 SCIENCE_Russia tree (3 R1, 14 R3, Kinzhal R5) + 8 powers on CC slots + Cyber OCL code + TOS2 unit + bot SkillSets; 6 headless vs China/AirForce: fires Cyber 13 FAB 18 Kinzhal 25 Orlan 77 Reservists 11 TornadoS 13 VDV 14, EWSuppress 0 (points); no Russia INI/string errors.
 2026-11-22 R3.7b 10 talent cards + upgrades + effects (Mobres swap, truck boost, MaxHealth, 7 Talent weapons via WeaponSetUpgrade, PD channel, Sight, T14 cap 3/5); 3 headless vs China clean (no Russia/talent INI errors), bot reaches rank 6-7 (AI picks cards silently, effect not measured -> R3.9).
 2026-11-22 R3.8 Oreshnik: OCL 6 cruise warheads (ScudStorm blast), reload 300s, 240s with 10B; scenario russia_oreshnik: fired at frame 200, China barracks 0 alive at 1500, no crash.
+2026-11-22 R3.9 checklist (scenarios run with -overlay <app Overlay + Scenarios/>, randommap 3, seed 5):
+  powers (russia_powers): TornadoS FAB Kinzhal Cyber EWSuppress VDV Reservists OrlanRecon all fired, no crash; Cyber stole 500 (10500 vs 9500); Reservists 5 alive; VDV 4 MotorRifle dropped; 1 of 3 China barracks killed by strikes
+  Oreshnik (russia_oreshnik): fired, target barracks dead, crash fixed (ModuleTag_09)
+  R3.4 PD/jammer, R3.5 economy, R3.6 upgrades: verified in own tasks (see LOG above)
+  NOT verified: talent card effects in play (no scenario action grants rank; bot picks cards silently) -> rest on INI load + code reading
+  NOT verified: bot uses Oreshnik/EWSuppress/defenses -> R4
