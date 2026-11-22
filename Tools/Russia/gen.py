@@ -43,6 +43,7 @@ UNITS = [
     ("InfantryReservist", "Nuke_ChinaInfantryRedguard", 0, 1, None, "Reservist", "Резервист", "Command_ConstructChinaInfantryRedguard", None),
     ("VehicleIMR3M", "ChinaVehicleDozer", 1000, 5, None, "IMR-3M Engineer Vehicle", "ИМР-3М", "Command_ConstructChinaDozer", "CommandCenter"),
     ("VehicleKamaz", "ChinaVehicleSupplyTruck", 600, 10, None, "KamAZ Truck", "КамАЗ", "Command_ConstructChinaVehicleSupplyTruck", "SupplyCenter"),
+    ("VehicleTOS2", "Nuke_ChinaVehicleInfernoCannon", 1500, 15, "SCIENCE_RussiaTOS2", "TOS-2 Tosochka", 'ТОС-2 "Тосочка"', "Command_ConstructChinaVehicleInfernoCannon", "SupplyCenter"),
     ("TankT72B3M", "ChinaTankBattleMaster", 700, 10, None, "T-72B3M", "Т-72Б3М", "Command_ConstructChinaTankBattleMaster", "WarFactory"),
     ("VehicleBTR82A", "ChinaVehicleTroopCrawler", 900, 12, None, "BTR-82A", "БТР-82А", "Command_ConstructChinaVehicleTroopCrawler", "WarFactory"),
     ("VehicleTigrM", "AmericaVehicleHumvee", 600, 10, None, "Tigr-M", '"Тигр-М"', "Command_ConstructAmericaVehicleHumvee", "SupplyCenter"),
@@ -66,8 +67,10 @@ UNITS = [
 ]
 DOZER = ["PowerPlant", "Barracks", "SupplyCenter", "WarFactory", "Airfield", "Voenkomat", "ControlCenter",
          "Strongpoint", "PantsirPos", "BukM3", "Zoopark", "Oreshnik", "CommandCenter"]
-CC_POWERS = ["Early_Command_ChinaCarpetBomb", "Command_NapalmStrike", "Command_ClusterMines", "Command_CashHack",
-             "Command_ArtilleryBarrage", "Command_EmergencyRepair", "Command_EMPPulse", "Command_UpgradeChinaRadar", "Command_Frenzy"]
+# способности генерала (руками в CommandSetReforged.ini ниже END); слот 9 - радар Китая
+CC_POWERS = ["Command_RussiaFAB", "Command_RussiaKinzhal", "Command_RussiaVDV", "Command_RussiaCyber",
+             "Command_RussiaTornadoS", "Command_RussiaReservists", "Command_RussiaEWSuppress", "Command_UpgradeChinaRadar",
+             "Command_RussiaOrlanRecon"]
 
 # новое оружие: имя, ванильный источник, поля поверх (None - убрать поле). dps ~ roster.tsv
 WEAPONS = [
@@ -80,6 +83,7 @@ WEAPONS = [
     ("RussiaBMP3Gun", "CrusaderTankGun", {"PrimaryDamage": 45.0, "DelayBetweenShots": 1000}),
     ("RussiaT90Gun", "CrusaderTankGun", {"PrimaryDamage": 66.0, "AttackRange": 160.0}),
     ("RussiaTOSSalvo", "InfernoCannonGun", {"PrimaryDamage": 120.0, "PrimaryDamageRadius": 60.0, "AttackRange": 200.0, "DelayBetweenShots": 2000}),
+    ("RussiaTOS2Salvo", "InfernoCannonGun", {"PrimaryDamage": 100.0, "PrimaryDamageRadius": 50.0, "AttackRange": 250.0, "DelayBetweenShots": 1800}),
     ("RussiaMstaShell", "NukeCannonGun", {"PrimaryDamage": 140.0, "PrimaryDamageRadius": 30.0, "DelayBetweenShots": 4000, "ProjectileDetonationOCL": None}),
     ("RussiaTornadoSalvo", "TomahawkMissileWeapon", {"PrimaryDamage": 50.0, "PrimaryDamageRadius": 30.0, "AttackRange": 400.0,
                                                     "ClipSize": 4, "DelayBetweenShots": 200, "ClipReloadTime": 8000}),
@@ -96,7 +100,7 @@ ARMORS = [("RussiaCageTankArmor", "TankArmor", {"INFANTRY_MISSILE": "50%"}),
 WSETS = {
     "InfantryMotorRifle": ["RussiaAK12"], "InfantryVerba": ["RussiaVerbaMissile"], "InfantryKornet": ["RussiaKornetMissile"],
     "InfantryFPV": ["RussiaFPVDrone"], "InfantryGRU": ["RussiaGRURifle"], "VehicleBTR82A": ["RussiaBTR30mm"],
-    "VehicleBMP3": ["RussiaBMP3Gun"], "TankT90M": ["RussiaT90Gun"], "VehicleTOS1A": ["RussiaTOSSalvo"],
+    "VehicleBMP3": ["RussiaBMP3Gun"], "TankT90M": ["RussiaT90Gun"], "VehicleTOS1A": ["RussiaTOSSalvo"], "VehicleTOS2": ["RussiaTOS2Salvo"],
     "VehicleMstaS": ["RussiaMstaShell"], "VehicleTornadoG": ["RussiaTornadoSalvo"], "VehicleLancet": ["RussiaLancetMunition"],
     "VehicleTorM2": ["RussiaTorMissile"], "BukM3": ["RussiaBukMissile"], "DroneOrlan": ["NONE"], "VehicleKrasukha": ["NONE"],
 }
@@ -202,7 +206,8 @@ def main():
             o += f"  CommandSet = {sets[i]}\n"
         o += f"  DisplayName = OBJECT:{n}\n  BuildCost = {c}\n  BuildTime = {t}.0\n"
         if req:
-            o += f"  Prerequisites\n    Object = Russia{req}\n  End\n"
+            kind = "Science = " + req if req.startswith("SCIENCE_") else "Object = Russia" + req
+            o += f"  Prerequisites\n    {kind}\n  End\n"
         btype, tag, hp, scale = stats[i]
         if hp:
             o += f"  ReplaceModule {tag}\n    Body = {btype} {tag}_Russia\n      MaxHealth = {hp}\n      InitialHealth = {hp}\n    End\n  End\n"

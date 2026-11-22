@@ -7070,3 +7070,187 @@ END
 OBJECT:RussiaVoenkomatMobres
 "Recruitment Office"
 END
+
+CONTROLBAR:RussiaTornadoS
+"Tornado-S Strike"
+END
+
+CONTROLBAR:TooltipRussiaTornadoS
+"Cluster rockets saturate the area. Levels add more rockets."
+END
+
+CONTROLBAR:ToolTipRussiaScienceTornadoS
+"Cluster rockets saturate the area. Levels add more rockets."
+END
+
+SCIENCE:RussiaTornadoS
+"Tornado-S Strike 1"
+END
+
+SCIENCE:RussiaTornadoS2
+"Tornado-S Strike 2"
+END
+
+SCIENCE:RussiaTornadoS3
+"Tornado-S Strike 3"
+END
+
+CONTROLBAR:RussiaCyber
+"Cyberattack"
+END
+
+CONTROLBAR:TooltipRussiaCyber
+"Steals 500/1000/1500 from the enemy and shuts down nearby buildings for 15 s; radius grows per level."
+END
+
+CONTROLBAR:ToolTipRussiaScienceCyber
+"Steals 500/1000/1500 from the enemy and shuts down nearby buildings for 15 s; radius grows per level."
+END
+
+SCIENCE:RussiaCyber
+"Cyberattack 1"
+END
+
+SCIENCE:RussiaCyber2
+"Cyberattack 2"
+END
+
+SCIENCE:RussiaCyber3
+"Cyberattack 3"
+END
+
+CONTROLBAR:RussiaFAB
+"FAB Strike"
+END
+
+CONTROLBAR:TooltipRussiaFAB
+"Bombers drop 2/4/6 heavy glide bombs."
+END
+
+CONTROLBAR:ToolTipRussiaScienceFAB
+"Bombers drop 2/4/6 heavy glide bombs."
+END
+
+SCIENCE:RussiaFAB
+"FAB Strike 1"
+END
+
+SCIENCE:RussiaFAB2
+"FAB Strike 2"
+END
+
+SCIENCE:RussiaFAB3
+"FAB Strike 3"
+END
+
+CONTROLBAR:RussiaVDV
+"VDV Airborne"
+END
+
+CONTROLBAR:TooltipRussiaVDV
+"Paratroopers: motor riflemen with Kornet teams. Levels add troops."
+END
+
+CONTROLBAR:ToolTipRussiaScienceVDV
+"Paratroopers: motor riflemen with Kornet teams. Levels add troops."
+END
+
+SCIENCE:RussiaVDV
+"VDV Airborne 1"
+END
+
+SCIENCE:RussiaVDV2
+"VDV Airborne 2"
+END
+
+SCIENCE:RussiaVDV3
+"VDV Airborne 3"
+END
+
+CONTROLBAR:RussiaReservists
+"Call Up Reservists"
+END
+
+CONTROLBAR:TooltipRussiaReservists
+"Five reservists appear at the target."
+END
+
+CONTROLBAR:ToolTipRussiaScienceReservists
+"Five reservists appear at the target."
+END
+
+SCIENCE:RussiaReservists
+"Call Up Reservists"
+END
+
+CONTROLBAR:RussiaEWSuppress
+"EW Suppression"
+END
+
+CONTROLBAR:TooltipRussiaEWSuppress
+"For 10 s enemy drones go blind and guided missiles lose lock in the area."
+END
+
+CONTROLBAR:ToolTipRussiaScienceEWSuppress
+"For 10 s enemy drones go blind and guided missiles lose lock in the area."
+END
+
+SCIENCE:RussiaEWSuppress
+"EW Suppression"
+END
+
+CONTROLBAR:RussiaOrlanRecon
+"Orlan Recon"
+END
+
+CONTROLBAR:TooltipRussiaOrlanRecon
+"A recon drone hovers over the target and reveals the area."
+END
+
+CONTROLBAR:ToolTipRussiaScienceOrlanRecon
+"A recon drone hovers over the target and reveals the area."
+END
+
+SCIENCE:RussiaOrlanRecon
+"Orlan Recon"
+END
+
+CONTROLBAR:RussiaKinzhal
+"Kinzhal Strike"
+END
+
+CONTROLBAR:TooltipRussiaKinzhal
+"A hypersonic missile destroys a single target."
+END
+
+CONTROLBAR:ToolTipRussiaScienceKinzhal
+"A hypersonic missile destroys a single target."
+END
+
+SCIENCE:RussiaKinzhal
+"Kinzhal Strike"
+END
+
+SCIENCE:RussiaTOS2
+"TOS-2 Tosochka"
+END
+
+CONTROLBAR:ToolTipRussiaScienceTOS2
+"Unlocks the TOS-2 at the Supply Depot: faster and longer-ranged than the TOS-1A."
+END
+
+SCIENCE:RussiaVeterans
+"Veterans"
+END
+
+CONTROLBAR:ToolTipRussiaScienceVeterans
+"Motor riflemen and RPG gunners are trained as veterans."
+END
+
+OBJECT:RussiaVehicleTOS2
+"TOS-2 Tosochka"
+END
+
+CONTROLBAR:ConstructRussiaVehicleTOS2
+"&Train TOS-2 Tosochka"
+END

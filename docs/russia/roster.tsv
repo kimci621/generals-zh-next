@@ -43,3 +43,4 @@ Mi8	Ми-8АМТШ	Mi-8AMTSh	AmericaVehicleChinook	1200	12	300	ChinookArmor	135	
 Su25	Су-25СМ3	Su-25SM3	ChinaJetMIG	1300	12	200	AirplaneArmor	150	200	rockets	300	45 area	AA	Airfield	ground attack
 Su35	Су-35С	Su-35S	AmericaJetRaptor	1500	20	180	AirplaneArmor	170	250	R-77	350 air	60 air	AA	CtrlC	anti-air
 Su34	Су-34	Su-34	AmericaJetAurora	2200	30	180	AirplaneArmor	160	200	FAB glide bomb	350	area	fighters, AA	CtrlC	standoff; GuidedFAB
+TOS2	ТОС-2 "Тосочка"	TOS-2 Tosochka	Nuke_ChinaVehicleInfernoCannon	1500	15	260	TankArmor	36	180	thermobaric salvo	250	60 area	air, tanks rush, Kornet	SCIENCE_RussiaTOS2	wheeled TOS: faster, longer, rank 1 science

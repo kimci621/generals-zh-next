@@ -35,8 +35,10 @@
 #include "Common/Xfer.h"
 #include "GameClient/GameText.h"
 #include "GameLogic/Object.h"
+#include "GameLogic/ObjectCreationList.h"
 #include "GameLogic/PartitionManager.h"
 #include "GameLogic/Module/CashHackSpecialPower.h"
+#include "GameClient/ControlBar.h"
 #include "GameClient/InGameUI.h"
 
 // ------------------------------------------------------------------------------------------------
@@ -45,6 +47,8 @@ CashHackSpecialPowerModuleData::CashHackSpecialPowerModuleData( void )
 {
 	m_upgrades.clear();
 	m_defaultAmountToSteal = 0;
+	m_upgradeOCL.clear();
+	m_defaultOCL = NULL;
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -62,6 +66,17 @@ static void parseCashHackUpgradePair( INI* ini, void * /*instance*/, void *store
 
 // ------------------------------------------------------------------------------------------------
 // ------------------------------------------------------------------------------------------------
+static void parseCashHackOCLPair( INI* ini, void * /*instance*/, void *store, const void* /*userData*/ )
+{
+	CashHackSpecialPowerModuleData::OCLUpgrade up;
+
+	INI::parseScience(ini, NULL, &up.m_science, NULL);
+	INI::parseObjectCreationList(ini, NULL, &up.m_ocl, NULL);
+
+	std::vector<CashHackSpecialPowerModuleData::OCLUpgrade>* s = (std::vector<CashHackSpecialPowerModuleData::OCLUpgrade>*)store;
+	s->push_back(up);
+}
+
 /*static*/ void CashHackSpecialPowerModuleData::buildFieldParse(MultiIniFieldParse& p)
 {
 	SpecialPowerModuleData::buildFieldParse( p );
@@ -70,6 +85,8 @@ static void parseCashHackUpgradePair( INI* ini, void * /*instance*/, void *store
 	{
 		{ "UpgradeMoneyAmount", parseCashHackUpgradePair, NULL, offsetof( CashHackSpecialPowerModuleData, m_upgrades ) },
 		{ "MoneyAmount", INI::parseInt, NULL, offsetof( CashHackSpecialPowerModuleData, m_defaultAmountToSteal ) },
+		{ "UpgradeOCL", parseCashHackOCLPair, NULL, offsetof( CashHackSpecialPowerModuleData, m_upgradeOCL ) },
+		{ "OCL", INI::parseObjectCreationList, NULL, offsetof( CashHackSpecialPowerModuleData, m_defaultOCL ) },
 		{ 0, 0, 0, 0 }
 	};
 	p.add(dataFieldParse);
@@ -102,8 +119,17 @@ void CashHackSpecialPower::doSpecialPowerAtLocation( const Coord3D *loc, Real an
 	if (getObject()->isDisabled())
 		return;
 
-	// only allowed at objects
-	return;
+	// A player can only aim it at an object.  The AI's fire-when-ready aims at a spot
+	// (AIPlayer::doReadySpecialPowers): hack the enemy building nearest to it, or nothing.
+	if ((commandOptions & COMMAND_FIRED_BY_SCRIPT) == 0 || loc == NULL)
+		return;
+	PartitionFilterRelationship enemies(getObject(), PartitionFilterRelationship::ALLOW_ENEMIES);
+	PartitionFilterAcceptByKindOf structures(MAKE_KINDOF_MASK(KINDOF_STRUCTURE), KINDOFMASK_NONE);
+	PartitionFilterSameMapStatus mapStatus(getObject());
+	PartitionFilter *filters[] = { &enemies, &structures, &mapStatus, NULL };
+	Object *victim = ThePartitionManager->getClosestObject(loc, 300.0f, FROM_CENTER_2D, filters);
+	if (victim != NULL)
+		doSpecialPowerAtObject(victim, commandOptions);
 }  
 
 //-------------------------------------------------------------------------------------------------
@@ -127,6 +153,23 @@ Int CashHackSpecialPower::findAmountToSteal() const
 
 // ------------------------------------------------------------------------------------------------
 // ------------------------------------------------------------------------------------------------
+const ObjectCreationList* CashHackSpecialPower::findOCL() const
+{
+	const CashHackSpecialPowerModuleData* d = getCashHackSpecialPowerModuleData();
+	const Player* controller = getObject()->getControllingPlayer();
+	if (controller != NULL)
+	{
+		for (std::vector<CashHackSpecialPowerModuleData::OCLUpgrade>::const_iterator it = d->m_upgradeOCL.begin();
+					it != d->m_upgradeOCL.end();
+					++it)
+		{
+			if (controller->hasScience(it->m_science))
+				return it->m_ocl;
+		}
+	}
+	return d->m_defaultOCL;
+}
+
 void CashHackSpecialPower::doSpecialPowerAtObject( Object *victim, UnsignedInt commandOptions )
 {
 	if (getObject()->isDisabled())
@@ -169,6 +212,10 @@ void CashHackSpecialPower::doSpecialPowerAtObject( Object *victim, UnsignedInt c
 			TheInGameUI->addMoneyText( -(Int)cash, &pos, victim->getControllingPlayer() );
 		}
 	}
+
+	const ObjectCreationList *ocl = findOCL();
+	if( ocl )
+		ObjectCreationList::create( ocl, self, victim->getPosition(), victim->getPosition(), 0.0f );
 
 }  
 

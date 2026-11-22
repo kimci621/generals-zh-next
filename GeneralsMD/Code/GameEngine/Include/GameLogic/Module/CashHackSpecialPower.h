@@ -38,6 +38,7 @@
 
 // FORWARD REFERENCES /////////////////////////////////////////////////////////////////////////////
 class Object;
+class ObjectCreationList;
 class SpecialPowerTemplate;
 struct FieldParse;
 enum ScienceType : Int;
@@ -60,6 +61,17 @@ public:
 	};
 	std::vector<Upgrades> m_upgrades;
 	Int m_defaultAmountToSteal;					///< the amount of money that we will steal
+
+	// An object creation list made at the victim after the steal, by the highest science owned (Russia's
+	// Cyberattack shuts the buildings around the hacked one down). None by default, as for EA's hack.
+	struct OCLUpgrade
+	{
+		ScienceType									m_science;
+		const ObjectCreationList*		m_ocl;
+		OCLUpgrade() : m_science(SCIENCE_INVALID), m_ocl(NULL) {}
+	};
+	std::vector<OCLUpgrade> m_upgradeOCL;
+	const ObjectCreationList* m_defaultOCL;
 
 	CashHackSpecialPowerModuleData( void );
 	static void buildFieldParse( MultiIniFieldParse& p );
@@ -84,6 +96,7 @@ public:
 protected:
 
 	Int findAmountToSteal() const;
+	const ObjectCreationList* findOCL() const;
 
 };
 

@@ -19260,3 +19260,187 @@ END
 OBJECT:RussiaVoenkomatMobres
 "Военкомат"
 END
+
+CONTROLBAR:RussiaTornadoS
+"Удар \"Торнадо-С\""
+END
+
+CONTROLBAR:TooltipRussiaTornadoS
+"Кассетные ракеты накрывают район. Уровни добавляют залпы."
+END
+
+CONTROLBAR:ToolTipRussiaScienceTornadoS
+"Кассетные ракеты накрывают район. Уровни добавляют залпы."
+END
+
+SCIENCE:RussiaTornadoS
+"Удар \"Торнадо-С\" 1"
+END
+
+SCIENCE:RussiaTornadoS2
+"Удар \"Торнадо-С\" 2"
+END
+
+SCIENCE:RussiaTornadoS3
+"Удар \"Торнадо-С\" 3"
+END
+
+CONTROLBAR:RussiaCyber
+"Кибератака"
+END
+
+CONTROLBAR:TooltipRussiaCyber
+"Крадёт 500/1000/1500 у врага и отключает здания рядом на 15 с; радиус растёт с уровнем."
+END
+
+CONTROLBAR:ToolTipRussiaScienceCyber
+"Крадёт 500/1000/1500 у врага и отключает здания рядом на 15 с; радиус растёт с уровнем."
+END
+
+SCIENCE:RussiaCyber
+"Кибератака 1"
+END
+
+SCIENCE:RussiaCyber2
+"Кибератака 2"
+END
+
+SCIENCE:RussiaCyber3
+"Кибератака 3"
+END
+
+CONTROLBAR:RussiaFAB
+"Удар ФАБ"
+END
+
+CONTROLBAR:TooltipRussiaFAB
+"Бомбардировщики сбрасывают 2/4/6 тяжёлых планирующих бомб."
+END
+
+CONTROLBAR:ToolTipRussiaScienceFAB
+"Бомбардировщики сбрасывают 2/4/6 тяжёлых планирующих бомб."
+END
+
+SCIENCE:RussiaFAB
+"Удар ФАБ 1"
+END
+
+SCIENCE:RussiaFAB2
+"Удар ФАБ 2"
+END
+
+SCIENCE:RussiaFAB3
+"Удар ФАБ 3"
+END
+
+CONTROLBAR:RussiaVDV
+"Десант ВДВ"
+END
+
+CONTROLBAR:TooltipRussiaVDV
+"Десант: мотострелки с расчётами \"Корнет\". Уровни добавляют бойцов."
+END
+
+CONTROLBAR:ToolTipRussiaScienceVDV
+"Десант: мотострелки с расчётами \"Корнет\". Уровни добавляют бойцов."
+END
+
+SCIENCE:RussiaVDV
+"Десант ВДВ 1"
+END
+
+SCIENCE:RussiaVDV2
+"Десант ВДВ 2"
+END
+
+SCIENCE:RussiaVDV3
+"Десант ВДВ 3"
+END
+
+CONTROLBAR:RussiaReservists
+"Призыв резервистов"
+END
+
+CONTROLBAR:TooltipRussiaReservists
+"Пять резервистов появляются в указанной точке."
+END
+
+CONTROLBAR:ToolTipRussiaScienceReservists
+"Пять резервистов появляются в указанной точке."
+END
+
+SCIENCE:RussiaReservists
+"Призыв резервистов"
+END
+
+CONTROLBAR:RussiaEWSuppress
+"Подавление РЭБ"
+END
+
+CONTROLBAR:TooltipRussiaEWSuppress
+"На 10 с вражеские дроны слепнут, а управляемые ракеты теряют цель в районе."
+END
+
+CONTROLBAR:ToolTipRussiaScienceEWSuppress
+"На 10 с вражеские дроны слепнут, а управляемые ракеты теряют цель в районе."
+END
+
+SCIENCE:RussiaEWSuppress
+"Подавление РЭБ"
+END
+
+CONTROLBAR:RussiaOrlanRecon
+"Разведка \"Орлан\""
+END
+
+CONTROLBAR:TooltipRussiaOrlanRecon
+"Разведывательный дрон зависает над целью и вскрывает район."
+END
+
+CONTROLBAR:ToolTipRussiaScienceOrlanRecon
+"Разведывательный дрон зависает над целью и вскрывает район."
+END
+
+SCIENCE:RussiaOrlanRecon
+"Разведка \"Орлан\""
+END
+
+CONTROLBAR:RussiaKinzhal
+"Удар \"Кинжал\""
+END
+
+CONTROLBAR:TooltipRussiaKinzhal
+"Гиперзвуковая ракета уничтожает одну цель."
+END
+
+CONTROLBAR:ToolTipRussiaScienceKinzhal
+"Гиперзвуковая ракета уничтожает одну цель."
+END
+
+SCIENCE:RussiaKinzhal
+"Удар \"Кинжал\""
+END
+
+SCIENCE:RussiaTOS2
+"ТОС-2 \"Тосочка\""
+END
+
+CONTROLBAR:ToolTipRussiaScienceTOS2
+"Открывает ТОС-2 на складе снабжения: быстрее и дальнобойнее ТОС-1А."
+END
+
+SCIENCE:RussiaVeterans
+"Ветераны"
+END
+
+CONTROLBAR:ToolTipRussiaScienceVeterans
+"Мотострелки и гранатомётчики выходят ветеранами."
+END
+
+OBJECT:RussiaVehicleTOS2
+"ТОС-2 \"Тосочка\""
+END
+
+CONTROLBAR:ConstructRussiaVehicleTOS2
+"Подготовить: ТОС-2 \"Тосочка\""
+END
