@@ -97,6 +97,39 @@ WSETS = {
 }
 
 
+def roster_stats(vanilla):
+    """{id: (body_type, tag, hp or None, speed_scale or None)} из docs/russia/roster.tsv против ванили."""
+    objs, locs = {}, {}
+    import glob
+    for f in glob.glob(os.path.join(vanilla, "Data/INI/Object/*.ini")):
+        for m in re.finditer(r"^Object (\S+)[ \t]*\n(.*?)^End", open(f, encoding="latin-1").read().replace("\r", ""), re.S | re.M):
+            objs[m.group(1)] = m.group(2)
+    lt = open(os.path.join(vanilla, "Data/INI/Locomotor.ini"), encoding="latin-1").read().replace("\r", "")
+    for m in re.finditer(r"^Locomotor (\S+)[ \t]*\n(.*?)^End", lt, re.S | re.M):
+        sp = re.search(r"^\s*Speed\s*=\s*([\d.]+)", m.group(2), re.M)
+        if sp:
+            locs[m.group(1)] = float(sp.group(1))
+    # правки Reforged могли уже заменить тело (ReplaceModule) - тогда тег у тела новый
+    for f in ("BalanceReforged.ini", "FixesReforged.ini"):
+        for m in re.finditer(r"^Object (\S+)[ \t]*\n(.*?)^End", open(os.path.join(D, "INI", f), encoding="latin-1").read().replace("\r", ""), re.S | re.M):
+            if m.group(1) in objs and re.search(r"^\s*Body\s*=", m.group(2), re.M):
+                objs[m.group(1)] = m.group(2) + "\n" + objs[m.group(1)]
+    rows = [l.split("\t") for l in open(os.path.join(HERE, "../../docs/russia/roster.tsv"), encoding="utf-8").read().splitlines()[1:]]
+    roster = {r[0]: r for r in rows}
+    out = {}
+    for i, src, *_ in BUILDINGS + UNITS:
+        r = roster.get(i) or next((v for k, v in roster.items() if i.endswith(k)), None)
+        body = objs[src]
+        b = re.search(r"^\s*Body\s*=\s*(\S+)\s+(\S+)", body, re.M)
+        hp = float(r[6]) if r and r[6] not in ("-", "") else None
+        scale = None
+        lo = re.search(r"^\s*Locomotor\s*=\s*SET_NORMAL\s+(\S+)", body, re.M)
+        if r and r[8] not in ("-", "") and lo and lo.group(1) in locs:
+            scale = round(float(r[8]) / locs[lo.group(1)], 3)
+        out[i] = (b.group(1), b.group(2), hp, scale)
+    return out
+
+
 def weapons(vanilla):
     w = open(os.path.join(vanilla, "Data/INI/Weapon.ini"), encoding="latin-1").read().replace("\r", "")
     out = []
@@ -143,6 +176,7 @@ def main():
             "Barracks": "RussiaBarracksCommandSet", "SupplyCenter": "RussiaSupplyCenterCommandSet",
             "WarFactory": "RussiaWarFactoryCommandSet", "Airfield": "RussiaAirfieldCommandSet"}
     objs, btns, strs = [], [], []
+    stats = roster_stats(sys.argv[1])
     for i, src, c, t, req, en, ru, sb, *fac in BUILDINGS + UNITS:
         n, bn = "Russia" + i, "Command_ConstructRussia" + i
         o = f"ObjectReskin {n} {src}\nEnd\n\nObject {n}\n  Side = Russia\n"
@@ -151,11 +185,17 @@ def main():
         o += f"  DisplayName = OBJECT:{n}\n  BuildCost = {c}\n  BuildTime = {t}.0\n"
         if req:
             o += f"  Prerequisites\n    Object = Russia{req}\n  End\n"
+        btype, tag, hp, scale = stats[i]
+        if hp:
+            o += f"  ReplaceModule {tag}\n    Body = {btype} {tag}_Russia\n      MaxHealth = {hp}\n      InitialHealth = {hp}\n    End\n  End\n"
+        if scale and abs(scale - 1) > 0.01:
+            o += f"  SpeedScale = {scale}\n"
         if i in WSETS:
             o += "  WeaponSet\n    Conditions = None\n" + "".join(
                 f"    Weapon = {slot} {w}\n" for slot, w in zip(("PRIMARY", "SECONDARY", "TERTIARY"), WSETS[i])) + "  End\n"
         objs.append(o + "End\n")
         if fac == [None]:
+            strs.append((f"OBJECT:{n}", en, ru))
             continue
         btns.append(button(sb, bn, n))
         verb = ("&Build", "Построить") if not fac else ("&Train", "Подготовить")

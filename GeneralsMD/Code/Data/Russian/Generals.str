@@ -19144,3 +19144,7 @@ END
 CONTROLBAR:ConstructRussiaJetSu34
 "Подготовить: Су-34"
 END
+
+OBJECT:RussiaInfantryReservist
+"Резервист"
+END

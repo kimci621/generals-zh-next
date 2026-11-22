@@ -17,7 +17,7 @@ P13 Upstream merges only by release tag (`git fetch upstream --tags; git merge v
 P14 Text for players: UI strings in game language (ru+en at least); Russian text on models. Code comments: match file (upstream uses English).
 
 ## STATE
-NOW: R3.3
+NOW: R3.4
 LAST: R2 skeleton verified 2026-11-22.
 NEXT-NOTE: -
 BLOCKERS: -
@@ -85,7 +85,7 @@ BALANCE TARGETS (user 2026-11-22: max 10 games per opponent general, iterate fas
 [x] R3.0 Expanded below. Generator Tools/Russia/gen.py <vanilla> owns reskin/cost/req/buttons/strings (between GENERATED markers); hand patches go below END in RussiaReforged.ini.
 [x] R3.1 All 31 units + 13 buildings as reskins with buttons (sources remapped so China scripts' asks hit Russia combat units: Redguard->MotorRifle, MIG->Su25, Helix->Mi8; duplicates on general variants). Lancet at Airfield, Tigr at SupplyCenter (WF has 12 slots).
 [x] R3.2 RussiaWeaponReforged.ini (own file, OVERWRITE, load line next to Turkiye's) + WeaponSet patches: Kornet, FPV (slow interceptable projectile), Verba air-only, BMPT, TOS thermobaric, Tornado salvo, Su34 FAB, Su35, Tor/Buk air-only, Pantsir cannon+missile. Orlan unarmed + SpotterSight. => loads, each unit fires in a match (KILLXP killer=Russia*).
-[ ] R3.3 hp/speed per roster.tsv (Body ReplaceModule, own Locomotors). => values in INI match roster.
+[x] R3.3 hp/speed per roster.tsv (Body ReplaceModule, own Locomotors). => values in INI match roster.
 [ ] R3.4 Point defense: Pantsir/PantsirPos/T14 APS PointDefenseLaserUpdate vs SMALL_MISSILE; Krasukha JammerUpdate. => scripted/headless check drones intercepted.
 [ ] R3.5 Economy: Voenkomat SpawnBehavior (F13c); OilGas derrick boost (F13a); Tax code+INI (F13b). => reservists spawn; income delta measured.
 [ ] R3.6 Upgrades Ratnik Thermal Relikt Cages Mobres PantsirMod GuidedFAB + buttons. => purchasable, effect visible in INI/log.
@@ -133,7 +133,7 @@ R0.1 | baseline run lacked -observer (idle human slot) | rerun: China vs USA see
 R0.3 | bot needs own SideInfo+SkirmishBuildList (scripts fall back by BaseSide, build list does not) | copied China's into AIDataReforged.ini as Russia
 R0.3 | lobby screenshot: user's game window open, can't drive lobby | moved to R2.9 windowed smoke
 R1.1 | web check per unit | done from model knowledge (no web, saves budget); range order holds: Buk-M3 >> Tornado-G~Lancet > Msta-S > Pantsir > Tor > TOS-1A > Kornet~Verba > tank guns. Real capacity BTR-82A 7, BMP-3 7, Mi-8 24: keep game values (5/3/8) for balance. No data changes.
-R2.1 | hp/speed per roster | needs ReplaceModule Body + own Locomotor per unit; deferred to R5 balance (numbers move there anyway). R2 sets Side/name/cost/time/prereqs/CommandSet only
+R2.1 | hp/speed per roster | done in R3.3: Body ReplaceModule (tag from vanilla or Balance/Fixes) + SpeedScale (ThingTemplate field; patch cannot restate SET_NORMAL locomotor)
 R2.3 | one reskin per source (ThingFactory findSideReskin) | R3 must give Kornet/FPV (TankHunter=RPG), T90M/BMP3 (Crusader), Pantsir/Tor (Avenger), Orlan/Su25 (MIG) different sources or non-reskin copies
 R2.3 | China mines/EMP-mine buttons dropped from Russia sets (CommandSetUpgrade would swap to China sets) | revisit if Russia gets mines
 R3.2 | Su35 anti-air jet | engine jets do not dogfight; Su35 stays Raptor-like strike fighter. Pantsir/Krasukha keep analog weapons until R3.4
@@ -154,3 +154,4 @@ R0.3 | test_gameengine fails a_template_maps_rules_are_served_beside_it_and_in_i
 2026-11-22 R2.9 5x Russia vs China seeds11-15 30min: 0 crash, China wins 5/5 (skeleton lacks Redguard/Overlord/Gattling etc. that China scripts ask for); windowed smoke ok, docs/russia/shots/r2-skeleton.jpg. GATE2.
 2026-11-22 R3.1 full roster reskins; Russia vs China seed11 decided China f23673, bot built most new types (BMPT 647 log refs, Su25, Lancet, Tor, T14...). AI ABILITY BUTTONS spam for Helix is vanilla China too.
 2026-11-22 R3.2 RussiaWeaponReforged.ini 14 weapons + WeaponSets (gen.py); no INI errors; Russia units score kills; China wins 3/3 seeds11-13 (frames 19-25k).
+2026-11-22 R3.3 hp (43 ReplaceModule) + SpeedScale (27) from roster.tsv via gen.py; no INI errors/missing strings seed11.
