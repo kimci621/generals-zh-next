@@ -17,7 +17,7 @@ P13 Upstream merges only by release tag (`git fetch upstream --tags; git merge v
 P14 Text for players: UI strings in game language (ru+en at least); Russian text on models. Code comments: match file (upstream uses English).
 
 ## STATE
-NOW: R1.3
+NOW: R1.4 GATE1
 LAST: R0.4 series driver 2026-11-22.
 NEXT-NOTE: -
 BLOCKERS: -
@@ -70,7 +70,7 @@ BALANCE TARGETS: win 45-55% vs USA/China/GLA (Hard vs Hard, 3 maps, sides swappe
 ### R1 paper design
 [x] R1.1 Verify real-system data (web, standard search) for every DATA unit: role, rough range order, crew/capacity. Keep only range ORDER, not scale. Record corrections as DEV.
 [x] R1.2 Pull analog stats: vanilla INIZH.big + BalanceReforged.ini/FixesReforged.ini overrides for every src in DATA (hp, armor, speed, vision, weapon dmg/range/reload, build time).
-[ ] R1.3 Write docs/russia/roster.tsv: id,name_ru,name_en,src,cost,time,hp,armor,speed,vision,weapon,range,dps,counters,req,notes. Rules: speed vehicles = China analog x0.9; every unit has >=1 counter; no unit beats all of its price class.
+[x] R1.3 Write docs/russia/roster.tsv: id,name_ru,name_en,src,cost,time,hp,armor,speed,vision,weapon,range,dps,counters,req,notes. Rules: speed vehicles = China analog x0.9; every unit has >=1 counter; no unit beats all of its price class.
 [ ] R1.4 GATE1: show user short roster summary (by group, what's strong/weak), get approval. Changes -> roster.tsv + DATA.
 
 ### R2 skeleton (all buildings + 8 base units, analog models)
@@ -132,3 +132,4 @@ R0.3 | test_gameengine fails a_template_maps_rules_are_served_beside_it_and_in_i
 2026-11-22 R0.6 mechanics verdicts in F13: all INI except counter-battery (code/skip).
 2026-11-22 GATE0 passed (user: continue). R1.1 range order confirmed, no DATA changes.
 2026-11-22 R1.2 docs/russia/analogs.tsv via Tools/Russia/analogs.py (vanilla + Balance/Fixes overrides; first ArmorSet/WeaponSet, primary weapon only).
+2026-11-22 R1.3 docs/russia/roster.tsv 44 rows; vehicle speed = China class analog x0.9; every unit has counters.

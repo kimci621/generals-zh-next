@@ -1,0 +1,45 @@
+id	name_ru	name_en	src	cost	time	hp	armor	speed	vision	weapon	range	dps	counters	req	notes
+CommandCenter	Штаб	Headquarters	ChinaCommandCenter	2000	45	5000	StructureArmorTough	-	300	-	-	-	-	-	builds IMR3M; Tax upgrade
+PowerPlant	Газотурбинная электростанция	Gas Turbine Plant	ChinaPowerPlant	900	10	1500	StructureArmor	-	200	-	-	-	-	CC	-10% cost vs China
+Barracks	Казармы	Barracks	ChinaBarracks	500	10	1000	StructureArmor	-	200	-	-	-	-	PP	Ratnik upgrade
+SupplyCenter	Склад снабжения	Supply Depot	ChinaSupplyCenter	1500	10	2000	StructureArmor	-	200	-	-	-	-	PP	builds Kamaz
+WarFactory	Завод бронетехники	Armor Plant	ChinaWarFactory	2000	15	2000	StructureArmor	-	200	-	-	-	-	Supply	Thermal/Relikt/Cages
+Airfield	Аэродром	Airfield	ChinaAirfield	1200	30	1500	StructureArmor	-	200	-	-	-	-	WF	GuidedFAB
+Voenkomat	Военкомат	Recruitment Office	ChinaPropagandaCenter	1000	30	1000	StructureArmor	-	200	-	-	-	-	Barracks	free Reservist/60s max 5; Mobres
+ControlCenter	Центр управления	Command Post	AmericaStrategyCenter	2500	60	1500	StructureArmor	-	400	-	-	-	-	WF	tech gate, OilGas, PantsirMod; no gun
+Strongpoint	Опорный пункт	Strongpoint	ChinaBunker	500	5	1500	StructureArmor	-	300	garrison 5	-	-	arty, TOS-like, flame	Barracks	
+PantsirPos	Позиция "Панцирь"	Pantsir Site	ChinaGattlingCannon	1200	25	1000	BaseDefenseArmor	-	360	cannon+missile AA	250 air / 150 ground	40 air / 25 ground	arty, tanks massed	WF	point defense vs SMALL_MISSILE
+BukM3	ЗРК "Бук-М3"	Buk-M3 SAM	AmericaPatriotBattery	1400	25	1000	BaseDefenseArmor	-	400	SAM	400 air only	70	any ground	CtrlC	no ground fire
+Zoopark	РЛС "Зоопарк-1М"	Zoopark-1M Radar	ChinaSpeakerTower	800	10	400	StructureArmor	-	500	-	-	-	any	WF	counter-battery (optional, F13)
+Oreshnik	Комплекс "Орешник"	Oreshnik Complex	ChinaNuclearMissileLauncher	5000	60	4000	StructureArmorTough	-	200	superweapon	map	-	-	CtrlC	6 impacts, 300s
+MotorRifle	Мотострелок	Motor Rifleman	AmericaInfantryRanger	225	5	160	HumanArmor	20	100	AK-12	100	40	tanks, BMPT, TOS	Barracks	no flashbang; Veterans science
+RPG	Гранатомётчик	RPG Gunner	ChinaInfantryTankHunter	300	5	100	HumanArmor	20	150	RPG-7	175	40	infantry, BMPT	Barracks	= China TH
+Verba	ПЗРК "Верба"	Verba MANPADS	AmericaInfantryMissileDefender	300	5	100	HumanArmor	20	150	MANPADS	225 air only	45	infantry, vehicles	Barracks	air only
+Sniper	Снайпер	Sniper	AmericaInfantryPathfinder	600	10	120	HumanArmor	20	250	SV-98	300	50 inf only	vehicles, arty	CtrlC	stealth when still
+Kornet	ПТРК "Корнет"	Kornet ATGM Team	ChinaInfantryTankHunter	700	12	120	HumanArmor	18	200	ATGM	250 deployed	60 vs veh	infantry, BMPT, arty	CtrlC	deploy-to-fire; long ATGM
+FPVOperator	Оператор FPV	FPV Operator	ChinaInfantryTankHunter	500	10	100	HumanArmor	20	150	FPV drone	300	50 vs veh	Pantsir/Tor/APS, Krasukha, infantry	Barracks	slow interceptable projectile
+Engineer	Инженер	Combat Engineer	ChinaInfantryHacker	400	10	100	HumanArmor	20	150	-	-	-	any	Barracks	capture, demine, repair
+GRU	Спецназ ГРУ	GRU Spetsnaz	ChinaInfantryBlackLotus	1500	20	200	HumanArmor	25	300	suppressed rifle + demo	150	30	vehicles, detectors	CtrlC	max 1; stealth when still
+Reservist	Резервист	Reservist	ChinaInfantryRedguard	0	-	100	HumanArmor	20	100	AK-74	100	15	anything	Voenkomat	free, single
+IMR3M	ИМР-3М	IMR-3M Engineer Vehicle	ChinaVehicleDozer	1000	5	300	DozerArmor	27	150	-	-	-	any	CC	builder, clears mines
+Kamaz	КамАЗ	KamAZ Truck	ChinaVehicleSupplyTruck	600	10	300	TruckArmor	36	150	-	-	-	any	Supply	Tax boosts delivery
+TigrM	"Тигр-М"	Tigr-M	AmericaVehicleHumvee	600	10	220	HumveeArmor	45	175	MG	150	45	RPG, tanks	WF	transport 4, scout
+BTR82A	БТР-82А	BTR-82A	ChinaVehicleTroopCrawler	900	12	300	TankArmor	36	175	30mm 2A72	175	35	RPG, tanks, Kornet	WF	transport 5; Cages
+BMP3	БМП-3	BMP-3	AmericaTankCrusader	1100	12	380	TankArmor	27	175	100mm+30mm	175	45	tanks, Kornet	CtrlC	transport 3
+T72B3M	Т-72Б3М	T-72B3M	ChinaTankBattleMaster	700	10	380	TankArmor	22	150	125mm	150	30	RPG, Kornet, FPV, Ka52	WF	cheap MBT; Relikt
+T90M	Т-90М	T-90M	AmericaTankCrusader	1000	12	480	TankArmor	22	160	125mm	160	33	Kornet, FPV, air	CtrlC	Relikt
+T14	Т-14 "Армата"	T-14 Armata	ChinaTankOverlord	2200	22	1000	TankArmor	18	175	125mm 2A82	175	55	air, Kornet mass, Lancet	CtrlC	max 3; APS point defense
+BMPT	БМПТ	BMPT Terminator	ChinaTankGattling	1100	12	350	TankArmor	36	175	2x30mm + ATGM	175	45 inf	tanks, Kornet	WF	anti-infantry, no AA
+Pantsir	ЗРПК "Панцирь-С1"	Pantsir-S1	AmericaTankAvenger	1000	12	280	TruckArmor	27	200	cannon+missile AA	250 air / 150 ground	45 air	tanks, inf	WF	AA + point defense
+TorM2	ЗРК "Тор-М2"	Tor-M2	AmericaTankAvenger	1300	15	300	TankArmor	22	220	SAM	300 air only	60 air	any ground	CtrlC	no ground fire
+TOS1A	ТОС-1А	TOS-1A	ChinaVehicleInfernoCannon	1300	15	300	TankArmor	27	180	thermobaric salvo	200	60 area	air, tanks rush, Kornet	CtrlC	short range, huge area
+MstaS	"Мста-С"	Msta-S	ChinaVehicleNukeLauncher	1200	18	240	TankArmor	18	150	152mm	350	35 area	air, fast raids	WF	needs spotting (Orlan/radar)
+TornadoG	"Торнадо-Г"	Tornado-G	AmericaVehicleTomahawk	1300	18	200	TruckArmor	27	150	MLRS salvo	400	40 area	air, fast raids, Lancet	CtrlC	needs spotting
+Krasukha	РЭБ "Красуха"	Krasukha EW	ChinaTankECM	900	12	280	TruckArmor	36	200	jammer	300 radius	-	any armed	CtrlC	jams missiles/drones
+Lancet	Пусковая "Ланцет"	Lancet Launcher	ChinaVehicleListeningOutpost	1200	15	220	TruckArmor	36	150	loitering munition	450 needs vision	40 vs veh	PD, Krasukha, raids	Airfield	interceptable
+Orlan	"Орлан-10"	Orlan-10	ChinaJetMIG	400	8	80	AirplaneArmor	140	450	-	-	-	any AA	Airfield	recon orbit, SpotterSight
+Ka52	Ка-52	Ka-52	AmericaVehicleComanche	1500	20	250	ComancheArmor	110	250	30mm+Vikhr	250	50 vs veh	AA, Verba, Pantsir	Airfield	
+Mi8	Ми-8АМТШ	Mi-8AMTSh	AmericaVehicleChinook	1200	12	300	ChinookArmor	135	300	-	-	-	AA	Airfield	transport 8
+Su25	Су-25СМ3	Su-25SM3	ChinaJetMIG	1300	12	200	AirplaneArmor	150	200	rockets	300	45 area	AA	Airfield	ground attack
+Su35	Су-35С	Su-35S	AmericaJetRaptor	1500	20	180	AirplaneArmor	170	250	R-77	350 air	60 air	AA	CtrlC	anti-air
+Su34	Су-34	Su-34	AmericaJetAurora	2200	30	180	AirplaneArmor	160	200	FAB glide bomb	350	area	fighters, AA	CtrlC	standoff; GuidedFAB
