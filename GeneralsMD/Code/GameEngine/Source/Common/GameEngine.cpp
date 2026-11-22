@@ -1347,6 +1347,8 @@ void GameEngine::init( int argc, char *argv[] )
 		/* Turkiye's own weapons.  OVERWRITE rather than MULTIFILE: a patch file may only edit a weapon
 			 that exists, and every one of these is new. */
 		ini.load( AsciiString( "Data\\INI\\TurkiyeWeaponReforged.ini" ), INI_LOAD_OVERWRITE, &xferCRC );
+		// Russia's own weapons (docs/russia), the same way
+		ini.load( AsciiString( "Data\\INI\\RussiaWeaponReforged.ini" ), INI_LOAD_OVERWRITE, &xferCRC );
 		initSubsystem(TheObjectCreationListStore,"TheObjectCreationListStore", MSGNEW("GameEngineSubsystem") ObjectCreationListStore(), &xferCRC, "Data\\INI\\Default\\ObjectCreationList.ini", "Data\\INI\\ObjectCreationList.ini");
 		/* Lists EA left out or got wrong, before any object names one: a list parsed again is cleared
 			 and replaced whole, and a new name is simply added. */
