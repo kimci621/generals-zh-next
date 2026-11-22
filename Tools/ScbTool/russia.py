@@ -52,9 +52,9 @@ TEAM_UNITS = {
     "China H 5W Helix Attackers": {"ChinaVehicleHelix": "RussiaHeliKa52"},
     "China CT - Base Def 1": {"ChinaVehicleInfernoCannon": "RussiaVehicleTOS2"},
     "China H 3W Guard Combat Zone": {"ChinaJetMIG": "RussiaDroneOrlan"},
-    "China H 4TH Wave Air B": {"ChinaJetMIG": "RussiaJetSu34"},
+    "China H 4TH Wave Air B": {"ChinaJetMIG": "RussiaJetSu35"},
     "China H 4W Guard Combat Zone": {"ChinaJetMIG": "RussiaJetSu35"},
-    "China H 5W Guard Combat Zone": {"ChinaJetMIG": "RussiaJetSu35"},
+    "China H 5W Guard Combat Zone": {"ChinaJetMIG": "RussiaJetSu34"},
     "China H 4TH Wave Artillery B": {"ChinaVehicleNukeLauncher": "RussiaVehicleTornadoG"},
     "China H 5TH Wave Artillery C": {"ChinaVehicleNukeLauncher": "RussiaVehicleTornadoG"},
     "China H 5TH Wave Artillery B": {"ChinaVehicleNukeLauncher": "RussiaVehicleTOS1A"},
@@ -63,11 +63,11 @@ TEAM_UNITS = {
 POWERS = {"SuperweaponNeutronMissile": "SuperweaponRussiaOreshnik", "SuperweaponArtilleryBarrage": "SuperweaponRussiaTornadoS",
           "SuperweaponChinaCarpetBomb": "SuperweaponRussiaFAB", "SuperweaponEMPPulse": "SuperweaponRussiaEWSuppress",
           "SuperweaponClusterMines": "SuperweaponRussiaKinzhal"}
-# (upgrade, building that sells it, credits to hold first)
+# (upgrade, building that sells it, credits to hold first; 0: the purchase queue saves for it)
 UPGRADES = [("Upgrade_RussiaTax", "RussiaCommandCenter", 2500), ("Upgrade_RussiaOilGas", "RussiaControlCenter", 2000),
             ("Upgrade_RussiaThermal", "RussiaControlCenter", 3000), ("Upgrade_RussiaRelikt", "RussiaControlCenter", 3000),
             ("Upgrade_RussiaCages", "RussiaControlCenter", 2000), ("Upgrade_RussiaPantsirMod", "RussiaControlCenter", 2500),
-            ("Upgrade_RussiaMobres", "RussiaVoenkomat", 1500), ("Upgrade_RussiaGuidedFAB", "RussiaAirfield", 2500)]
+            ("Upgrade_RussiaMobres", "RussiaVoenkomat", 0), ("Upgrade_RussiaGuidedFAB", "RussiaAirfield", 2500)]
 
 
 def param(kind, value):

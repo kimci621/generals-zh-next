@@ -17,7 +17,7 @@ P13 Upstream merges only by release tag (`git fetch upstream --tags; git merge v
 P14 Text for players: UI strings in game language (ru+en at least); Russian text on models. Code comments: match file (upstream uses English).
 
 ## STATE
-NOW: R4.9
+NOW: GATE4 (wait user: science points vs metric)
 LAST: R3 passed GATE3 2026-11-22.
 NEXT-NOTE: -
 BLOCKERS: -
@@ -65,7 +65,7 @@ BALANCE TARGETS (user 2026-11-22: max 10 games per opponent general, iterate fas
 
 ### R4 bot
 [x] R4.0 Expand: Russia skirmish scripts (ScbTool or scb.py) on top of China's: build Pantsir on air threat, Orlan over arty, Lancet targeting, Voenkomat, upgrades, powers; trace like ~/Games/Generals ai-lab AI_LAB_TRACE.
-[ ] R4.9 30-match series: every unique unit/power used in >=50% matches. GATE4.
+[?] R4.9 30-match series: every unique unit/power used in >=50% matches. GATE4.
 
 ### R5 balance
 [ ] R5.0 Expand: unitmatrix/duel/siege with Russia, series vs USA/China/GLA + China control, iterate numbers. Changelog docs/russia/CHANGELOG.md with commands+numbers.
@@ -127,8 +127,11 @@ R4.0 | MstaS buildable at WF | inherited SCIENCE_NukeLauncher prereq (China scie
 R4.0 | Buk ok | Patriot AssistedTargetingUpdate used missing SECONDARY slot -> crash once bot built Buk | RemoveModule ModuleTag_07
 R4.0 | Mobres bought once | ReplaceObjectUpgrade dropped AI build-list entry -> rebuild+rebuy loop (29x/match) | engine: ReplaceObjectUpgrade hands build-list entry to replacement
 R4.0 | all powers >=50% | 7 science points (ranks 1-5) for 9 picks (Orlan, TOS2, 6 powers, Kinzhal); set picked by AI role, set2 ~10/12 | TornadoS+EWSuppress only in set1 -> ask user at GATE4 (points or metric)
+R4.9 | Mobres bought by scripts | Upgrade_RussiaMobres was OBJECT; AIPlayer::buildUpgrade skips OBJECT upgrades | Type=PLAYER, button PLAYER_UPGRADE -> 25/30
+R4.9 | Oreshnik fires >=50% | built 25/30, fires 12/30; vs GLA Russia dies before first charge | balance, R5
 ## LOG (date ID result commit)
 2026-11-22 R0-R2: build ok, headless 33x RT, series 141/h; skeleton clean, China wins 5/5 vs skeleton.
 2026-11-22 R3: full roster+mechanics; powers fire (Cyber 13 FAB 18 Kinzhal 25 Orlan 77 ... EWSuppress 0); Oreshnik fires; talent effects and bot Oreshnik/EWSuppress/defenses NOT verified -> R4.
 2026-11-22 GATE3 passed (user: делай).
 2026-11-22 R4.0 own SkirmishRussia scripts + 3 data/engine fixes; 12 matches vs China/USA/GLA seeds1-2 swap: unique items <50% 35/62 -> 4/62 (Su34 5, Mobres 3 before loop fix, EWSuppress 2, TornadoS 2); W Russia 5 China 1 GLA 4 none 2.
+2026-11-22 R4.9 u6 30 matches: below 50% 3/62 (EWSuppress 9, TornadoS 10, Oreshnik fire 12); W vs China 6-3-1, USA 5-3-2, GLA 1-9; GATE4 open
