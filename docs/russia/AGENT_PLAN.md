@@ -17,8 +17,8 @@ P13 Upstream merges only by release tag (`git fetch upstream --tags; git merge v
 P14 Text for players: UI strings in game language (ru+en at least); Russian text on models. Code comments: match file (upstream uses English).
 
 ## STATE
-NOW: R1.4 GATE1
-LAST: R0.4 series driver 2026-11-22.
+NOW: R2.1
+LAST: GATE1 roster approved 2026-11-22.
 NEXT-NOTE: -
 BLOCKERS: -
 
@@ -71,10 +71,14 @@ BALANCE TARGETS (user 2026-11-22: max 10 games per opponent general, iterate fas
 [x] R1.1 Verify real-system data (web, standard search) for every DATA unit: role, rough range order, crew/capacity. Keep only range ORDER, not scale. Record corrections as DEV.
 [x] R1.2 Pull analog stats: vanilla INIZH.big + BalanceReforged.ini/FixesReforged.ini overrides for every src in DATA (hp, armor, speed, vision, weapon dmg/range/reload, build time).
 [x] R1.3 Write docs/russia/roster.tsv: id,name_ru,name_en,src,cost,time,hp,armor,speed,vision,weapon,range,dps,counters,req,notes. Rules: speed vehicles = China analog x0.9; every unit has >=1 counter; no unit beats all of its price class.
-[ ] R1.4 GATE1: show user short roster summary (by group, what's strong/weak), get approval. Changes -> roster.tsv + DATA.
+[x] R1.4 GATE1: show user short roster summary (by group, what's strong/weak), get approval. Changes -> roster.tsv + DATA.
 
 ### R2 skeleton (all buildings + 8 base units, analog models)
-[ ] R2.0 Expand R2 into <=1-session tasks here (buildings, command sets, units MotorRifle RPG Engineer IMR3M Kamaz T72B3M BTR82A MstaS PantsirPos, strings ru+en, placeholder cameos = analog's).
+[x] R2.0 Expanded below. Mechanism: ThingFactory.cpp:344 findSideReskin swaps any template for the producer side's reskin, so China names in AI scripts/build list work.
+[ ] R2.1 Buildings: 13 ObjectReskin+patch (Side, cost, time, hp, DisplayName) per roster.tsv; mechanics (spawn, superweapon, SAM, radar) stay analog's until R3. => INI loads, no [LINE errors.
+[ ] R2.2 Units: MotorRifle RPG Engineer IMR3M Kamaz T72B3M BTR82A MstaS reskins (cost, time, hp, speed via own Locomotor only if needed, DisplayName). => INI loads.
+[ ] R2.3 Command sets: Russia CC/IMR3M/Barracks/Supply/WF/Airfield sets naming Russia templates (copy China's, drop units not in roster). => buttons resolve (no missing-template log).
+[ ] R2.4 Strings OBJECT:Russia* en (Patch.str) + ru (Russian/Generals.str). => no MISSING string in log.
 [ ] R2.9 Verify: 5 headless Russia-vs-China 30 game-min, no crash, bot builds base+factories+attacks (count from log), no INI errors; one windowed smoke with screenshot. GATE2 report.
 
 ### R3 full roster + mechanics
