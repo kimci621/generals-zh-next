@@ -17,7 +17,7 @@ P13 Upstream merges only by release tag (`git fetch upstream --tags; git merge v
 P14 Text for players: UI strings in game language (ru+en at least); Russian text on models. Code comments: match file (upstream uses English).
 
 ## STATE
-NOW: R3.6
+NOW: R3.7
 LAST: R2 skeleton verified 2026-11-22.
 NEXT-NOTE: -
 BLOCKERS: -
@@ -88,7 +88,7 @@ BALANCE TARGETS (user 2026-11-22: max 10 games per opponent general, iterate fas
 [x] R3.3 hp/speed per roster.tsv (Body ReplaceModule, own Locomotors). => values in INI match roster.
 [x] R3.4 Point defense: Pantsir/PantsirPos/T14 APS PointDefenseLaserUpdate vs SMALL_MISSILE; Krasukha JammerUpdate. => scripted/headless check drones intercepted.
 [x] R3.5 Economy: Voenkomat SpawnBehavior (F13c); OilGas derrick boost (F13a); Tax code+INI (F13b). => reservists spawn; income delta measured.
-[ ] R3.6 Upgrades Ratnik Thermal Relikt Cages Mobres PantsirMod GuidedFAB + buttons. => purchasable, effect visible in INI/log.
+[x] R3.6 Upgrades Ratnik Thermal Relikt Cages Mobres PantsirMod GuidedFAB + buttons. => purchasable, effect visible in INI/log.
 [ ] R3.7 Sciences/powers/talents per DATA SCIENCE (Cyber code F13d, FAB, TornadoS, VDV, Reservists, EWSuppress, Kinzhal, TOS2, Veterans, OrlanRecon) + PlayerTemplate own sciences + AI SkillSets. => powers fire in headless.
 [ ] R3.8 Oreshnik superweapon (Scud Storm-like, 6 impacts). => fires in headless.
 [ ] R3.9 Verify each mechanic by scenario or scripted headless check, checklist in LOG. GATE3.
@@ -138,6 +138,10 @@ R2.3 | one reskin per source (ThingFactory findSideReskin) | R3 must give Kornet
 R2.3 | China mines/EMP-mine buttons dropped from Russia sets (CommandSetUpgrade would swap to China sets) | revisit if Russia gets mines
 R3.2 | Su35 anti-air jet | engine jets do not dogfight; Su35 stays Raptor-like strike fighter. Pantsir/Krasukha keep analog weapons until R3.4
 R0.3 | test_gameengine fails a_template_maps_rules_are_served_beside_it_and_in_its_name (5) | pre-existing on clean tree, not ours
+R3.6 | Thermal/Relikt/Cages @WF | WF has 12 unit buttons (UI max 14 incl rally/sell) -> on ControlCenter with OilGas/PantsirMod
+R3.6 | Cages vs FPV/Lancet only | no free damage type; Cages halve INFANTRY_MISSILE (FPV, Lancet now INFANTRY_MISSILE, also enemy RPGs). New armors need OVERWRITE after ArmorStore -> RussiaArmorReforged.ini + load line GameEngine.cpp
+R3.6 | Mobres = spawn delay swap | SpawnBehavior has no upgrade gate -> ReplaceObjectUpgrade to RussiaVoenkomatMobres (reskin of Tank_ChinaPropagandaCenter, 40s); old reservists stay, cap may reach 10
+R3.6 | headless seed12 rmg vs USA hangs past maxframes (CRC AT LIMIT printed, no RESULT) | same for China vs USA -> pre-existing engine bug, not ours; avoid seed12 vs USA, report to user
 ## LOG (date ID result commit)
 2026-11-22 plan created
 2026-11-22 R0.1 build ok; headless China vs USA randommap seed1 (cells 0): decided frame 8065, 8.0s logic, 33.5x RT, 11s wall, no crash. Winner not printed in stdout (find in R0.4).
@@ -157,3 +161,4 @@ R0.3 | test_gameengine fails a_template_maps_rules_are_served_beside_it_and_in_i
 2026-11-22 R3.3 hp (43 ReplaceModule) + SpeedScale (27) from roster.tsv via gen.py; no INI errors/missing strings seed11.
 2026-11-22 R3.4 PD on PantsirPos+T14 APS, Jammer on Krasukha (no gun); Pantsir/Tor keep Avenger PD. Loads clean vs USA seed12; interception NOT measured (no log line) -> R3.9 scenario.
 2026-11-22 R3.5 Tax engine code (SupplyTruckAIUpdate UpgradedBoost list) + CC button; OilGas derrick boost + ControlCenter button; Voenkomat SpawnBehavior needs DefaultProductionExitUpdate (propaganda has no exit). Reservist spawned f1844 seed11. Income delta NOT measured (AI never buys upgrades) -> R4/R3.9.
+2026-11-22 R3.6 7 upgrades+buttons+strings (Ratnik/Relikt MaxHealth, Thermal Sight, Cages Armor, Mobres ReplaceObject, PantsirMod PD RequiredUpgrade, GuidedFAB WeaponSet); clean load Russia vs China seeds11-12; effect in match NOT measured (AI does not buy) -> R3.9/R4.

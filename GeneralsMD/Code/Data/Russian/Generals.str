@@ -19172,3 +19172,91 @@ END
 CONTROLBAR:ToolTipUpgradeRussiaOilGas
 "Захваченные нефтевышки приносят на 50% больше."
 END
+
+UPGRADE:RussiaRatnik
+"Экипировка «Ратник»"
+END
+
+CONTROLBAR:UpgradeRussiaRatnik
+"&Экипировка «Ратник»"
+END
+
+CONTROLBAR:ToolTipUpgradeRussiaRatnik
+"Пехота получает +25% здоровья."
+END
+
+UPGRADE:RussiaThermal
+"Тепловизоры"
+END
+
+CONTROLBAR:UpgradeRussiaThermal
+"&Тепловизоры"
+END
+
+CONTROLBAR:ToolTipUpgradeRussiaThermal
+"Боевая техника видит на 25% дальше."
+END
+
+UPGRADE:RussiaRelikt
+"ДЗ «Реликт»"
+END
+
+CONTROLBAR:UpgradeRussiaRelikt
+"&ДЗ «Реликт»"
+END
+
+CONTROLBAR:ToolTipUpgradeRussiaRelikt
+"Т-72Б3М и Т-90М получают +20% здоровья."
+END
+
+UPGRADE:RussiaCages
+"Противодроновые решётки"
+END
+
+CONTROLBAR:UpgradeRussiaCages
+"&Противодроновые решётки"
+END
+
+CONTROLBAR:ToolTipUpgradeRussiaCages
+"Танки, БТР и БМП получают вдвое меньше урона от дронов и гранатомётов."
+END
+
+UPGRADE:RussiaMobres
+"Мобилизационный резерв"
+END
+
+CONTROLBAR:UpgradeRussiaMobres
+"&Мобилизационный резерв"
+END
+
+CONTROLBAR:ToolTipUpgradeRussiaMobres
+"Этот военкомат призывает резервиста раз в 40 секунд вместо 60."
+END
+
+UPGRADE:RussiaPantsirMod
+"Модернизация «Панциря»"
+END
+
+CONTROLBAR:UpgradeRussiaPantsirMod
+"&Модернизация «Панциря»"
+END
+
+CONTROLBAR:ToolTipUpgradeRussiaPantsirMod
+"«Панцири» и их позиции получают ещё один канал перехвата."
+END
+
+UPGRADE:RussiaGuidedFAB
+"УМПК для ФАБ"
+END
+
+CONTROLBAR:UpgradeRussiaGuidedFAB
+"&УМПК для ФАБ"
+END
+
+CONTROLBAR:ToolTipUpgradeRussiaGuidedFAB
+"Су-34 сбрасывает бомбы на 50% дальше."
+END
+
+OBJECT:RussiaVoenkomatMobres
+"Военкомат"
+END

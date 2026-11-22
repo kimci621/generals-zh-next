@@ -6982,3 +6982,91 @@ END
 CONTROLBAR:ToolTipUpgradeRussiaOilGas
 "Captured oil derricks pay 50% more."
 END
+
+UPGRADE:RussiaRatnik
+"Ratnik gear"
+END
+
+CONTROLBAR:UpgradeRussiaRatnik
+"&Ratnik gear"
+END
+
+CONTROLBAR:ToolTipUpgradeRussiaRatnik
+"Infantry get 25% more health."
+END
+
+UPGRADE:RussiaThermal
+"Thermal Sights"
+END
+
+CONTROLBAR:UpgradeRussiaThermal
+"&Thermal Sights"
+END
+
+CONTROLBAR:ToolTipUpgradeRussiaThermal
+"Combat vehicles see 25% farther."
+END
+
+UPGRADE:RussiaRelikt
+"Relikt ERA"
+END
+
+CONTROLBAR:UpgradeRussiaRelikt
+"&Relikt ERA"
+END
+
+CONTROLBAR:ToolTipUpgradeRussiaRelikt
+"T-72B3M and T-90M get 20% more health."
+END
+
+UPGRADE:RussiaCages
+"Anti-drone Cages"
+END
+
+CONTROLBAR:UpgradeRussiaCages
+"&Anti-drone Cages"
+END
+
+CONTROLBAR:ToolTipUpgradeRussiaCages
+"Tanks, BTR and BMP take half damage from drones and RPG warheads."
+END
+
+UPGRADE:RussiaMobres
+"Mobilization Reserve"
+END
+
+CONTROLBAR:UpgradeRussiaMobres
+"&Mobilization Reserve"
+END
+
+CONTROLBAR:ToolTipUpgradeRussiaMobres
+"This Recruitment Office calls up a Reservist every 40 seconds instead of 60."
+END
+
+UPGRADE:RussiaPantsirMod
+"Pantsir Modernization"
+END
+
+CONTROLBAR:UpgradeRussiaPantsirMod
+"&Pantsir Modernization"
+END
+
+CONTROLBAR:ToolTipUpgradeRussiaPantsirMod
+"Pantsir vehicles and sites get one more point defense channel."
+END
+
+UPGRADE:RussiaGuidedFAB
+"Guided FAB (UMPK)"
+END
+
+CONTROLBAR:UpgradeRussiaGuidedFAB
+"&Guided FAB (UMPK)"
+END
+
+CONTROLBAR:ToolTipUpgradeRussiaGuidedFAB
+"Su-34 releases its bombs from 50% farther."
+END
+
+OBJECT:RussiaVoenkomatMobres
+"Recruitment Office"
+END

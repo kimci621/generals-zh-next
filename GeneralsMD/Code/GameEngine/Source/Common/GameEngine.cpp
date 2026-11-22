@@ -1360,6 +1360,8 @@ void GameEngine::init( int argc, char *argv[] )
 		ini.load( AsciiString( "Data\\INI\\SpecialPowerReforged.ini" ), INI_LOAD_MULTIFILE, &xferCRC );
 		initSubsystem(TheDamageFXStore,"TheDamageFXStore", MSGNEW("GameEngineSubsystem") DamageFXStore(), &xferCRC, NULL, "Data\\INI\\DamageFX.ini");
 		initSubsystem(TheArmorStore,"TheArmorStore", MSGNEW("GameEngineSubsystem") ArmorStore(), &xferCRC, NULL, "Data\\INI\\Armor.ini");
+		// Russia's own armors (anti-drone cages), new names, so not in the MULTIFILE object file (docs/russia)
+		ini.load( AsciiString( "Data\\INI\\RussiaArmorReforged.ini" ), INI_LOAD_OVERWRITE, &xferCRC );
 		initSubsystem(TheBuildAssistant,"TheBuildAssistant", MSGNEW("GameEngineSubsystem") BuildAssistant, NULL);
 
 
