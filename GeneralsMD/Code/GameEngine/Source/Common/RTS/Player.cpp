@@ -4286,7 +4286,8 @@ void Player::addNewSharedSpecialPowerTimer( const SpecialPowerTemplate *temp, Un
 UnsignedInt Player::getSpecialPowerReloadTime( const SpecialPowerTemplate *temp ) const
 {
 	const Real handicap = getLobbyHandicap();
-	return handicap == 1.0f ? temp->getReloadTime() : (UnsignedInt)( temp->getReloadTime() / handicap );
+	const UnsignedInt reload = temp->getReloadTime( this );
+	return handicap == 1.0f ? reload : (UnsignedInt)( reload / handicap );
 }
 
 void Player::resetOrStartSpecialPowerReadyFrame( const SpecialPowerTemplate *temp )

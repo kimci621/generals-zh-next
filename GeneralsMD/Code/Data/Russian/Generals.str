@@ -19524,3 +19524,11 @@ END
 CONTROLBAR:ToolTipRussiaTalent10B
 "\"Орешник\" перезаряжается на 60 с быстрее."
 END
+
+CONTROLBAR:RussiaOreshnik
+"&Пуск \"Орешника\""
+END
+
+CONTROLBAR:TooltipRussiaOreshnik
+"Шесть гиперзвуковых боеголовок накрывают район. Перехватить нельзя."
+END

@@ -219,6 +219,21 @@ static void parseUpgradeRadiusCursorRadius( INI *ini, void * /*instance*/, void 
 }
 
 //-------------------------------------------------------------------------------------------------
+static void parseUpgradeReloadTime( INI *ini, void * /*instance*/, void *store, const void * /*userData*/ )
+{
+	SpecialPowerTemplate::UpgradeReload up;
+	up.m_reload = DurationFrames::fromRaw( (UnsignedInt)INI::scanInt( parseSciencesThenValue( ini, &up.m_sciences ).str() ) );
+	((std::vector<SpecialPowerTemplate::UpgradeReload> *)store)->push_back( up );
+}
+
+//-------------------------------------------------------------------------------------------------
+UnsignedInt SpecialPowerTemplate::getReloadTime( const Player *player ) const
+{
+	const UpgradeReload *up = findFirstOwnedEntry( player, getFO()->m_upgradeReloadTime );
+	return up ? up->m_reload.get() : getReloadTime();
+}
+
+//-------------------------------------------------------------------------------------------------
 Real SpecialPowerTemplate::getRadiusCursorRadius( const Player *player ) const
 {
 	const UpgradeRadius *up = findFirstOwnedEntry( player, getFO()->m_upgradeRadiusCursorRadius );
@@ -242,6 +257,7 @@ Real SpecialPowerTemplate::getRadiusCursorRadius( const Player *player ) const
 	{ "ViewObjectRange",					INI::parseReal,										NULL,	offsetof( SpecialPowerTemplate, m_viewObjectRange ) },
 	{ "RadiusCursorRadius",				INI::parseReal,										NULL,	offsetof( SpecialPowerTemplate, m_radiusCursorRadius ) },
 	{ "UpgradeRadiusCursorRadius",	parseUpgradeRadiusCursorRadius,		NULL,	offsetof( SpecialPowerTemplate, m_upgradeRadiusCursorRadius ) },
+	{ "UpgradeReloadTime",	parseUpgradeReloadTime,		NULL,	offsetof( SpecialPowerTemplate, m_upgradeReloadTime ) },
 	{ "ShortcutPower",						INI::parseBool,										NULL, offsetof( SpecialPowerTemplate, m_shortcutPower ) },
 	{ "AIFiresWhenReady",					INI::parseBool,										NULL, offsetof( SpecialPowerTemplate, m_aiFiresWhenReady ) },
 	{ "AcademyClassify",					INI::parseIndexList,			TheAcademyClassificationTypeNames, offsetof( SpecialPowerTemplate, m_academyClassificationType ) },

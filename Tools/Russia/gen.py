@@ -93,6 +93,9 @@ WEAPONS = [
     ("RussiaBukMissile", "PatriotMissileWeaponAir", {"PrimaryDamage": 35.0, "AttackRange": 400.0}),
     ("RussiaSu34GuidedFAB", "AuroraBombWeapon", {"AttackRange": 450.0}),  # апгрейд УМПК, ручной WeaponSet
 ]
+# R3.8 Орешник: 6 пусков (OCL) крылатой ракеты с разбросом, боеголовка Scud Storm без отравления
+WEAPONS += [("RussiaOreshnikLaunch", "CruiseMissileWeapon", {"ProjectileObject": "RussiaOreshnikWarhead", "ScatterRadius": 160.0}),
+            ("RussiaOreshnikWarheadBlast", "ScudStormDamageWeapon", {"FireOCL": None})]
 # таланты R3.7b (ручные WeaponSet PLAYER_UPGRADE): 7B арта +15% дальности, 8B Бук +25%, 9A FPV/Ланцет +25% урона
 _W = {w[0]: w for w in WEAPONS}
 for _n, _k, _v in (("RussiaMstaShell", "AttackRange", 402.5), ("RussiaTOSSalvo", "AttackRange", 230.0),

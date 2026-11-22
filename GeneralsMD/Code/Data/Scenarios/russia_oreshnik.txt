@@ -1,0 +1,7 @@
+# R3.8: Орешник у Russia (слот 0) с питанием бьёт по казарме слота 1; в логе ждём выстрел и разрушение.
+30    spawn      0  RussiaPowerPlant      1   start0:-200:-250
+30    spawn      0  RussiaPowerPlant      1   start0:-200:-400
+30    spawn      0  RussiaOreshnik        1   start0:-300:250
+30    spawn      1  ChinaBarracks         1   start1:0:-300
+200   power      0  RussiaOreshnik        start1:0:-300  SuperweaponRussiaOreshnik
+1500  tally      1  ChinaBarracks

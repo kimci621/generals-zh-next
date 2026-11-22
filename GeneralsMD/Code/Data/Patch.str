@@ -7334,3 +7334,11 @@ END
 CONTROLBAR:ToolTipRussiaTalent10B
 "The Oreshnik reloads 60 s faster."
 END
+
+CONTROLBAR:RussiaOreshnik
+"&Launch Oreshnik"
+END
+
+CONTROLBAR:TooltipRussiaOreshnik
+"Six hypersonic warheads strike the area. Cannot be intercepted."
+END

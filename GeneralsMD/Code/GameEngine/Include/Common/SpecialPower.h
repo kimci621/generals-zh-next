@@ -149,6 +149,8 @@ public:
 	UnsignedInt getID( void ) const { return getFO()->m_id; }
 	SpecialPowerType getSpecialPowerType( void ) const { return getFO()->m_type; }
 	UnsignedInt getReloadTime( void ) const { return getFO()->m_reloadTime; }
+	/// the reload, cut by the first UpgradeReloadTime entry the player owns (Russia's Oreshnik talent)
+	UnsignedInt getReloadTime( const Player *player ) const;
 	ScienceType getRequiredScience( void ) const { return getFO()->m_requiredScience; }
 	const AudioEventRTS *getInitiateSound( void ) const { return &getFO()->m_initiateSound; }
 	const AudioEventRTS *getInitiateAtTargetSound( void ) const { return &getFO()->m_initiateAtLocationSound; }
@@ -188,6 +190,14 @@ public:
 	};
 private:
 	std::vector<UpgradeRadius> m_upgradeRadiusCursorRadius;	///< UpgradeRadiusCursorRadius = <science> [<science> ...] <radius>
+public:
+	struct UpgradeReload
+	{
+		ScienceVec m_sciences;
+		DurationFrames m_reload;
+	};
+private:
+	std::vector<UpgradeReload> m_upgradeReloadTime;	///< UpgradeReloadTime = <science> [<science> ...] <msec>
 	Bool							m_publicTimer;				///< display a countdown timer for this special power for all to see
 	Bool							m_sharedNSync;				///< If true, this is a special that is shared between all of a player's command centers
 	Bool							m_shortcutPower;		///< Is this shortcut power capable of being fired by the side panel?

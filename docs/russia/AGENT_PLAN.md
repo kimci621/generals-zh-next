@@ -17,7 +17,7 @@ P13 Upstream merges only by release tag (`git fetch upstream --tags; git merge v
 P14 Text for players: UI strings in game language (ru+en at least); Russian text on models. Code comments: match file (upstream uses English).
 
 ## STATE
-NOW: R3.8
+NOW: R3.9
 LAST: R2 skeleton verified 2026-11-22.
 NEXT-NOTE: -
 BLOCKERS: -
@@ -91,7 +91,7 @@ BALANCE TARGETS (user 2026-11-22: max 10 games per opponent general, iterate fas
 [x] R3.6 Upgrades Ratnik Thermal Relikt Cages Mobres PantsirMod GuidedFAB + buttons. => purchasable, effect visible in INI/log.
 [x] R3.7 Sciences/powers per DATA SCIENCE (Cyber code F13d, FAB, TornadoS, VDV, Reservists, EWSuppress, Kinzhal, TOS2, Veterans, OrlanRecon) + PlayerTemplate own sciences + AI SkillSets. => powers fire in headless.
 [x] R3.7b Talents 6-10 (A|B) per DATA TALENTS: 10 sciences SCIENCE_RussiaTalent6A..10B (ScienceReforged.ini, Turkiye pattern), TalentSciences in FactionRussia, effects in TalentsReforged.ini, strings en+ru. => cards load, no INI errors; effect lines present.
-[ ] R3.8 Oreshnik superweapon (Scud Storm-like, 6 impacts). => fires in headless.
+[x] R3.8 Oreshnik superweapon (Scud Storm-like, 6 impacts). => fires in headless.
 [ ] R3.9 Verify each mechanic by scenario or scripted headless check, checklist in LOG. GATE3.
 
 ### R4 bot
@@ -151,6 +151,8 @@ R3.7 | 7 science points by rank 5 | bot sets reach Kinzhal; EWSuppress (set1 8th
 R3.7b | T14 max3 in roster | never set in INI -> MaxSimultaneousOfType 3 now; 10A needs per-player cap -> ThingTemplate MaxSimultaneousUpgrade = <science> <n> (Player::canBuildMoreOfType)
 R3.7b | 6B Tax talent | truck UpgradedBoost was first-wins -> sums owned boosts (Tax 50 + talent 30)
 R3.7b | 10B Oreshnik reload | power does not exist yet -> R3.8 keys it on SCIENCE_RussiaTalent10B
+R3.8 | silo MissileLauncherBuildingUpdate kept SuperweaponNeutronMissile -> crash on fire | ModuleTag_09 replaced with Oreshnik template
+R3.8 | bot never builds Oreshnik (Russia builds 0 defenses, superweapon 0 in 6x72000 frames) | checked by scenario russia_oreshnik (needs -overlay with Scenarios/) -> bot build order R4
 ## LOG (date ID result commit)
 2026-11-22 plan created
 2026-11-22 R0.1 build ok; headless China vs USA randommap seed1 (cells 0): decided frame 8065, 8.0s logic, 33.5x RT, 11s wall, no crash. Winner not printed in stdout (find in R0.4).
@@ -173,3 +175,4 @@ R3.7b | 10B Oreshnik reload | power does not exist yet -> R3.8 keys it on SCIENC
 2026-11-22 R3.6 7 upgrades+buttons+strings (Ratnik/Relikt MaxHealth, Thermal Sight, Cages Armor, Mobres ReplaceObject, PantsirMod PD RequiredUpgrade, GuidedFAB WeaponSet); clean load Russia vs China seeds11-12; effect in match NOT measured (AI does not buy) -> R3.9/R4.
 2026-11-22 R3.7 SCIENCE_Russia tree (3 R1, 14 R3, Kinzhal R5) + 8 powers on CC slots + Cyber OCL code + TOS2 unit + bot SkillSets; 6 headless vs China/AirForce: fires Cyber 13 FAB 18 Kinzhal 25 Orlan 77 Reservists 11 TornadoS 13 VDV 14, EWSuppress 0 (points); no Russia INI/string errors.
 2026-11-22 R3.7b 10 talent cards + upgrades + effects (Mobres swap, truck boost, MaxHealth, 7 Talent weapons via WeaponSetUpgrade, PD channel, Sight, T14 cap 3/5); 3 headless vs China clean (no Russia/talent INI errors), bot reaches rank 6-7 (AI picks cards silently, effect not measured -> R3.9).
+2026-11-22 R3.8 Oreshnik: OCL 6 cruise warheads (ScudStorm blast), reload 300s, 240s with 10B; scenario russia_oreshnik: fired at frame 200, China barracks 0 alive at 1500, no crash.
