@@ -17,7 +17,7 @@ P13 Upstream merges only by release tag (`git fetch upstream --tags; git merge v
 P14 Text for players: UI strings in game language (ru+en at least); Russian text on models. Code comments: match file (upstream uses English).
 
 ## STATE
-NOW: R3.4
+NOW: R3.5
 LAST: R2 skeleton verified 2026-11-22.
 NEXT-NOTE: -
 BLOCKERS: -
@@ -86,7 +86,7 @@ BALANCE TARGETS (user 2026-11-22: max 10 games per opponent general, iterate fas
 [x] R3.1 All 31 units + 13 buildings as reskins with buttons (sources remapped so China scripts' asks hit Russia combat units: Redguard->MotorRifle, MIG->Su25, Helix->Mi8; duplicates on general variants). Lancet at Airfield, Tigr at SupplyCenter (WF has 12 slots).
 [x] R3.2 RussiaWeaponReforged.ini (own file, OVERWRITE, load line next to Turkiye's) + WeaponSet patches: Kornet, FPV (slow interceptable projectile), Verba air-only, BMPT, TOS thermobaric, Tornado salvo, Su34 FAB, Su35, Tor/Buk air-only, Pantsir cannon+missile. Orlan unarmed + SpotterSight. => loads, each unit fires in a match (KILLXP killer=Russia*).
 [x] R3.3 hp/speed per roster.tsv (Body ReplaceModule, own Locomotors). => values in INI match roster.
-[ ] R3.4 Point defense: Pantsir/PantsirPos/T14 APS PointDefenseLaserUpdate vs SMALL_MISSILE; Krasukha JammerUpdate. => scripted/headless check drones intercepted.
+[x] R3.4 Point defense: Pantsir/PantsirPos/T14 APS PointDefenseLaserUpdate vs SMALL_MISSILE; Krasukha JammerUpdate. => scripted/headless check drones intercepted.
 [ ] R3.5 Economy: Voenkomat SpawnBehavior (F13c); OilGas derrick boost (F13a); Tax code+INI (F13b). => reservists spawn; income delta measured.
 [ ] R3.6 Upgrades Ratnik Thermal Relikt Cages Mobres PantsirMod GuidedFAB + buttons. => purchasable, effect visible in INI/log.
 [ ] R3.7 Sciences/powers/talents per DATA SCIENCE (Cyber code F13d, FAB, TornadoS, VDV, Reservists, EWSuppress, Kinzhal, TOS2, Veterans, OrlanRecon) + PlayerTemplate own sciences + AI SkillSets. => powers fire in headless.
@@ -155,3 +155,4 @@ R0.3 | test_gameengine fails a_template_maps_rules_are_served_beside_it_and_in_i
 2026-11-22 R3.1 full roster reskins; Russia vs China seed11 decided China f23673, bot built most new types (BMPT 647 log refs, Su25, Lancet, Tor, T14...). AI ABILITY BUTTONS spam for Helix is vanilla China too.
 2026-11-22 R3.2 RussiaWeaponReforged.ini 14 weapons + WeaponSets (gen.py); no INI errors; Russia units score kills; China wins 3/3 seeds11-13 (frames 19-25k).
 2026-11-22 R3.3 hp (43 ReplaceModule) + SpeedScale (27) from roster.tsv via gen.py; no INI errors/missing strings seed11.
+2026-11-22 R3.4 PD on PantsirPos+T14 APS, Jammer on Krasukha (no gun); Pantsir/Tor keep Avenger PD. Loads clean vs USA seed12; interception NOT measured (no log line) -> R3.9 scenario.

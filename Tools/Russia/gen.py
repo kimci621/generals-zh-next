@@ -93,7 +93,7 @@ WSETS = {
     "InfantryFPV": ["RussiaFPVDrone"], "InfantryGRU": ["RussiaGRURifle"], "VehicleBTR82A": ["RussiaBTR30mm"],
     "VehicleBMP3": ["RussiaBMP3Gun"], "TankT90M": ["RussiaT90Gun"], "VehicleTOS1A": ["RussiaTOSSalvo"],
     "VehicleMstaS": ["RussiaMstaShell"], "VehicleTornadoG": ["RussiaTornadoSalvo"], "VehicleLancet": ["RussiaLancetMunition"],
-    "VehicleTorM2": ["RussiaTorMissile"], "BukM3": ["RussiaBukMissile"], "DroneOrlan": ["NONE"],
+    "VehicleTorM2": ["RussiaTorMissile"], "BukM3": ["RussiaBukMissile"], "DroneOrlan": ["NONE"], "VehicleKrasukha": ["NONE"],
 }
 
 
