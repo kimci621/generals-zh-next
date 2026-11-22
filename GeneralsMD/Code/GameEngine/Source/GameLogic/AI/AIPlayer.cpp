@@ -7368,6 +7368,23 @@ static const ThingTemplate *buildableOfKind( Object *builder, GUICommandType com
 
 static Bool priorityBuildPending( Player *player, const ThingTemplate *tmpl );
 
+/** False only for a defence whose default weapons are all anti-air; an unarmed one counts as true. */
+static Bool defenseHitsGround( const ThingTemplate *tmpl )
+{
+	const WeaponTemplateSet *set = tmpl->getWeaponTemplateSets().empty() ? NULL : tmpl->findWeaponTemplateSet( WeaponSetFlags() );
+	Bool armed = FALSE;
+	for( Int slot = 0; set && slot < WEAPONSLOT_COUNT; ++slot )
+	{
+		const WeaponTemplate *weapon = set->getNth( (WeaponSlotType)slot );
+		if( weapon == NULL )
+			continue;
+		armed = TRUE;
+		if( weapon->getAntiMask() & WEAPON_ANTI_GROUND )
+			return TRUE;
+	}
+	return !armed;
+}
+
 //----------------------------------------------------------------------------------------------------------
 /** The base defence this player has the fewest of, off the dozer's buttons (aiPickBaseDefense).  Asking
 	* buildableOfKind for one gave the first button every time: a USA base of nothing but Patriots, a
@@ -7395,6 +7412,9 @@ const ThingTemplate *AIPlayer::nextBaseDefense( Object *dozer )
 		// what the bank covers today would lean on the cheapest
 		const CanMakeType canMake = TheBuildAssistant->canMakeUnit( dozer, tmpl );
 		if( canMake != CANMAKE_OK && canMake != CANMAKE_NO_MONEY )
+			continue;
+		// a gun that only shoots at the sky (Russia's Buk-M3) holds no ground: the scripts that want one ask for it
+		if( !defenseHitsGround( tmpl ) )
 			continue;
 		candidates[ count ] = tmpl;
 		armed[ count ] = tmpl->canPossiblyHaveAnyWeapon() || tmpl->isKindOf( KINDOF_SPAWNS_ARE_THE_WEAPONS );

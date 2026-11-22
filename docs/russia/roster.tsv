@@ -26,7 +26,7 @@ Kamaz	КамАЗ	KamAZ Truck	ChinaVehicleSupplyTruck	600	10	300	TruckArmor	36	15
 TigrM	"Тигр-М"	Tigr-M	AmericaVehicleHumvee	600	10	220	HumveeArmor	45	175	MG	150	45	RPG, tanks	WF	transport 4, scout
 BTR82A	БТР-82А	BTR-82A	ChinaVehicleTroopCrawler	900	12	300	TankArmor	36	175	30mm 2A72	175	35	RPG, tanks, Kornet	WF	transport 5; Cages
 BMP3	БМП-3	BMP-3	AmericaTankCrusader	1100	12	380	TankArmor	27	175	100mm+30mm	175	45	tanks, Kornet	CtrlC	transport 3
-T72B3M	Т-72Б3М	T-72B3M	ChinaTankBattleMaster	700	10	380	TankArmor	22	150	125mm	150	30	RPG, Kornet, FPV, Ka52	WF	cheap MBT; Relikt
+T72B3M	Т-72Б3М	T-72B3M	ChinaTankBattleMaster	800	10	380	TankArmor	22	150	125mm	150	30	RPG, Kornet, FPV, Ka52	WF	cheap MBT; Relikt
 T90M	Т-90М	T-90M	AmericaTankCrusader	1000	12	480	TankArmor	22	160	125mm	160	33	Kornet, FPV, air	CtrlC	Relikt
 T14	Т-14 "Армата"	T-14 Armata	ChinaTankOverlord	2200	22	1000	TankArmor	18	175	125mm 2A82	175	55	air, Kornet mass, Lancet	CtrlC	max 3; APS point defense
 BMPT	БМПТ	BMPT Terminator	ChinaTankGattling	1100	12	350	TankArmor	36	175	2x30mm + ATGM	175	45 inf	tanks, Kornet	WF	anti-infantry, no AA
@@ -43,4 +43,4 @@ Mi8	Ми-8АМТШ	Mi-8AMTSh	AmericaVehicleChinook	1200	12	300	ChinookArmor	135	
 Su25	Су-25СМ3	Su-25SM3	ChinaJetMIG	1300	12	200	AirplaneArmor	150	200	rockets	300	45 area	AA	Airfield	ground attack
 Su35	Су-35С	Su-35S	AmericaJetRaptor	1500	20	180	AirplaneArmor	170	250	R-77	350 air	60 air	AA	CtrlC	anti-air
 Su34	Су-34	Su-34	AmericaJetAurora	2200	30	180	AirplaneArmor	160	200	FAB glide bomb	350	area	fighters, AA	CtrlC	standoff; GuidedFAB
-TOS2	ТОС-2 "Тосочка"	TOS-2 Tosochka	Nuke_ChinaVehicleInfernoCannon	1500	15	260	TankArmor	36	180	thermobaric salvo	250	60 area	air, tanks rush, Kornet	SCIENCE_RussiaTOS2	wheeled TOS: faster, longer, rank 1 science
+TOS2	ТОС-2 "Тосочка"	TOS-2 Tosochka	Nuke_ChinaVehicleInfernoCannon	1800	15	260	TankArmor	36	180	thermobaric salvo	250	60 area	air, tanks rush, Kornet	SCIENCE_RussiaTOS2	wheeled TOS: faster, longer, rank 1 science

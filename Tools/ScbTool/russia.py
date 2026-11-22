@@ -27,6 +27,8 @@ import scbtool
 SOURCE, PLAYER, FACTION = "SkirmishChina", "SkirmishRussia", "FactionRussia"
 INT, SIDE, COMPARISON, OBJECT_TYPE, SPECIAL_POWER, UPGRADE = 0, 11, 6, 15, 30, 32
 GE, LT = 3, 0
+VS_GLA = "RussiaVsGLA"
+GLA_SIDES = ("GLA", "GLAToxinGeneral", "GLADemolitionGeneral", "GLAStealthGeneral")
 ACTIVE = 4
 
 # team -> {China unit in it: Russia unit}; by tier: early teams keep units with no Control Center
@@ -75,7 +77,8 @@ def param(kind, value):
 
 
 def call(kinds, name, *params):
-    chunk_name = "Condition" if name in ("PLAYER_HAS_OBJECT_COMPARISON", "PLAYER_HAS_CREDITS") else "ScriptAction"
+    chunk_name = "Condition" if name in ("PLAYER_HAS_OBJECT_COMPARISON", "PLAYER_HAS_CREDITS", "FLAG",
+                                         "SKIRMISH_PLAYER_FACTION") else "ScriptAction"
     return scbtool.Chunk(chunk_name, 4 if chunk_name == "Condition" else 2, [kinds[name], name, list(params)], [])
 
 
@@ -84,18 +87,29 @@ def has(kinds, obj, comparison, count):
                 param(INT, count), param(OBJECT_TYPE, obj))
 
 
-def script(name, delay, conditions, actions):
+def script(name, delay, conditions, actions, any_of=None, once=0):
     # fields: name, comment, condition comment, action comment, active, once, easy, normal, hard, subroutine, delay
-    orc = scbtool.Chunk("OrCondition", 1, [], conditions)
-    return scbtool.Chunk("Script", 2, [name, "", "", "", 1, 0, 0, 1, 1, 0, delay], [orc] + actions)
+    # conditions: one AND group; any_of: several groups, any one fires the script
+    orcs = [scbtool.Chunk("OrCondition", 1, [], group) for group in (any_of or [conditions])]
+    return scbtool.Chunk("Script", 2, [name, "", "", "", 1, once, 0, 1, 1, 0, delay], orcs + actions)
+
+
+def flag(kinds, name, value):
+    return call(kinds, "FLAG", [5, 0, 0.0, name], [8, value, 0.0, ""])
 
 
 def russia_scripts(kinds):
-    out = [script("Russia Build Control Center", 15,
+    # ГЛА без авиации: против неё бот не тратится на ПВО (флаг ставится один раз в начале матча)
+    vs_gla = [[call(kinds, "SKIRMISH_PLAYER_FACTION", param(SIDE, "<This Player's Enemy>"), [46, 0, 0.0, side])]
+              for side in GLA_SIDES]
+    out = [script("Russia Enemy GLA", 0, None, [call(kinds, "SET_FLAG", [5, 0, 0.0, VS_GLA], [8, 1, 0.0, ""])],
+                  any_of=vs_gla, once=1),
+           script("Russia Build Control Center", 15,
                   [has(kinds, "RussiaWarFactory", GE, 1), has(kinds, "RussiaControlCenter", LT, 1)],
                   [call(kinds, "SKIRMISH_BUILD_BUILDING", param(OBJECT_TYPE, "RussiaControlCenter"))]),
            script("Russia Build Buk", 30,
-                  [has(kinds, "RussiaControlCenter", GE, 1), has(kinds, "RussiaBukM3", LT, 2)],
+                  [has(kinds, "RussiaControlCenter", GE, 1), has(kinds, "RussiaBukM3", LT, 2),
+                   flag(kinds, VS_GLA, 0)],
                   [call(kinds, "SKIRMISH_BUILD_STRUCTURE_FRONT", param(OBJECT_TYPE, "RussiaBukM3"))])]
     for upgrade, building, credits in UPGRADES:
         credit = call(kinds, "PLAYER_HAS_CREDITS", param(INT, credits), param(COMPARISON, 1), param(SIDE, "<This Player>"))

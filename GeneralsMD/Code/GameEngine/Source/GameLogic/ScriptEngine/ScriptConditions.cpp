@@ -179,7 +179,8 @@ Player *ScriptConditions::playerFromParam(Parameter *pSideParm)
 			if (pSideParm->getString()!=THIS_PLAYER_ENEMY) {
 				cached = pPlayer->getPlayerIndex() + 1;
 			}
-		} else {
+		} else if (pSideParm->getString()!=THIS_PLAYER_ENEMY) {
+			// No enemy yet early in a skirmish: look again next time instead of caching the miss.
 			cached = -1;
 		}
 		pSideParm->friend_setInt(cached);
