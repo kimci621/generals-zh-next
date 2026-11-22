@@ -19,7 +19,7 @@ P14 Text for players: UI strings in game language (ru+en at least); Russian text
 ## STATE
 NOW: R5.0
 LAST: R3 passed GATE3 2026-11-22.
-NEXT-NOTE: -
+NEXT-NOTE: R5.0 baseline in CHANGELOG; waiting user: way to fix GLA matchup + Russia vs China tuning
 BLOCKERS: -
 
 ## DECISIONS (user-approved 2026-11-22, do not change without user)
@@ -68,7 +68,7 @@ BALANCE TARGETS (user 2026-11-22: max 10 games per opponent general, iterate fas
 [x] R4.9 30-match series: every unique unit/power used in >=50% matches. GATE4. (Oreshnik fire 14/30 carried to R5: dies to GLA early)
 
 ### R5 balance
-[ ] R5.0 Expand: unitmatrix/duel/siege with Russia, series vs USA/China/GLA + China control, iterate numbers. Changelog docs/russia/CHANGELOG.md with commands+numbers.
+[?] R5.0 Expand: unitmatrix/duel/siege with Russia, series vs USA/China/GLA + China control, iterate numbers. Changelog docs/russia/CHANGELOG.md with commands+numbers.
 [ ] R5.9 Targets met on 10/general series, then confirmed on 100/general. GATE5.
 
 ### R6 UI+sound (later) / R7 models (later, open-ended): expand when reached.
@@ -129,6 +129,7 @@ R4.0 | Mobres bought once | ReplaceObjectUpgrade dropped AI build-list entry -> 
 R4.0 | all powers >=50% | 7 science points (ranks 1-5) for 9 picks (Orlan, TOS2, 6 powers, Kinzhal); set picked by AI role, set2 ~10/12 | TornadoS+EWSuppress only in set1 -> ask user at GATE4 (points or metric)
 R4.9 | Mobres bought by scripts | Upgrade_RussiaMobres was OBJECT; AIPlayer::buildUpgrade skips OBJECT upgrades | Type=PLAYER, button PLAYER_UPGRADE -> 25/30
 R4.9 | Oreshnik fires >=50% | built 25/30, fires 12/30; vs GLA Russia dies before first charge | balance, R5
+R5.0 | Russia loses to GLA by own weakness | China control also 0-10 vs GLA same seeds; Russia trades 0.59 vs China's 0.49 | GLA fix = stronger own Russia scripts (not opponents'), ask user; vs China 10-0 too strong, suspect AA wall (CHANGELOG)
 ## LOG (date ID result commit)
 2026-11-22 R0-R2: build ok, headless 33x RT, series 141/h; skeleton clean, China wins 5/5 vs skeleton.
 2026-11-22 R3: full roster+mechanics; powers fire (Cyber 13 FAB 18 Kinzhal 25 Orlan 77 ... EWSuppress 0); Oreshnik fires; talent effects and bot Oreshnik/EWSuppress/defenses NOT verified -> R4.
@@ -136,3 +137,4 @@ R4.9 | Oreshnik fires >=50% | built 25/30, fires 12/30; vs GLA Russia dies befor
 2026-11-22 R4.0 own SkirmishRussia scripts + 3 data/engine fixes; 12 matches vs China/USA/GLA seeds1-2 swap: unique items <50% 35/62 -> 4/62 (Su34 5, Mobres 3 before loop fix, EWSuppress 2, TornadoS 2); W Russia 5 China 1 GLA 4 none 2.
 2026-11-22 R4.9 u6 30 matches: below 50% 3/62 (EWSuppress 9, TornadoS 10, Oreshnik fire 12); W vs China 6-3-1, USA 5-3-2, GLA 1-9; GATE4 open
 2026-11-22 GATE4 user: free rank-1 sciences. u7 30 matches: below 50% 1/62 (Oreshnik fire 14); EWSuppress 28 TornadoS 27; W vs China 10-0, USA 6-1-3, GLA 1-9.
+2026-11-22 R5.0 baseline 30 matches: Russia-GLA 1-9, China-GLA 0-10, Russia-China 10-0; income 92-108% of China; asked user.
