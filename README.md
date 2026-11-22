@@ -1,3 +1,5 @@
+> **Форк.** Это generals-zh-next, изменённая версия [Zero Hour Reforged](https://github.com/olcayseygan/CnCGeneralsZH-Reforged) (основа: тег `v4.2.0`). С 2026-11-22 здесь делается новая фракция Россия, план в [docs/russia/plan.html](docs/russia/plan.html). Изменения относительно оригинала видны в истории коммитов после `v4.2.0`. Лицензия та же: GPL-3.0 с дополнительными условиями EA (LICENSE.md).
+
 <picture><source media="(prefers-color-scheme: dark)" srcset=".github/media/banner-dark.png"><img alt="Zero Hour Reforged" src=".github/media/banner-light.png" width="800"></picture>
 
 EA published the source of Command & Conquer: Generals and Zero Hour in February 2025. Zero Hour
