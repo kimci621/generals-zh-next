@@ -261,6 +261,7 @@ const FieldParse ThingTemplate::s_objectFieldParseTable[] =
 	{ "StructureRubbleHeight",	INI::parseUnsignedByte,					NULL, offsetof(ThingTemplate, m_structureRubbleHeight ) },
 	{ "ThreatValue",						INI::parseUnsignedShort,		NULL, offsetof(ThingTemplate, m_threatValue ) }, 
   { "MaxSimultaneousOfType",	ThingTemplate::parseMaxSimultaneous,		NULL, offsetof(ThingTemplate, m_maxSimultaneousOfType ) }, 
+  { "MaxSimultaneousUpgrade",	ThingTemplate::parseMaxSimultaneousUpgrade,		NULL, 0 },
   { "MaxSimultaneousLinkKey",	NameKeyGenerator::parseStringAsNameKeyType,		NULL, offsetof(ThingTemplate, m_maxSimultaneousLinkKey ) }, 
 	{ "CrusherLevel",					INI::parseUnsignedByte,			NULL, offsetof( ThingTemplate, m_crusherLevel ) },
 	{ "CrushableLevel",				INI::parseUnsignedByte,			NULL, offsetof( ThingTemplate, m_crushableLevel ) },
@@ -285,6 +286,7 @@ const FieldParse ThingTemplate::s_objectReskinFieldParseTable[] =
 
   // Needed to avoid some cheats with the scud storm rebuild hole
   { "MaxSimultaneousOfType",	ThingTemplate::parseMaxSimultaneous,		NULL, offsetof(ThingTemplate, m_maxSimultaneousOfType ) }, 
+  { "MaxSimultaneousUpgrade",	ThingTemplate::parseMaxSimultaneousUpgrade,		NULL, 0 },
   { "MaxSimultaneousLinkKey",	NameKeyGenerator::parseStringAsNameKeyType,		NULL, offsetof(ThingTemplate, m_maxSimultaneousLinkKey ) }, 
 
 	{ 0, 0, 0, 0 }  // keep this last
@@ -1113,6 +1115,15 @@ void ThingTemplate::parseWeaponTemplateSet( INI* ini, void *instance, void * /*s
 }
 
 //-------------------------------------------------------------------------------------------------
+/** MaxSimultaneousUpgrade = <science> <count>: a player owning the science may have count of these */
+void ThingTemplate::parseMaxSimultaneousUpgrade(INI *ini, void *instance, void * /*store*/, const void* /*userData*/)
+{
+  ThingTemplate *self = (ThingTemplate *)instance;
+  INI::parseScience(ini, NULL, &self->m_maxSimultaneousScience, NULL);
+  self->m_maxSimultaneousWithScience = (UnsignedShort)INI::scanInt(ini->getNextToken());
+}
+
+//-------------------------------------------------------------------------------------------------
 // Parse the "maxSimultaneousOfType" keyword
 void ThingTemplate::parseMaxSimultaneous(INI *ini, void *instance, void *store, const void *userData)
 {
@@ -1208,6 +1219,8 @@ ThingTemplate::ThingTemplate() :
 	m_instanceScaleFuzziness = 0;
 	m_threatValue = 0;
 	m_maxSimultaneousOfType = 0;	// unlimited
+	m_maxSimultaneousScience = SCIENCE_INVALID;
+	m_maxSimultaneousWithScience = 0;
   m_maxSimultaneousLinkKey = NAMEKEY_INVALID; // Not linked
 	m_nameKey = NAMEKEY_INVALID;
   m_maxSimultaneousDeterminedBySuperweaponRestriction = false;

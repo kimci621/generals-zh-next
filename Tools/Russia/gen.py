@@ -93,6 +93,13 @@ WEAPONS = [
     ("RussiaBukMissile", "PatriotMissileWeaponAir", {"PrimaryDamage": 35.0, "AttackRange": 400.0}),
     ("RussiaSu34GuidedFAB", "AuroraBombWeapon", {"AttackRange": 450.0}),  # апгрейд УМПК, ручной WeaponSet
 ]
+# таланты R3.7b (ручные WeaponSet PLAYER_UPGRADE): 7B арта +15% дальности, 8B Бук +25%, 9A FPV/Ланцет +25% урона
+_W = {w[0]: w for w in WEAPONS}
+for _n, _k, _v in (("RussiaMstaShell", "AttackRange", 402.5), ("RussiaTOSSalvo", "AttackRange", 230.0),
+                   ("RussiaTOS2Salvo", "AttackRange", 287.5), ("RussiaTornadoSalvo", "AttackRange", 460.0),
+                   ("RussiaBukMissile", "AttackRange", 500.0), ("RussiaFPVDrone", "PrimaryDamage", 62.5),
+                   ("RussiaLancetMunition", "PrimaryDamage", 100.0)):
+    WEAPONS.append((_n + "Talent", _W[_n][1], {**_W[_n][2], _k: _v}))
 # броня: имя, ванильная, поля поверх (решётки R3.6: INFANTRY_MISSILE вдвое меньше)
 ARMORS = [("RussiaCageTankArmor", "TankArmor", {"INFANTRY_MISSILE": "50%"}),
           ("RussiaCageAAArmor", "AntiAirVehicle", {"INFANTRY_MISSILE": "25%"})]

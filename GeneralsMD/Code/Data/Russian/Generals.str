@@ -19444,3 +19444,83 @@ END
 CONTROLBAR:ConstructRussiaVehicleTOS2
 "Подготовить: ТОС-2 \"Тосочка\""
 END
+
+SCIENCE:RussiaTalent6A
+"Резервист каждые 40 с"
+END
+
+CONTROLBAR:ToolTipRussiaTalent6A
+"Военкомат призывает резервиста каждые 40 с вместо 60."
+END
+
+SCIENCE:RussiaTalent6B
+"Налог +10%"
+END
+
+CONTROLBAR:ToolTipRussiaTalent6B
+"Каждая доставка КамАЗа приносит на 30 больше, сверх налога."
+END
+
+SCIENCE:RussiaTalent7A
+"Т-72/Т-90 +20% прочности"
+END
+
+CONTROLBAR:ToolTipRussiaTalent7A
+"Т-72Б3М и Т-90М получают +20% прочности."
+END
+
+SCIENCE:RussiaTalent7B
+"Артиллерия +15% дальности"
+END
+
+CONTROLBAR:ToolTipRussiaTalent7B
+"\"Мста-С\", ТОС-1А, ТОС-2 и \"Торнадо-Г\" бьют на 15% дальше."
+END
+
+SCIENCE:RussiaTalent8A
+"Панцирь/Тор: больше перехватов"
+END
+
+CONTROLBAR:ToolTipRussiaTalent8A
+"\"Панцирь-С1\", позиции \"Панцирь\" и \"Тор-М2\" получают ещё один канал перехвата."
+END
+
+SCIENCE:RussiaTalent8B
+"Бук +25% дальности"
+END
+
+CONTROLBAR:ToolTipRussiaTalent8B
+"ЗРК \"Бук-М3\" бьют на 25% дальше."
+END
+
+SCIENCE:RussiaTalent9A
+"FPV/Ланцет +25% урона"
+END
+
+CONTROLBAR:ToolTipRussiaTalent9A
+"FPV-дроны и \"Ланцеты\" наносят на 25% больше урона."
+END
+
+SCIENCE:RussiaTalent9B
+"Орлан/РЛС +25% обзора"
+END
+
+CONTROLBAR:ToolTipRussiaTalent9B
+"\"Орлан-10\" и РЛС \"Зоопарк\" видят на 25% дальше."
+END
+
+SCIENCE:RussiaTalent10A
+"Лимит \"Армат\" 5"
+END
+
+CONTROLBAR:ToolTipRussiaTalent10A
+"До 5 Т-14 \"Армата\" вместо 3."
+END
+
+SCIENCE:RussiaTalent10B
+"\"Орешник\" -60 с перезарядки"
+END
+
+CONTROLBAR:ToolTipRussiaTalent10B
+"\"Орешник\" перезаряжается на 60 с быстрее."
+END

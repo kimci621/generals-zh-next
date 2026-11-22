@@ -7254,3 +7254,83 @@ END
 CONTROLBAR:ConstructRussiaVehicleTOS2
 "&Train TOS-2 Tosochka"
 END
+
+SCIENCE:RussiaTalent6A
+"reservist every 40 s"
+END
+
+CONTROLBAR:ToolTipRussiaTalent6A
+"The Recruitment Office calls up a reservist every 40 s instead of 60."
+END
+
+SCIENCE:RussiaTalent6B
+"Tax +10%"
+END
+
+CONTROLBAR:ToolTipRussiaTalent6B
+"Each KamAZ delivery brings 30 more, on top of the Tax upgrade."
+END
+
+SCIENCE:RussiaTalent7A
+"T-72/T-90 +20% health"
+END
+
+CONTROLBAR:ToolTipRussiaTalent7A
+"T-72B3M and T-90M get 20% more health."
+END
+
+SCIENCE:RussiaTalent7B
+"Artillery +15% range"
+END
+
+CONTROLBAR:ToolTipRussiaTalent7B
+"Msta-S, TOS-1A, TOS-2 and Tornado-G fire 15% farther."
+END
+
+SCIENCE:RussiaTalent8A
+"Pantsir/Tor intercept more"
+END
+
+CONTROLBAR:ToolTipRussiaTalent8A
+"Pantsir-S1, Pantsir sites and Tor-M2 get one more interception channel."
+END
+
+SCIENCE:RussiaTalent8B
+"Buk +25% range"
+END
+
+CONTROLBAR:ToolTipRussiaTalent8B
+"Buk-M3 batteries reach 25% farther."
+END
+
+SCIENCE:RussiaTalent9A
+"FPV/Lancet +25% damage"
+END
+
+CONTROLBAR:ToolTipRussiaTalent9A
+"FPV drones and Lancet munitions deal 25% more damage."
+END
+
+SCIENCE:RussiaTalent9B
+"Orlan/radar +25% sight"
+END
+
+CONTROLBAR:ToolTipRussiaTalent9B
+"Orlan-10 drones and Zoopark radars see 25% farther."
+END
+
+SCIENCE:RussiaTalent10A
+"Armata limit 5"
+END
+
+CONTROLBAR:ToolTipRussiaTalent10A
+"Up to 5 T-14 Armata instead of 3."
+END
+
+SCIENCE:RussiaTalent10B
+"Oreshnik reload -60 s"
+END
+
+CONTROLBAR:ToolTipRussiaTalent10B
+"The Oreshnik reloads 60 s faster."
+END

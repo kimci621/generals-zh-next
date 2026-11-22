@@ -3813,6 +3813,8 @@ Bool Player::canBuildMoreOfType( const ThingTemplate *whatToBuild, Int unitsPerO
 
   // make sure we're not maxed out for this type of unit.
   UnsignedInt maxSimultaneousOfType = whatToBuild->getMaxSimultaneousOfType();
+  if ( whatToBuild->getMaxSimultaneousScience() != SCIENCE_INVALID && hasScience( whatToBuild->getMaxSimultaneousScience() ) )
+    maxSimultaneousOfType = whatToBuild->getMaxSimultaneousWithScience();
 
   if ( whatToBuild->isMaxSimultaneousFromSuperweaponRestriction() )
   {

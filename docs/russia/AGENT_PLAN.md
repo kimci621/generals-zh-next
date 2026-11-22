@@ -17,7 +17,7 @@ P13 Upstream merges only by release tag (`git fetch upstream --tags; git merge v
 P14 Text for players: UI strings in game language (ru+en at least); Russian text on models. Code comments: match file (upstream uses English).
 
 ## STATE
-NOW: R3.7b
+NOW: R3.8
 LAST: R2 skeleton verified 2026-11-22.
 NEXT-NOTE: -
 BLOCKERS: -
@@ -90,7 +90,7 @@ BALANCE TARGETS (user 2026-11-22: max 10 games per opponent general, iterate fas
 [x] R3.5 Economy: Voenkomat SpawnBehavior (F13c); OilGas derrick boost (F13a); Tax code+INI (F13b). => reservists spawn; income delta measured.
 [x] R3.6 Upgrades Ratnik Thermal Relikt Cages Mobres PantsirMod GuidedFAB + buttons. => purchasable, effect visible in INI/log.
 [x] R3.7 Sciences/powers per DATA SCIENCE (Cyber code F13d, FAB, TornadoS, VDV, Reservists, EWSuppress, Kinzhal, TOS2, Veterans, OrlanRecon) + PlayerTemplate own sciences + AI SkillSets. => powers fire in headless.
-[ ] R3.7b Talents 6-10 (A|B) per DATA TALENTS: 10 sciences SCIENCE_RussiaTalent6A..10B (ScienceReforged.ini, Turkiye pattern), TalentSciences in FactionRussia, effects in TalentsReforged.ini, strings en+ru. => cards load, no INI errors; effect lines present.
+[x] R3.7b Talents 6-10 (A|B) per DATA TALENTS: 10 sciences SCIENCE_RussiaTalent6A..10B (ScienceReforged.ini, Turkiye pattern), TalentSciences in FactionRussia, effects in TalentsReforged.ini, strings en+ru. => cards load, no INI errors; effect lines present.
 [ ] R3.8 Oreshnik superweapon (Scud Storm-like, 6 impacts). => fires in headless.
 [ ] R3.9 Verify each mechanic by scenario or scripted headless check, checklist in LOG. GATE3.
 
@@ -148,6 +148,9 @@ R3.7 | TOS2 at WF | WF full (12) -> SupplyCenter; src Nuke_ChinaVehicleInfernoCa
 R3.7 | powers own visuals | dev stand-ins: FAB=China carpet bomber 2/4/6 bombs, Kinzhal=SupW cruise missile, TornadoS=China barrage OCLs, Orlan=US spy drone, VDV=US cargo plane
 R3.7 | AI fire-when-ready aims at a spot; Cyber (object power) did nothing and spammed 887x/6 matches | CashHackSpecialPower: script-fired at location hacks nearest enemy structure within 300
 R3.7 | 7 science points by rank 5 | bot sets reach Kinzhal; EWSuppress (set1 8th) never bought -> R4 if >=50% use needed
+R3.7b | T14 max3 in roster | never set in INI -> MaxSimultaneousOfType 3 now; 10A needs per-player cap -> ThingTemplate MaxSimultaneousUpgrade = <science> <n> (Player::canBuildMoreOfType)
+R3.7b | 6B Tax talent | truck UpgradedBoost was first-wins -> sums owned boosts (Tax 50 + talent 30)
+R3.7b | 10B Oreshnik reload | power does not exist yet -> R3.8 keys it on SCIENCE_RussiaTalent10B
 ## LOG (date ID result commit)
 2026-11-22 plan created
 2026-11-22 R0.1 build ok; headless China vs USA randommap seed1 (cells 0): decided frame 8065, 8.0s logic, 33.5x RT, 11s wall, no crash. Winner not printed in stdout (find in R0.4).
@@ -169,3 +172,4 @@ R3.7 | 7 science points by rank 5 | bot sets reach Kinzhal; EWSuppress (set1 8th
 2026-11-22 R3.5 Tax engine code (SupplyTruckAIUpdate UpgradedBoost list) + CC button; OilGas derrick boost + ControlCenter button; Voenkomat SpawnBehavior needs DefaultProductionExitUpdate (propaganda has no exit). Reservist spawned f1844 seed11. Income delta NOT measured (AI never buys upgrades) -> R4/R3.9.
 2026-11-22 R3.6 7 upgrades+buttons+strings (Ratnik/Relikt MaxHealth, Thermal Sight, Cages Armor, Mobres ReplaceObject, PantsirMod PD RequiredUpgrade, GuidedFAB WeaponSet); clean load Russia vs China seeds11-12; effect in match NOT measured (AI does not buy) -> R3.9/R4.
 2026-11-22 R3.7 SCIENCE_Russia tree (3 R1, 14 R3, Kinzhal R5) + 8 powers on CC slots + Cyber OCL code + TOS2 unit + bot SkillSets; 6 headless vs China/AirForce: fires Cyber 13 FAB 18 Kinzhal 25 Orlan 77 Reservists 11 TornadoS 13 VDV 14, EWSuppress 0 (points); no Russia INI/string errors.
+2026-11-22 R3.7b 10 talent cards + upgrades + effects (Mobres swap, truck boost, MaxHealth, 7 Talent weapons via WeaponSetUpgrade, PD channel, Sight, T14 cap 3/5); 3 headless vs China clean (no Russia/talent INI errors), bot reaches rank 6-7 (AI picks cards silently, effect not measured -> R3.9).

@@ -226,21 +226,22 @@ void SupplyTruckAIUpdate::privateDock( Object *dock, CommandSourceType cmdSource
 }
 
 //----------------------------------------------------------------------------------------
-/** The bonus a full load pays on arrival: the first UpgradedBoost whose upgrade the player owns, as
-	* AutoDepositUpdate::getUpgradedSupplyBoost reads the derrick's.  None written, none paid. */
+/** The bonus a full load pays on arrival: every UpgradedBoost whose upgrade the player owns, added up
+	* (Russia's Tax upgrade and its rank 6 talent stack).  None written, none paid. */
 Int SupplyTruckAIUpdate::getUpgradedSupplyBoost() const
 {
 	const Player *player = getObject()->getControllingPlayer();
 	if( player == NULL )
 		return 0;
 	const std::list<upgradePair> &boosts = getSupplyTruckAIUpdateModuleData()->m_upgradeBoost;
+	Int total = 0;
 	for( std::list<upgradePair>::const_iterator it = boosts.begin(); it != boosts.end(); ++it )
 	{
 		const UpgradeTemplate *upgrade = TheUpgradeCenter->findUpgrade( it->type.c_str() );
 		if( upgrade && player->hasUpgradeComplete( upgrade ) )
-			return it->amount;
+			total += it->amount;
 	}
-	return 0;
+	return total;
 }
 
 //-------------------------------------------------------------------------------------------------

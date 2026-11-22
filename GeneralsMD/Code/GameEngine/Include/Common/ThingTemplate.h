@@ -557,6 +557,9 @@ public:
   //-------------------------------------------------------------------------------------------------
   NameKeyType getMaxSimultaneousLinkKey() const { return m_maxSimultaneousLinkKey; }
   UnsignedInt getMaxSimultaneousOfType() const;
+  /// MaxSimultaneousUpgrade: the cap a player owning the science gets instead (Russia's Armata talent)
+  ScienceType getMaxSimultaneousScience() const { return m_maxSimultaneousScience; }
+  UnsignedInt getMaxSimultaneousWithScience() const { return m_maxSimultaneousWithScience; }
 
   // The INI says "MaxSimultaneousOfType = DeterminedBySuperweaponRestriction" on the superweapons,
   // and every faction's variant of them carries it.  What the lobby's rule then leaves this player
@@ -703,6 +706,7 @@ protected:
   static void OverrideableByLikeKind(INI *ini, void *instance, void *store, const void *userData);
 
   static void parseMaxSimultaneous(INI *ini, void *instance, void *store, const void *userData);
+  static void parseMaxSimultaneousUpgrade(INI *ini, void *instance, void *store, const void *userData);
 
 	Bool removeModuleInfo(const AsciiString& moduleToRemove, AsciiString& clearedModuleNameOut);
 
@@ -796,6 +800,8 @@ private:
 	UnsignedShort		m_refundValue;								///< custom resale value, if sold. (0 == use default)
 	UnsignedShort		m_threatValue;								///< Threat map info
 	UnsignedShort		m_maxSimultaneousOfType;			///< max simultaneous of this unit we can have (per player) at one time. (0 == unlimited)
+	ScienceType			m_maxSimultaneousScience;			///< MaxSimultaneousUpgrade's science (SCIENCE_INVALID: none)
+	UnsignedShort		m_maxSimultaneousWithScience;	///< MaxSimultaneousUpgrade's cap
 
 	// ---- Bool-sized things
   Bool          m_maxSimultaneousDeterminedBySuperweaponRestriction; ///< If true, override value in m_maxSimultaneousOfType with value from GameInfo::getSuperweaponRestriction()
