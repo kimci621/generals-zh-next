@@ -19,7 +19,7 @@ P14 Text for players: UI strings in game language (ru+en at least); Russian text
 ## STATE
 NOW: R5.0
 LAST: R3 passed GATE3 2026-11-22.
-NEXT-NOTE: R5.0 nerfs in CHANGELOG; vs China 15-3-2/20 (1 above band), vs USA 10-3-7; next: one more small nerf vs China, then 12 generals series
+NEXT-NOTE: R5.0 done; R5.9 100/general running (user 2026-11-22: run without asking, report only 100-game result)
 BLOCKERS: -
 
 ## DECISIONS (user-approved 2026-11-22, do not change without user)
@@ -48,7 +48,7 @@ BUILDINGS: CommandCenter Штаб src ChinaCommandCenter 2000 | PowerPlant Га�
 INFANTRY: MotorRifle Мотострелок AmericaInfantryRanger 225 | RPG Гранатомётчик ChinaInfantryTankHunter 300 | Verba ПЗРК "Верба" AmericaInfantryMissileDefender 300 air only | Sniper Снайпер СВ-98 AmericaInfantryPathfinder 600 req CtrlC | Kornet ПТРК "Корнет" ChinaInfantryTankHunter+own weapon 700 deploy-to-fire long range | FPVOperator Оператор FPV ChinaInfantryTankHunter+own weapon 500 slow interceptable drone projectile | Engineer Инженер ChinaInfantryHacker body 400 capture/demine/repair | GRU Спецназ ГРУ ChinaInfantryBlackLotus 1500 req CtrlC max1 stealth-standing, demo | Reservist Резервист ChinaInfantryRedguard(single) 0 Voenkomat only
 VEHICLES: IMR3M ИМР-3М ChinaVehicleDozer 1000 | Kamaz КамАЗ ChinaVehicleSupplyTruck 600 req Supply | TigrM "Тигр-М" AmericaVehicleHumvee 600 | BTR82A БТР-82А ChinaVehicleTroopCrawler 900 transport5 | BMP3 БМП-3 AmericaTankCrusader body 1100 req CtrlC transport3 | T72B3M Т-72Б3М ChinaTankBattleMaster 800 | T90M Т-90М AmericaTankCrusader 1000 req CtrlC | T14 Т-14 "Армата" ChinaTankOverlord 2200 req CtrlC max3 APS | BMPT БМПТ ChinaTankGattling 1100 anti-inf | Pantsir ЗРПК "Панцирь-С1" AmericaTankAvenger 1000 AA+PD | TorM2 ЗРК "Тор-М2" AmericaTankAvenger 1300 req CtrlC AA longer, no ground | TOS1A ТОС-1А ChinaVehicleInfernoCannon 1300 req CtrlC short thermobaric | MstaS "Мста-С" ChinaVehicleNukeLauncher 1200 long arty needs spotting | TornadoG "Торнадо-Г" AmericaVehicleTomahawk 1300 req CtrlC area salvo | Krasukha РЭБ "Красуха" ChinaTankECM 900 req CtrlC no weapon, jams missiles/drones | Lancet Пусковая "Ланцет" ChinaVehicleListeningOutpost body 1200 req Airfield loitering munition, needs vision
 AIR: Orlan "Орлан-10" ChinaJetMIG body 400 recon vision 450 no weapon | Ka52 Ка-52 AmericaVehicleComanche 1500 | Mi8 Ми-8АМТШ AmericaVehicleChinook 1200 transport8 | Su25 Су-25СМ3 ChinaJetMIG 1300 | Su35 Су-35С AmericaJetRaptor 1500 req CtrlC anti-air | Su34 Су-34 AmericaJetAurora 2200 req CtrlC standoff FAB
-UPGRADES: Tax Налог @CC 1500 delivery +10-15% | OilGas Нефтегазовый комплекс @CtrlC 2000 derricks +50% | Ratnik @Barracks 1000 inf +25% hp | Thermal Тепловизоры @WF 1500 veh +25% vision | Relikt @WF 1500 T72/T90 +20% hp | Cages Противодроновые решётки @WF 800 tanks/BTR half dmg from FPV/Lancet | Mobres Мобилизационный резерв @Voenkomat 1500 reservist/40s | PantsirMod @CtrlC 1200 PD rate up | GuidedFAB @Airfield 1500 Su34 range up
+UPGRADES: Tax Налог @CC 1500 delivery +10-15% | OilGas Нефтегазовый комплекс @CtrlC 2000 derricks +50% | Ratnik @Barracks 1000 inf +25% hp | Thermal Тепловизоры @WF 1500 veh +25% vision | Relikt @WF 1500 T72/T90 +10% hp (R5.0) | Cages Противодроновые решётки @WF 800 tanks/BTR half dmg from FPV/Lancet | Mobres Мобилизационный резерв @Voenkomat 1500 reservist/40s | PantsirMod @CtrlC 1200 PD rate up | GuidedFAB @Airfield 1500 Su34 range up
 SCIENCE: R1 (1pt each, unlocks): TOS2 "Тосочка" unit (faster/longer TOS) ~China NukeCannon unlock | Veterans: MotorRifle spawns veteran (R5.0: RPG dropped) ~Redguard training | OrlanRecon power 30s drone orbit ~US spy drone
  R3 (powers, pts per level): Cyber x3 steal 500/1000/1500 + disable buildings 15s radius grows ~CashHack+EMP | FAB x3 Su34 drops 2/4/6 glide bombs ~carpet bomb | TornadoS x3 cluster rocket area ~artillery barrage | VDV x3 paradrop MotorRifle+Kornet ~US paradrop | Reservists x1 5 reservists at Voenkomat ~GLA ambush | EWSuppress x1 10s drones/missiles off in radius ~EMP soft
  R5: Kinzhal hypersonic single-building strike ~US FAE bomb
@@ -68,8 +68,8 @@ BALANCE TARGETS (user 2026-11-22: max 10 games per opponent general, iterate fas
 [x] R4.9 30-match series: every unique unit/power used in >=50% matches. GATE4. (Oreshnik fire 14/30 carried to R5: dies to GLA early)
 
 ### R5 balance
-[~] R5.0 Expand: unitmatrix/duel/siege with Russia, series vs USA/China/GLA + China control, iterate numbers. Changelog docs/russia/CHANGELOG.md with commands+numbers.
-[ ] R5.9 Targets met on 10/general series, then confirmed on 100/general. GATE5.
+[x] R5.0 Expand: unitmatrix/duel/siege with Russia, series vs USA/China/GLA + China control, iterate numbers. Changelog docs/russia/CHANGELOG.md with commands+numbers.
+[~] R5.9 Targets met on 10/general series, then confirmed on 100/general. GATE5.
 
 ### R6 UI+sound (later) / R7 models (later, open-ended): expand when reached.
 
@@ -140,3 +140,4 @@ R5.0 | old note: Russia loses to GLA by own weakness | China control also 0-10 v
 2026-11-22 GATE4 user: free rank-1 sciences. u7 30 matches: below 50% 1/62 (Oreshnik fire 14); EWSuppress 28 TornadoS 27; W vs China 10-0, USA 6-1-3, GLA 1-9.
 2026-11-22 R5.0 baseline 30 matches: Russia-GLA 1-9, China-GLA 0-10, Russia-China 10-0; income 92-108% of China; asked user.
 2026-11-22 R5.0 nerf T72 800, TOS2 1800, Veterans MotorRifle only; 20/pair: vs China 15-3-2 (was 18-0-2), vs USA 10-3-7; USA-China 3-3-14; GLA unchanged 0-10.
+2026-11-22 R5.0 powers reload up, 1 Voenkomat, Relikt 10%: vs China 11-5-4/20; 12 generals x10 35-55-30; vs GLA Russia 3-33-4, China 1-38-1, USA 0-31-9.

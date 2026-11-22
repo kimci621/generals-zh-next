@@ -25,3 +25,15 @@ Russia vs China, single-lever experiments (reverted, 20 matches each): baseline 
 
 Applied (combined): T-72B3M 700 -> 800 (source price), TOS-2 1500 -> 1800, Veterans science: RPG gunners no longer start veteran (motor riflemen only, like China's Red Guard training).
 Result: vs China 15-3-2 (target band 6-14 of 20: one above), vs USA 10-3-7 (in band). Economy vs China 96-101% of China's at 3-10 min.
+
+## 2026-11-22 R5.0 round 2
+Engine tests after ScriptConditions.cpp/AIPlayer.cpp: test_gameengine 833 tests, only known pre-existing failure a_template_maps_rules_are_served_beside_it_and_in_its_name. Other ctest failures (GPU/lobby/LAN/widechar/fingerprint, test_water_grid and test_bigfilesystem do not build) are outside AI/scripts.
+
+Russia vs China single-lever tries (20 matches each, seeds 1-10 swap): Pantsir site 1400 17-0-3; site point defense ScanRate 500/range 120 15-4-1; one Voenkomat 15-2-3; Relikt +10% 15-3-2. Win rate held ~75% whatever the unit numbers.
+Cause found: Russia's bot fires ~60 powers per match, China's ~10 (only carpet bomb, barrage, EMP).
+
+Applied: Cyber/VDV/Reservists reload 240 -> 360 s, FAB 180 -> 240 s; one Voenkomat per player (MaxSimultaneousLinkKey shared with the Mobres copy; roster "max 5 alive"); Relikt +20% -> +10% hp.
+Result vs China 11-5-4 (band 6-14).
+
+10 per general (seeds 1-5 swap, maxframes 54000), W-L-D: USA 3-2-5, AirForce 4-1-5, Laser 3-3-4, SuperWeapon 1-2-7, China 5-3-2, Infantry 7-0-3, Nuke 6-4-0, Tank 3-7-0, GLA 0-9-1, Demolition 1-9-0, Stealth 2-5-3, Toxin 0-10-0. Total 35-55-30.
+GLA controls same seeds: China vs GLA four factions 1-38-1, USA 0-31-9. Russia vs GLA four 3-33-4: not worse than China/USA (user target).
