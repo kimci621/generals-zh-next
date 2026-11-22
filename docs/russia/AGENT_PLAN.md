@@ -17,8 +17,8 @@ P13 Upstream merges only by release tag (`git fetch upstream --tags; git merge v
 P14 Text for players: UI strings in game language (ru+en at least); Russian text on models. Code comments: match file (upstream uses English).
 
 ## STATE
-NOW: GATE3 (wait for user), then R4.0
-LAST: R2 skeleton verified 2026-11-22.
+NOW: R4.9
+LAST: R3 passed GATE3 2026-11-22.
 NEXT-NOTE: -
 BLOCKERS: -
 
@@ -58,44 +58,13 @@ IDENTITY: strong = layered AA, heavy arty/thermobaric, EW, drones; weak = speed 
 BALANCE TARGETS (user 2026-11-22: max 10 games per opponent general, iterate fast): win 45-55% overall vs all 12 vanilla factions/generals (Hard vs Hard, 10 games each = 120, sides swapped 5/5); per-general 3-7 of 10 ok, outside -> look; THEN confirm at 100 games per general (1200 total, ~9h) once 10-game rounds look stable; control series China same seeds; income/min 90-110% of China (reservist=225); each unique unit/power used by bot in >=50% matches; duel/siege surviving-money share 0.4-0.6.
 
 ## TASKS
-### R0 engine recon
-[x] R0.1 Baseline: build app (F1), one headless 2-player China vs USA match, 10 game-min cap. Record x-real-time, wall time, crash/no. => HEADLESS RESULT line present; numbers in LOG.
-[x] R0.2 Hook map <-R0.1: confirm F6 list by grep `startsWith( "` and `"Turkiye`, plus how strings (F10), cameos, faction picker, Eva, voices bind to side. Write result as table in FACTS F12 (place | what | Russia needs: now/later/no). => F12 written.
-[x] R0.3 Stub faction <-R0.2: new Data/INI/RussiaReforged.ini (ObjectReskin RussiaCommandCenter ChinaCommandCenter + patch Side=Russia), FactionRussia in PlayerTemplate (BaseSide China, RandomExcluded Yes, start building RussiaCommandCenter, display strings en+ru), load line in GameEngine.cpp next to Turkiye's, UI prefix branches -> map Russia to China look for now. => headless `-side 0 FactionRussia` vs China 10 game-min no crash, no INI errors in log; screenshot of lobby list with Russia (window-only capture `screencapture -l <winid>`, never full screen).
-[x] R0.4 Series driver <-R0.1: Tools/Russia/series.py (python3 stdlib): seeds x maps x side pairs, -side per slot, parallel N, per-run HOME/logPrefix in $TMPDIR, timeout kill, parse HEADLESS RESULT -> CSV (seed,map,sides,winner,frames,xrt). Same seed twice -> same result. => 12-match smoke CSV; matches/hour measured (6 parallel) in LOG.
-[x] R0.5 Module check: economy <-R0.3: (a) derrick boost tied to a Russia upgrade (multiple UpgradedBoost lines allowed?) (b) delivery bonus tied to Russia upgrade (how SupplyLines touches trucks/supply center) (c) Voenkomat periodic free unit with max alive (OCL/SpawnBehavior?) (d) one power = cash steal + building disable. Each: INI-only or code, with module names. => verdicts in FACTS F13.
-[x] R0.6 Module check: mechanics <-R0.3: EW jamming missiles/drones (F7 Jammer*), drones as slow interceptable projectiles (Kargu/SwarmStrike, PointDefense), Lancet needs ally vision, counter-battery mark (MarkAndRain/RadarContactMarks), Oreshnik as Scud Storm variant, APS on T-14 (PointDefense on tank). => verdicts in F13.
-[x] R0.7 GATE0: report to user: Russia in lobby, speed (matches/hour), which mechanics need engine code, risks. Wait.
-
-### R1 paper design
-[x] R1.1 Verify real-system data (web, standard search) for every DATA unit: role, rough range order, crew/capacity. Keep only range ORDER, not scale. Record corrections as DEV.
-[x] R1.2 Pull analog stats: vanilla INIZH.big + BalanceReforged.ini/FixesReforged.ini overrides for every src in DATA (hp, armor, speed, vision, weapon dmg/range/reload, build time).
-[x] R1.3 Write docs/russia/roster.tsv: id,name_ru,name_en,src,cost,time,hp,armor,speed,vision,weapon,range,dps,counters,req,notes. Rules: speed vehicles = China analog x0.9; every unit has >=1 counter; no unit beats all of its price class.
-[x] R1.4 GATE1: show user short roster summary (by group, what's strong/weak), get approval. Changes -> roster.tsv + DATA.
-
-### R2 skeleton (all buildings + 8 base units, analog models)
-[x] R2.0 Expanded below. Mechanism: ThingFactory.cpp:344 findSideReskin swaps any template for the producer side's reskin, so China names in AI scripts/build list work.
-[x] R2.1 Buildings: 13 ObjectReskin+patch (Side, cost, time, hp, DisplayName) per roster.tsv; mechanics (spawn, superweapon, SAM, radar) stay analog's until R3. => INI loads, no [LINE errors.
-[x] R2.2 Units: MotorRifle RPG Engineer IMR3M Kamaz T72B3M BTR82A MstaS reskins (cost, time, hp, speed via own Locomotor only if needed, DisplayName). => INI loads.
-[x] R2.3 Command sets: Russia CC/IMR3M/Barracks/Supply/WF/Airfield sets naming Russia templates (copy China's, drop units not in roster). => buttons resolve (no missing-template log).
-[x] R2.4 Strings OBJECT:Russia* en (Patch.str) + ru (Russian/Generals.str). => no MISSING string in log.
-[x] R2.9 Verify: 5 headless Russia-vs-China 30 game-min, no crash, bot builds base+factories+attacks (count from log), no INI errors; one windowed smoke with screenshot. GATE2 report.
-
-### R3 full roster + mechanics
-[x] R3.0 Expanded below. Generator Tools/Russia/gen.py <vanilla> owns reskin/cost/req/buttons/strings (between GENERATED markers); hand patches go below END in RussiaReforged.ini.
-[x] R3.1 All 31 units + 13 buildings as reskins with buttons (sources remapped so China scripts' asks hit Russia combat units: Redguard->MotorRifle, MIG->Su25, Helix->Mi8; duplicates on general variants). Lancet at Airfield, Tigr at SupplyCenter (WF has 12 slots).
-[x] R3.2 RussiaWeaponReforged.ini (own file, OVERWRITE, load line next to Turkiye's) + WeaponSet patches: Kornet, FPV (slow interceptable projectile), Verba air-only, BMPT, TOS thermobaric, Tornado salvo, Su34 FAB, Su35, Tor/Buk air-only, Pantsir cannon+missile. Orlan unarmed + SpotterSight. => loads, each unit fires in a match (KILLXP killer=Russia*).
-[x] R3.3 hp/speed per roster.tsv (Body ReplaceModule, own Locomotors). => values in INI match roster.
-[x] R3.4 Point defense: Pantsir/PantsirPos/T14 APS PointDefenseLaserUpdate vs SMALL_MISSILE; Krasukha JammerUpdate. => scripted/headless check drones intercepted.
-[x] R3.5 Economy: Voenkomat SpawnBehavior (F13c); OilGas derrick boost (F13a); Tax code+INI (F13b). => reservists spawn; income delta measured.
-[x] R3.6 Upgrades Ratnik Thermal Relikt Cages Mobres PantsirMod GuidedFAB + buttons. => purchasable, effect visible in INI/log.
-[x] R3.7 Sciences/powers per DATA SCIENCE (Cyber code F13d, FAB, TornadoS, VDV, Reservists, EWSuppress, Kinzhal, TOS2, Veterans, OrlanRecon) + PlayerTemplate own sciences + AI SkillSets. => powers fire in headless.
-[x] R3.7b Talents 6-10 (A|B) per DATA TALENTS: 10 sciences SCIENCE_RussiaTalent6A..10B (ScienceReforged.ini, Turkiye pattern), TalentSciences in FactionRussia, effects in TalentsReforged.ini, strings en+ru. => cards load, no INI errors; effect lines present.
-[x] R3.8 Oreshnik superweapon (Scud Storm-like, 6 impacts). => fires in headless.
-[x] R3.9 Verify each mechanic by scenario or scripted headless check, checklist in LOG. GATE3.
+[x] R0 done: engine recon, hooks F12, stub faction, series.py (141 matches/h), module verdicts F13. GATE0 passed.
+[x] R1 done: roster.tsv 44 rows, analogs.tsv; range order checked. GATE1 passed.
+[x] R2 done: 13 buildings + base units reskins, command sets, strings en+ru; 5 headless clean. GATE2 passed.
+[x] R3 done: 31 units + mechanics (PD/APS, Krasukha jammer, Tax/OilGas/Voenkomat, 7 upgrades, sciences+8 powers, talents 6-10, Oreshnik) via Tools/Russia/gen.py; scenarios russia_powers/russia_oreshnik pass. GATE3 passed.
 
 ### R4 bot
-[ ] R4.0 Expand: Russia skirmish scripts (ScbTool or scb.py) on top of China's: build Pantsir on air threat, Orlan over arty, Lancet targeting, Voenkomat, upgrades, powers; trace like ~/Games/Generals ai-lab AI_LAB_TRACE.
+[x] R4.0 Expand: Russia skirmish scripts (ScbTool or scb.py) on top of China's: build Pantsir on air threat, Orlan over arty, Lancet targeting, Voenkomat, upgrades, powers; trace like ~/Games/Generals ai-lab AI_LAB_TRACE.
 [ ] R4.9 30-match series: every unique unit/power used in >=50% matches. GATE4.
 
 ### R5 balance
@@ -153,32 +122,13 @@ R3.7b | 6B Tax talent | truck UpgradedBoost was first-wins -> sums owned boosts 
 R3.7b | 10B Oreshnik reload | power does not exist yet -> R3.8 keys it on SCIENCE_RussiaTalent10B
 R3.8 | silo MissileLauncherBuildingUpdate kept SuperweaponNeutronMissile -> crash on fire | ModuleTag_09 replaced with Oreshnik template
 R3.8 | bot never builds Oreshnik (Russia builds 0 defenses, superweapon 0 in 6x72000 frames) | checked by scenario russia_oreshnik (needs -overlay with Scenarios/) -> bot build order R4
+R4.0 | China scripts enough via reskins | bot fielded only what China teams name (27/62 unique items); no Control Center ever (build list had ChinaInternetCenter) | Tools/ScbTool/russia.py: own player SkirmishRussia (stand-in by playerFaction), teams with Russia units, Control Center/Buk/upgrade scripts; build list CtrlC; usage tool Tools/Russia/usage.py
+R4.0 | MstaS buildable at WF | inherited SCIENCE_NukeLauncher prereq (China science) | gen.py writes empty Prerequisites when roster req is empty (20 objects)
+R4.0 | Buk ok | Patriot AssistedTargetingUpdate used missing SECONDARY slot -> crash once bot built Buk | RemoveModule ModuleTag_07
+R4.0 | Mobres bought once | ReplaceObjectUpgrade dropped AI build-list entry -> rebuild+rebuy loop (29x/match) | engine: ReplaceObjectUpgrade hands build-list entry to replacement
+R4.0 | all powers >=50% | 7 science points (ranks 1-5) for 9 picks (Orlan, TOS2, 6 powers, Kinzhal); set picked by AI role, set2 ~10/12 | TornadoS+EWSuppress only in set1 -> ask user at GATE4 (points or metric)
 ## LOG (date ID result commit)
-2026-11-22 plan created
-2026-11-22 R0.1 build ok; headless China vs USA randommap seed1 (cells 0): decided frame 8065, 8.0s logic, 33.5x RT, 11s wall, no crash. Winner not printed in stdout (find in R0.4).
-2026-11-22 R0.2 F12 written; 6 prefix one-liners + strings + load line needed now.
-2026-11-22 R0.3 FactionRussia+RussiaCommandCenter+AI list; Russia vs China seed1 18000 frames no crash, 30.8s 19.5x RT, bot built 78 (China 53); ReskinCheck: CC lacks CostModifierUpgrade x2 (check in R2).
-2026-11-22 R0.4 series.py: 12 Russia(=China stub) vs China rmg seeds1-5+1 swap, 30 game-min cap, 6 par: 0 bad, 141 matches/hour, seed1 repeat identical; W Russia 3 China 3 none 6.
-2026-11-22 R0.5 economy verdicts in F13: a,c INI; b,d small code.
-2026-11-22 R0.6 mechanics verdicts in F13: all INI except counter-battery (code/skip).
-2026-11-22 GATE0 passed (user: continue). R1.1 range order confirmed, no DATA changes.
-2026-11-22 R1.2 docs/russia/analogs.tsv via Tools/Russia/analogs.py (vanilla + Balance/Fixes overrides; first ArmorSet/WeaponSet, primary weapon only).
-2026-11-22 R1.3 docs/russia/roster.tsv 44 rows; vehicle speed = China class analog x0.9; every unit has counters.
-2026-11-22 user changed balance method: <=10 games per general.
-2026-11-22 R2.1-4 13 buildings + 8 units reskins, Russia command sets/buttons, strings en+ru; Russia vs China seed1 18000 frames ok, bot built all Russia types (RPG/T72/MstaS heavy, MotorRifle 3).
-2026-11-22 R2.9 5x Russia vs China seeds11-15 30min: 0 crash, China wins 5/5 (skeleton lacks Redguard/Overlord/Gattling etc. that China scripts ask for); windowed smoke ok, docs/russia/shots/r2-skeleton.jpg. GATE2.
-2026-11-22 R3.1 full roster reskins; Russia vs China seed11 decided China f23673, bot built most new types (BMPT 647 log refs, Su25, Lancet, Tor, T14...). AI ABILITY BUTTONS spam for Helix is vanilla China too.
-2026-11-22 R3.2 RussiaWeaponReforged.ini 14 weapons + WeaponSets (gen.py); no INI errors; Russia units score kills; China wins 3/3 seeds11-13 (frames 19-25k).
-2026-11-22 R3.3 hp (43 ReplaceModule) + SpeedScale (27) from roster.tsv via gen.py; no INI errors/missing strings seed11.
-2026-11-22 R3.4 PD on PantsirPos+T14 APS, Jammer on Krasukha (no gun); Pantsir/Tor keep Avenger PD. Loads clean vs USA seed12; interception NOT measured (no log line) -> R3.9 scenario.
-2026-11-22 R3.5 Tax engine code (SupplyTruckAIUpdate UpgradedBoost list) + CC button; OilGas derrick boost + ControlCenter button; Voenkomat SpawnBehavior needs DefaultProductionExitUpdate (propaganda has no exit). Reservist spawned f1844 seed11. Income delta NOT measured (AI never buys upgrades) -> R4/R3.9.
-2026-11-22 R3.6 7 upgrades+buttons+strings (Ratnik/Relikt MaxHealth, Thermal Sight, Cages Armor, Mobres ReplaceObject, PantsirMod PD RequiredUpgrade, GuidedFAB WeaponSet); clean load Russia vs China seeds11-12; effect in match NOT measured (AI does not buy) -> R3.9/R4.
-2026-11-22 R3.7 SCIENCE_Russia tree (3 R1, 14 R3, Kinzhal R5) + 8 powers on CC slots + Cyber OCL code + TOS2 unit + bot SkillSets; 6 headless vs China/AirForce: fires Cyber 13 FAB 18 Kinzhal 25 Orlan 77 Reservists 11 TornadoS 13 VDV 14, EWSuppress 0 (points); no Russia INI/string errors.
-2026-11-22 R3.7b 10 talent cards + upgrades + effects (Mobres swap, truck boost, MaxHealth, 7 Talent weapons via WeaponSetUpgrade, PD channel, Sight, T14 cap 3/5); 3 headless vs China clean (no Russia/talent INI errors), bot reaches rank 6-7 (AI picks cards silently, effect not measured -> R3.9).
-2026-11-22 R3.8 Oreshnik: OCL 6 cruise warheads (ScudStorm blast), reload 300s, 240s with 10B; scenario russia_oreshnik: fired at frame 200, China barracks 0 alive at 1500, no crash.
-2026-11-22 R3.9 checklist (scenarios run with -overlay <app Overlay + Scenarios/>, randommap 3, seed 5):
-  powers (russia_powers): TornadoS FAB Kinzhal Cyber EWSuppress VDV Reservists OrlanRecon all fired, no crash; Cyber stole 500 (10500 vs 9500); Reservists 5 alive; VDV 4 MotorRifle dropped; 1 of 3 China barracks killed by strikes
-  Oreshnik (russia_oreshnik): fired, target barracks dead, crash fixed (ModuleTag_09)
-  R3.4 PD/jammer, R3.5 economy, R3.6 upgrades: verified in own tasks (see LOG above)
-  NOT verified: talent card effects in play (no scenario action grants rank; bot picks cards silently) -> rest on INI load + code reading
-  NOT verified: bot uses Oreshnik/EWSuppress/defenses -> R4
+2026-11-22 R0-R2: build ok, headless 33x RT, series 141/h; skeleton clean, China wins 5/5 vs skeleton.
+2026-11-22 R3: full roster+mechanics; powers fire (Cyber 13 FAB 18 Kinzhal 25 Orlan 77 ... EWSuppress 0); Oreshnik fires; talent effects and bot Oreshnik/EWSuppress/defenses NOT verified -> R4.
+2026-11-22 GATE3 passed (user: делай).
+2026-11-22 R4.0 own SkirmishRussia scripts + 3 data/engine fixes; 12 matches vs China/USA/GLA seeds1-2 swap: unique items <50% 35/62 -> 4/62 (Su34 5, Mobres 3 before loop fix, EWSuppress 2, TornadoS 2); W Russia 5 China 1 GLA 4 none 2.

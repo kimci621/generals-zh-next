@@ -27,12 +27,15 @@ def seeds(spec):
     return out
 
 
-def run(job, maxframes, timeout):
+def run(job, maxframes, timeout, keep=None):
     seed, mp, sides, tag = job
     prefix = f"ser_{tag}_"
     log = os.path.join(LOGS, prefix + "DebugLogFile.txt")
     if os.path.exists(log):
-        os.remove(log)
+        if keep:
+            os.replace(log, os.path.join(keep, f"{seed}_{sides[0]}_{sides[1]}.log"))
+        else:
+            os.remove(log)
     cmd = [APP, "-root", ROOT, "-headless", "-quickstart", "-noshellmap", "-observer", "-multiInstance"]
     cmd += ["-randommap", str(seed), "2", "0"] if mp == "rmg" else ["-map", f'"Maps\\{mp}\\{mp}.map"']
     cmd += ["-autoskirmish", "2", "-aidiff", "hard", "-seed", str(seed), "-maxframes", str(maxframes), "-logPrefix", prefix]
@@ -58,7 +61,10 @@ def run(job, maxframes, timeout):
                     scores[slot] = int(m.group(2))
                     if m.group(1) == "WON":
                         winner = sides[slot]
-        os.remove(log)
+        if keep:
+            os.replace(log, os.path.join(keep, f"{seed}_{sides[0]}_{sides[1]}.log"))
+        else:
+            os.remove(log)
     if status == "ok" and why == "noresult":
         status = "crash"
     return dict(seed=seed, map=mp, side0=sides[0], side1=sides[1], winner=winner, why=why, frames=frames,
@@ -75,6 +81,7 @@ def main():
     ap.add_argument("--maxframes", type=int, default=54000)
     ap.add_argument("--timeout", type=int, default=900)
     ap.add_argument("--out", required=True)
+    ap.add_argument("--keeplogs", help="папка: сохранить логи матчей (для usage.py)")
     a = ap.parse_args()
     jobs = []
     for pair in a.pairs.split(","):
@@ -84,9 +91,11 @@ def main():
             for s in seeds(a.seeds):
                 for sides in orders:
                     jobs.append((s, mp, sides, f"{len(jobs)}_{os.getpid()}"))
+    if a.keeplogs:
+        os.makedirs(a.keeplogs, exist_ok=True)
     t0 = time.time()
     with ThreadPoolExecutor(a.parallel) as ex:
-        rows = list(ex.map(lambda j: run(j, a.maxframes, a.timeout), jobs))
+        rows = list(ex.map(lambda j: run(j, a.maxframes, a.timeout, a.keeplogs), jobs))
     with open(a.out, "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=list(rows[0]))
         w.writeheader()

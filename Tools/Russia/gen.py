@@ -218,6 +218,9 @@ def main():
         if req:
             kind = "Science = " + req if req.startswith("SCIENCE_") else "Object = Russia" + req
             o += f"  Prerequisites\n    {kind}\n  End\n"
+        else:
+            # пустой список: не наследовать требования источника (Мста-С ждала китайскую науку SCIENCE_NukeLauncher)
+            o += "  Prerequisites\n  End\n"
         btype, tag, hp, scale = stats[i]
         if hp:
             o += f"  ReplaceModule {tag}\n    Body = {btype} {tag}_Russia\n      MaxHealth = {hp}\n      InitialHealth = {hp}\n    End\n  End\n"

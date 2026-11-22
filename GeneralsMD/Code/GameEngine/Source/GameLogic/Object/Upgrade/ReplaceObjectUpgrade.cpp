@@ -39,6 +39,7 @@
 #include "GameLogic/GameLogic.h"
 #include "GameLogic/Module/CreateModule.h"
 #include "GameLogic/Object.h"
+#include "GameLogic/SidesList.h"
 
 // ------------------------------------------------------------------------------------------------
 // ------------------------------------------------------------------------------------------------
@@ -86,12 +87,20 @@ void ReplaceObjectUpgrade::upgradeImplementation( )
 
 	// Remove us first since occupation of cells is apparently not a refcount, but a flag.  If I don't remove, then the new
 	// thing will be placed, and then on deletion I will remove "his" marks.
+	const ObjectID myID = me->getID();
 	TheAI->pathfinder()->removeObjectFromPathfindMap( me );
 	TheGameLogic->destroyObject(me);
 
 	Object *replacementObject = TheThingFactory->newObject(replacementTemplate, myTeam);
 	replacementObject->setTransformMatrix(&myMatrix);
 	TheAI->pathfinder()->addObjectToPathfindMap( replacementObject );
+
+	// An AI build list holds the building it put up by ID.  Hand the entry over, or the AI sees the building
+	// gone, puts up another and buys the upgrade again: a Russia bot replaced its Voenkomat 29 times a match.
+	if( Player *owner = replacementObject->getControllingPlayer() )
+		for( BuildListInfo *info = owner->getBuildList(); info; info = info->getNext() )
+			if( info->getObjectID() == myID )
+				info->setObjectID( replacementObject->getID() );
 
 	// Now onCreates were called at the constructor.  This magically created
 	// thing needs to be considered as Built for Game specific stuff.
