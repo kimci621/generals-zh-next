@@ -6778,3 +6778,179 @@ END
 CONTROLBAR:ConstructRussiaVehicleMstaS
 "&Train Msta-S"
 END
+
+OBJECT:RussiaInfantryVerba
+"Verba MANPADS"
+END
+
+CONTROLBAR:ConstructRussiaInfantryVerba
+"&Train Verba MANPADS"
+END
+
+OBJECT:RussiaInfantryFPV
+"FPV Operator"
+END
+
+CONTROLBAR:ConstructRussiaInfantryFPV
+"&Train FPV Operator"
+END
+
+OBJECT:RussiaInfantrySniper
+"Sniper"
+END
+
+CONTROLBAR:ConstructRussiaInfantrySniper
+"&Train Sniper"
+END
+
+OBJECT:RussiaInfantryKornet
+"Kornet ATGM Team"
+END
+
+CONTROLBAR:ConstructRussiaInfantryKornet
+"&Train Kornet ATGM Team"
+END
+
+OBJECT:RussiaInfantryGRU
+"GRU Spetsnaz"
+END
+
+CONTROLBAR:ConstructRussiaInfantryGRU
+"&Train GRU Spetsnaz"
+END
+
+OBJECT:RussiaVehicleTigrM
+"Tigr-M"
+END
+
+CONTROLBAR:ConstructRussiaVehicleTigrM
+"&Train Tigr-M"
+END
+
+OBJECT:RussiaTankBMPT
+"BMPT Terminator"
+END
+
+CONTROLBAR:ConstructRussiaTankBMPT
+"&Train BMPT Terminator"
+END
+
+OBJECT:RussiaVehiclePantsir
+"Pantsir-S1"
+END
+
+CONTROLBAR:ConstructRussiaVehiclePantsir
+"&Train Pantsir-S1"
+END
+
+OBJECT:RussiaTankT90M
+"T-90M"
+END
+
+CONTROLBAR:ConstructRussiaTankT90M
+"&Train T-90M"
+END
+
+OBJECT:RussiaVehicleBMP3
+"BMP-3"
+END
+
+CONTROLBAR:ConstructRussiaVehicleBMP3
+"&Train BMP-3"
+END
+
+OBJECT:RussiaTankT14
+"T-14 Armata"
+END
+
+CONTROLBAR:ConstructRussiaTankT14
+"&Train T-14 Armata"
+END
+
+OBJECT:RussiaVehicleTorM2
+"Tor-M2"
+END
+
+CONTROLBAR:ConstructRussiaVehicleTorM2
+"&Train Tor-M2"
+END
+
+OBJECT:RussiaVehicleTOS1A
+"TOS-1A"
+END
+
+CONTROLBAR:ConstructRussiaVehicleTOS1A
+"&Train TOS-1A"
+END
+
+OBJECT:RussiaVehicleTornadoG
+"Tornado-G"
+END
+
+CONTROLBAR:ConstructRussiaVehicleTornadoG
+"&Train Tornado-G"
+END
+
+OBJECT:RussiaVehicleKrasukha
+"Krasukha EW"
+END
+
+CONTROLBAR:ConstructRussiaVehicleKrasukha
+"&Train Krasukha EW"
+END
+
+OBJECT:RussiaVehicleLancet
+"Lancet Launcher"
+END
+
+CONTROLBAR:ConstructRussiaVehicleLancet
+"&Train Lancet Launcher"
+END
+
+OBJECT:RussiaJetSu25
+"Su-25SM3"
+END
+
+CONTROLBAR:ConstructRussiaJetSu25
+"&Train Su-25SM3"
+END
+
+OBJECT:RussiaDroneOrlan
+"Orlan-10"
+END
+
+CONTROLBAR:ConstructRussiaDroneOrlan
+"&Train Orlan-10"
+END
+
+OBJECT:RussiaHeliKa52
+"Ka-52"
+END
+
+CONTROLBAR:ConstructRussiaHeliKa52
+"&Train Ka-52"
+END
+
+OBJECT:RussiaHeliMi8
+"Mi-8AMTSh"
+END
+
+CONTROLBAR:ConstructRussiaHeliMi8
+"&Train Mi-8AMTSh"
+END
+
+OBJECT:RussiaJetSu35
+"Su-35S"
+END
+
+CONTROLBAR:ConstructRussiaJetSu35
+"&Train Su-35S"
+END
+
+OBJECT:RussiaJetSu34
+"Su-34"
+END
+
+CONTROLBAR:ConstructRussiaJetSu34
+"&Train Su-34"
+END

@@ -17,7 +17,7 @@ P13 Upstream merges only by release tag (`git fetch upstream --tags; git merge v
 P14 Text for players: UI strings in game language (ru+en at least); Russian text on models. Code comments: match file (upstream uses English).
 
 ## STATE
-NOW: R3.0 (GATE2 reported, wait)
+NOW: R3.2
 LAST: R2 skeleton verified 2026-11-22.
 NEXT-NOTE: -
 BLOCKERS: -
@@ -82,7 +82,15 @@ BALANCE TARGETS (user 2026-11-22: max 10 games per opponent general, iterate fas
 [x] R2.9 Verify: 5 headless Russia-vs-China 30 game-min, no crash, bot builds base+factories+attacks (count from log), no INI errors; one windowed smoke with screenshot. GATE2 report.
 
 ### R3 full roster + mechanics
-[ ] R3.0 Expand: remaining units, RussiaWeaponReforged.ini (own file, load like Turkiye's), upgrades, sciences/powers, talents, Oreshnik, mechanics AA/drones/EW (counter-battery last, optional).
+[x] R3.0 Expanded below. Generator Tools/Russia/gen.py <vanilla> owns reskin/cost/req/buttons/strings (between GENERATED markers); hand patches go below END in RussiaReforged.ini.
+[x] R3.1 All 31 units + 13 buildings as reskins with buttons (sources remapped so China scripts' asks hit Russia combat units: Redguard->MotorRifle, MIG->Su25, Helix->Mi8; duplicates on general variants). Lancet at Airfield, Tigr at SupplyCenter (WF has 12 slots).
+[ ] R3.2 RussiaWeaponReforged.ini (own file, OVERWRITE, load line next to Turkiye's) + WeaponSet patches: Kornet, FPV (slow interceptable projectile), Verba air-only, BMPT, TOS thermobaric, Tornado salvo, Su34 FAB, Su35, Tor/Buk air-only, Pantsir cannon+missile. Orlan unarmed + SpotterSight. => loads, each unit fires in a match (KILLXP killer=Russia*).
+[ ] R3.3 hp/speed per roster.tsv (Body ReplaceModule, own Locomotors). => values in INI match roster.
+[ ] R3.4 Point defense: Pantsir/PantsirPos/T14 APS PointDefenseLaserUpdate vs SMALL_MISSILE; Krasukha JammerUpdate. => scripted/headless check drones intercepted.
+[ ] R3.5 Economy: Voenkomat SpawnBehavior (F13c); OilGas derrick boost (F13a); Tax code+INI (F13b). => reservists spawn; income delta measured.
+[ ] R3.6 Upgrades Ratnik Thermal Relikt Cages Mobres PantsirMod GuidedFAB + buttons. => purchasable, effect visible in INI/log.
+[ ] R3.7 Sciences/powers/talents per DATA SCIENCE (Cyber code F13d, FAB, TornadoS, VDV, Reservists, EWSuppress, Kinzhal, TOS2, Veterans, OrlanRecon) + PlayerTemplate own sciences + AI SkillSets. => powers fire in headless.
+[ ] R3.8 Oreshnik superweapon (Scud Storm-like, 6 impacts). => fires in headless.
 [ ] R3.9 Verify each mechanic by scenario or scripted headless check, checklist in LOG. GATE3.
 
 ### R4 bot
@@ -143,3 +151,4 @@ R0.3 | test_gameengine fails a_template_maps_rules_are_served_beside_it_and_in_i
 2026-11-22 user changed balance method: <=10 games per general.
 2026-11-22 R2.1-4 13 buildings + 8 units reskins, Russia command sets/buttons, strings en+ru; Russia vs China seed1 18000 frames ok, bot built all Russia types (RPG/T72/MstaS heavy, MotorRifle 3).
 2026-11-22 R2.9 5x Russia vs China seeds11-15 30min: 0 crash, China wins 5/5 (skeleton lacks Redguard/Overlord/Gattling etc. that China scripts ask for); windowed smoke ok, docs/russia/shots/r2-skeleton.jpg. GATE2.
+2026-11-22 R3.1 full roster reskins; Russia vs China seed11 decided China f23673, bot built most new types (BMPT 647 log refs, Su25, Lancet, Tor, T14...). AI ABILITY BUTTONS spam for Helix is vanilla China too.

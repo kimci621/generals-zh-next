@@ -18968,3 +18968,179 @@ END
 CONTROLBAR:ConstructRussiaVehicleMstaS
 "Подготовить: \"Мста-С\""
 END
+
+OBJECT:RussiaInfantryVerba
+"ПЗРК \"Верба\""
+END
+
+CONTROLBAR:ConstructRussiaInfantryVerba
+"Подготовить: ПЗРК \"Верба\""
+END
+
+OBJECT:RussiaInfantryFPV
+"Оператор FPV"
+END
+
+CONTROLBAR:ConstructRussiaInfantryFPV
+"Подготовить: Оператор FPV"
+END
+
+OBJECT:RussiaInfantrySniper
+"Снайпер"
+END
+
+CONTROLBAR:ConstructRussiaInfantrySniper
+"Подготовить: Снайпер"
+END
+
+OBJECT:RussiaInfantryKornet
+"ПТРК \"Корнет\""
+END
+
+CONTROLBAR:ConstructRussiaInfantryKornet
+"Подготовить: ПТРК \"Корнет\""
+END
+
+OBJECT:RussiaInfantryGRU
+"Спецназ ГРУ"
+END
+
+CONTROLBAR:ConstructRussiaInfantryGRU
+"Подготовить: Спецназ ГРУ"
+END
+
+OBJECT:RussiaVehicleTigrM
+"\"Тигр-М\""
+END
+
+CONTROLBAR:ConstructRussiaVehicleTigrM
+"Подготовить: \"Тигр-М\""
+END
+
+OBJECT:RussiaTankBMPT
+"БМПТ"
+END
+
+CONTROLBAR:ConstructRussiaTankBMPT
+"Подготовить: БМПТ"
+END
+
+OBJECT:RussiaVehiclePantsir
+"ЗРПК \"Панцирь-С1\""
+END
+
+CONTROLBAR:ConstructRussiaVehiclePantsir
+"Подготовить: ЗРПК \"Панцирь-С1\""
+END
+
+OBJECT:RussiaTankT90M
+"Т-90М"
+END
+
+CONTROLBAR:ConstructRussiaTankT90M
+"Подготовить: Т-90М"
+END
+
+OBJECT:RussiaVehicleBMP3
+"БМП-3"
+END
+
+CONTROLBAR:ConstructRussiaVehicleBMP3
+"Подготовить: БМП-3"
+END
+
+OBJECT:RussiaTankT14
+"Т-14 \"Армата\""
+END
+
+CONTROLBAR:ConstructRussiaTankT14
+"Подготовить: Т-14 \"Армата\""
+END
+
+OBJECT:RussiaVehicleTorM2
+"ЗРК \"Тор-М2\""
+END
+
+CONTROLBAR:ConstructRussiaVehicleTorM2
+"Подготовить: ЗРК \"Тор-М2\""
+END
+
+OBJECT:RussiaVehicleTOS1A
+"ТОС-1А"
+END
+
+CONTROLBAR:ConstructRussiaVehicleTOS1A
+"Подготовить: ТОС-1А"
+END
+
+OBJECT:RussiaVehicleTornadoG
+"\"Торнадо-Г\""
+END
+
+CONTROLBAR:ConstructRussiaVehicleTornadoG
+"Подготовить: \"Торнадо-Г\""
+END
+
+OBJECT:RussiaVehicleKrasukha
+"РЭБ \"Красуха\""
+END
+
+CONTROLBAR:ConstructRussiaVehicleKrasukha
+"Подготовить: РЭБ \"Красуха\""
+END
+
+OBJECT:RussiaVehicleLancet
+"Пусковая \"Ланцет\""
+END
+
+CONTROLBAR:ConstructRussiaVehicleLancet
+"Подготовить: Пусковая \"Ланцет\""
+END
+
+OBJECT:RussiaJetSu25
+"Су-25СМ3"
+END
+
+CONTROLBAR:ConstructRussiaJetSu25
+"Подготовить: Су-25СМ3"
+END
+
+OBJECT:RussiaDroneOrlan
+"\"Орлан-10\""
+END
+
+CONTROLBAR:ConstructRussiaDroneOrlan
+"Подготовить: \"Орлан-10\""
+END
+
+OBJECT:RussiaHeliKa52
+"Ка-52"
+END
+
+CONTROLBAR:ConstructRussiaHeliKa52
+"Подготовить: Ка-52"
+END
+
+OBJECT:RussiaHeliMi8
+"Ми-8АМТШ"
+END
+
+CONTROLBAR:ConstructRussiaHeliMi8
+"Подготовить: Ми-8АМТШ"
+END
+
+OBJECT:RussiaJetSu35
+"Су-35С"
+END
+
+CONTROLBAR:ConstructRussiaJetSu35
+"Подготовить: Су-35С"
+END
+
+OBJECT:RussiaJetSu34
+"Су-34"
+END
+
+CONTROLBAR:ConstructRussiaJetSu34
+"Подготовить: Су-34"
+END
