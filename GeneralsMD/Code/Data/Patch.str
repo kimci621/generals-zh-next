@@ -6610,3 +6610,171 @@ END
 INI:FactionRussia
 "Russia (Experimental)"
 END
+
+OBJECT:RussiaCommandCenter
+"Headquarters"
+END
+
+CONTROLBAR:ConstructRussiaCommandCenter
+"&Build Headquarters"
+END
+
+OBJECT:RussiaPowerPlant
+"Gas Turbine Plant"
+END
+
+CONTROLBAR:ConstructRussiaPowerPlant
+"&Build Gas Turbine Plant"
+END
+
+OBJECT:RussiaBarracks
+"Barracks"
+END
+
+CONTROLBAR:ConstructRussiaBarracks
+"&Build Barracks"
+END
+
+OBJECT:RussiaSupplyCenter
+"Supply Depot"
+END
+
+CONTROLBAR:ConstructRussiaSupplyCenter
+"&Build Supply Depot"
+END
+
+OBJECT:RussiaWarFactory
+"Armor Plant"
+END
+
+CONTROLBAR:ConstructRussiaWarFactory
+"&Build Armor Plant"
+END
+
+OBJECT:RussiaAirfield
+"Airfield"
+END
+
+CONTROLBAR:ConstructRussiaAirfield
+"&Build Airfield"
+END
+
+OBJECT:RussiaVoenkomat
+"Recruitment Office"
+END
+
+CONTROLBAR:ConstructRussiaVoenkomat
+"&Build Recruitment Office"
+END
+
+OBJECT:RussiaControlCenter
+"Command Post"
+END
+
+CONTROLBAR:ConstructRussiaControlCenter
+"&Build Command Post"
+END
+
+OBJECT:RussiaStrongpoint
+"Strongpoint"
+END
+
+CONTROLBAR:ConstructRussiaStrongpoint
+"&Build Strongpoint"
+END
+
+OBJECT:RussiaPantsirPos
+"Pantsir Site"
+END
+
+CONTROLBAR:ConstructRussiaPantsirPos
+"&Build Pantsir Site"
+END
+
+OBJECT:RussiaBukM3
+"Buk-M3 SAM"
+END
+
+CONTROLBAR:ConstructRussiaBukM3
+"&Build Buk-M3 SAM"
+END
+
+OBJECT:RussiaZoopark
+"Zoopark-1M Radar"
+END
+
+CONTROLBAR:ConstructRussiaZoopark
+"&Build Zoopark-1M Radar"
+END
+
+OBJECT:RussiaOreshnik
+"Oreshnik Complex"
+END
+
+CONTROLBAR:ConstructRussiaOreshnik
+"&Build Oreshnik Complex"
+END
+
+OBJECT:RussiaInfantryMotorRifle
+"Motor Rifleman"
+END
+
+CONTROLBAR:ConstructRussiaInfantryMotorRifle
+"&Train Motor Rifleman"
+END
+
+OBJECT:RussiaInfantryRPG
+"RPG Gunner"
+END
+
+CONTROLBAR:ConstructRussiaInfantryRPG
+"&Train RPG Gunner"
+END
+
+OBJECT:RussiaInfantryEngineer
+"Combat Engineer"
+END
+
+CONTROLBAR:ConstructRussiaInfantryEngineer
+"&Train Combat Engineer"
+END
+
+OBJECT:RussiaVehicleIMR3M
+"IMR-3M Engineer Vehicle"
+END
+
+CONTROLBAR:ConstructRussiaVehicleIMR3M
+"&Train IMR-3M Engineer Vehicle"
+END
+
+OBJECT:RussiaVehicleKamaz
+"KamAZ Truck"
+END
+
+CONTROLBAR:ConstructRussiaVehicleKamaz
+"&Train KamAZ Truck"
+END
+
+OBJECT:RussiaTankT72B3M
+"T-72B3M"
+END
+
+CONTROLBAR:ConstructRussiaTankT72B3M
+"&Train T-72B3M"
+END
+
+OBJECT:RussiaVehicleBTR82A
+"BTR-82A"
+END
+
+CONTROLBAR:ConstructRussiaVehicleBTR82A
+"&Train BTR-82A"
+END
+
+OBJECT:RussiaVehicleMstaS
+"Msta-S"
+END
+
+CONTROLBAR:ConstructRussiaVehicleMstaS
+"&Train Msta-S"
+END

@@ -18800,3 +18800,171 @@ END
 INI:FactionRussia
 "Россия (экспериментальная)"
 END
+
+OBJECT:RussiaCommandCenter
+"Штаб"
+END
+
+CONTROLBAR:ConstructRussiaCommandCenter
+"Построить: Штаб"
+END
+
+OBJECT:RussiaPowerPlant
+"Газотурбинная электростанция"
+END
+
+CONTROLBAR:ConstructRussiaPowerPlant
+"Построить: Газотурбинная электростанция"
+END
+
+OBJECT:RussiaBarracks
+"Казармы"
+END
+
+CONTROLBAR:ConstructRussiaBarracks
+"Построить: Казармы"
+END
+
+OBJECT:RussiaSupplyCenter
+"Склад снабжения"
+END
+
+CONTROLBAR:ConstructRussiaSupplyCenter
+"Построить: Склад снабжения"
+END
+
+OBJECT:RussiaWarFactory
+"Завод бронетехники"
+END
+
+CONTROLBAR:ConstructRussiaWarFactory
+"Построить: Завод бронетехники"
+END
+
+OBJECT:RussiaAirfield
+"Аэродром"
+END
+
+CONTROLBAR:ConstructRussiaAirfield
+"Построить: Аэродром"
+END
+
+OBJECT:RussiaVoenkomat
+"Военкомат"
+END
+
+CONTROLBAR:ConstructRussiaVoenkomat
+"Построить: Военкомат"
+END
+
+OBJECT:RussiaControlCenter
+"Центр управления"
+END
+
+CONTROLBAR:ConstructRussiaControlCenter
+"Построить: Центр управления"
+END
+
+OBJECT:RussiaStrongpoint
+"Опорный пункт"
+END
+
+CONTROLBAR:ConstructRussiaStrongpoint
+"Построить: Опорный пункт"
+END
+
+OBJECT:RussiaPantsirPos
+"Позиция \"Панцирь\""
+END
+
+CONTROLBAR:ConstructRussiaPantsirPos
+"Построить: Позиция \"Панцирь\""
+END
+
+OBJECT:RussiaBukM3
+"ЗРК \"Бук-М3\""
+END
+
+CONTROLBAR:ConstructRussiaBukM3
+"Построить: ЗРК \"Бук-М3\""
+END
+
+OBJECT:RussiaZoopark
+"РЛС \"Зоопарк-1М\""
+END
+
+CONTROLBAR:ConstructRussiaZoopark
+"Построить: РЛС \"Зоопарк-1М\""
+END
+
+OBJECT:RussiaOreshnik
+"Комплекс \"Орешник\""
+END
+
+CONTROLBAR:ConstructRussiaOreshnik
+"Построить: Комплекс \"Орешник\""
+END
+
+OBJECT:RussiaInfantryMotorRifle
+"Мотострелок"
+END
+
+CONTROLBAR:ConstructRussiaInfantryMotorRifle
+"Подготовить: Мотострелок"
+END
+
+OBJECT:RussiaInfantryRPG
+"Гранатомётчик"
+END
+
+CONTROLBAR:ConstructRussiaInfantryRPG
+"Подготовить: Гранатомётчик"
+END
+
+OBJECT:RussiaInfantryEngineer
+"Инженер"
+END
+
+CONTROLBAR:ConstructRussiaInfantryEngineer
+"Подготовить: Инженер"
+END
+
+OBJECT:RussiaVehicleIMR3M
+"ИМР-3М"
+END
+
+CONTROLBAR:ConstructRussiaVehicleIMR3M
+"Подготовить: ИМР-3М"
+END
+
+OBJECT:RussiaVehicleKamaz
+"КамАЗ"
+END
+
+CONTROLBAR:ConstructRussiaVehicleKamaz
+"Подготовить: КамАЗ"
+END
+
+OBJECT:RussiaTankT72B3M
+"Т-72Б3М"
+END
+
+CONTROLBAR:ConstructRussiaTankT72B3M
+"Подготовить: Т-72Б3М"
+END
+
+OBJECT:RussiaVehicleBTR82A
+"БТР-82А"
+END
+
+CONTROLBAR:ConstructRussiaVehicleBTR82A
+"Подготовить: БТР-82А"
+END
+
+OBJECT:RussiaVehicleMstaS
+"\"Мста-С\""
+END
+
+CONTROLBAR:ConstructRussiaVehicleMstaS
+"Подготовить: \"Мста-С\""
+END

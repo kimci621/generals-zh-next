@@ -17,7 +17,7 @@ P13 Upstream merges only by release tag (`git fetch upstream --tags; git merge v
 P14 Text for players: UI strings in game language (ru+en at least); Russian text on models. Code comments: match file (upstream uses English).
 
 ## STATE
-NOW: R2.1
+NOW: R2.9
 LAST: GATE1 roster approved 2026-11-22.
 NEXT-NOTE: -
 BLOCKERS: -
@@ -75,10 +75,10 @@ BALANCE TARGETS (user 2026-11-22: max 10 games per opponent general, iterate fas
 
 ### R2 skeleton (all buildings + 8 base units, analog models)
 [x] R2.0 Expanded below. Mechanism: ThingFactory.cpp:344 findSideReskin swaps any template for the producer side's reskin, so China names in AI scripts/build list work.
-[ ] R2.1 Buildings: 13 ObjectReskin+patch (Side, cost, time, hp, DisplayName) per roster.tsv; mechanics (spawn, superweapon, SAM, radar) stay analog's until R3. => INI loads, no [LINE errors.
-[ ] R2.2 Units: MotorRifle RPG Engineer IMR3M Kamaz T72B3M BTR82A MstaS reskins (cost, time, hp, speed via own Locomotor only if needed, DisplayName). => INI loads.
-[ ] R2.3 Command sets: Russia CC/IMR3M/Barracks/Supply/WF/Airfield sets naming Russia templates (copy China's, drop units not in roster). => buttons resolve (no missing-template log).
-[ ] R2.4 Strings OBJECT:Russia* en (Patch.str) + ru (Russian/Generals.str). => no MISSING string in log.
+[x] R2.1 Buildings: 13 ObjectReskin+patch (Side, cost, time, hp, DisplayName) per roster.tsv; mechanics (spawn, superweapon, SAM, radar) stay analog's until R3. => INI loads, no [LINE errors.
+[x] R2.2 Units: MotorRifle RPG Engineer IMR3M Kamaz T72B3M BTR82A MstaS reskins (cost, time, hp, speed via own Locomotor only if needed, DisplayName). => INI loads.
+[x] R2.3 Command sets: Russia CC/IMR3M/Barracks/Supply/WF/Airfield sets naming Russia templates (copy China's, drop units not in roster). => buttons resolve (no missing-template log).
+[x] R2.4 Strings OBJECT:Russia* en (Patch.str) + ru (Russian/Generals.str). => no MISSING string in log.
 [ ] R2.9 Verify: 5 headless Russia-vs-China 30 game-min, no crash, bot builds base+factories+attacks (count from log), no INI errors; one windowed smoke with screenshot. GATE2 report.
 
 ### R3 full roster + mechanics
@@ -125,6 +125,9 @@ R0.1 | baseline run lacked -observer (idle human slot) | rerun: China vs USA see
 R0.3 | bot needs own SideInfo+SkirmishBuildList (scripts fall back by BaseSide, build list does not) | copied China's into AIDataReforged.ini as Russia
 R0.3 | lobby screenshot: user's game window open, can't drive lobby | moved to R2.9 windowed smoke
 R1.1 | web check per unit | done from model knowledge (no web, saves budget); range order holds: Buk-M3 >> Tornado-G~Lancet > Msta-S > Pantsir > Tor > TOS-1A > Kornet~Verba > tank guns. Real capacity BTR-82A 7, BMP-3 7, Mi-8 24: keep game values (5/3/8) for balance. No data changes.
+R2.1 | hp/speed per roster | needs ReplaceModule Body + own Locomotor per unit; deferred to R5 balance (numbers move there anyway). R2 sets Side/name/cost/time/prereqs/CommandSet only
+R2.3 | one reskin per source (ThingFactory findSideReskin) | R3 must give Kornet/FPV (TankHunter=RPG), T90M/BMP3 (Crusader), Pantsir/Tor (Avenger), Orlan/Su25 (MIG) different sources or non-reskin copies
+R2.3 | China mines/EMP-mine buttons dropped from Russia sets (CommandSetUpgrade would swap to China sets) | revisit if Russia gets mines
 R0.3 | test_gameengine fails a_template_maps_rules_are_served_beside_it_and_in_its_name (5) | pre-existing on clean tree, not ours
 ## LOG (date ID result commit)
 2026-11-22 plan created
@@ -138,3 +141,4 @@ R0.3 | test_gameengine fails a_template_maps_rules_are_served_beside_it_and_in_i
 2026-11-22 R1.2 docs/russia/analogs.tsv via Tools/Russia/analogs.py (vanilla + Balance/Fixes overrides; first ArmorSet/WeaponSet, primary weapon only).
 2026-11-22 R1.3 docs/russia/roster.tsv 44 rows; vehicle speed = China class analog x0.9; every unit has counters.
 2026-11-22 user changed balance method: <=10 games per general.
+2026-11-22 R2.1-4 13 buildings + 8 units reskins, Russia command sets/buttons, strings en+ru; Russia vs China seed1 18000 frames ok, bot built all Russia types (RPG/T72/MstaS heavy, MotorRifle 3).
