@@ -220,7 +220,7 @@ const Image *Sidebar_image( const char *piece )
 			return s_images[ i ].image;
 
 	const Bool gla = side.startsWith( "GLA" );
-	const char *prefix = side.startsWith( "China" ) || side.startsWith( "Boss" ) ? "ChinaPro"
+	const char *prefix = side.startsWith( "China" ) || side.startsWith( "Boss" ) || side.startsWith( "Russia" ) ? "ChinaPro"
 		: gla ? "GLAPro" : side.startsWith( "Turkiye" ) ? "TurkiyePro" : "AmericaPro";
 	AsciiString name;
 	name.format( "%sSidebar%s", prefix, piece );
@@ -2029,7 +2029,7 @@ void Sidebar_update( void )
 	{
 		s_iconPlayer = player;
 		const AsciiString side = player->getSide();
-		const char *prefix = side.startsWith( "China" ) || side.startsWith( "Boss" ) ? "China"
+		const char *prefix = side.startsWith( "China" ) || side.startsWith( "Boss" ) || side.startsWith( "Russia" ) ? "China"
 			: side.startsWith( "GLA" ) ? "Gla" : side.startsWith( "Turkiye" ) ? "Turkiye" : "America";
 		for( Int t = 0; t < SIDEBAR_TAB_COUNT; t++ )
 		{

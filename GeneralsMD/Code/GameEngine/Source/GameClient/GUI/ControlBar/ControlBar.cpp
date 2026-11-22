@@ -6395,7 +6395,7 @@ static const Image *mirroredPowerTrayPiece( const char *piece, const Image *stan
 {
 	const AsciiString side = TheControlBar->getControlBarSchemeManager()->getCurrentSide();
 	const char *prefix = "America";
-	if( side.startsWith( "China" ) || side.startsWith( "Boss" ) )
+	if( side.startsWith( "China" ) || side.startsWith( "Boss" ) || side.startsWith( "Russia" ) )
 		prefix = "China";
 	else if( side.startsWith( "GLA" ) )
 		prefix = "Gla";

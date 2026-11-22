@@ -1381,6 +1381,8 @@ void GameEngine::init( int argc, char *argv[] )
 		ini.load( AsciiString( "Data\\INI\\FixesReforged.ini" ), INI_LOAD_MULTIFILE, &xferCRC );
 		// Turkiye's objects, reskins of the American ones, so they come after the balance and fixes they copy
 		ini.load( AsciiString( "Data\\INI\\TurkiyeReforged.ini" ), INI_LOAD_MULTIFILE, &xferCRC );
+		// Russia's objects, reskins of the Chinese ones (docs/russia)
+		ini.load( AsciiString( "Data\\INI\\RussiaReforged.ini" ), INI_LOAD_MULTIFILE, &xferCRC );
 		// The general's talents, ranks 6 to 10: each card a science and whatever it grants
 		ini.load( AsciiString( "Data\\INI\\TalentsReforged.ini" ), INI_LOAD_MULTIFILE, &xferCRC );
 

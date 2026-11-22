@@ -6606,3 +6606,7 @@ END
 GUI:GroupTrayTraining
 "+%d in production"
 END
+
+INI:FactionRussia
+"Russia (Experimental)"
+END
