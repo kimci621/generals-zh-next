@@ -17,7 +17,7 @@ P13 Upstream merges only by release tag (`git fetch upstream --tags; git merge v
 P14 Text for players: UI strings in game language (ru+en at least); Russian text on models. Code comments: match file (upstream uses English).
 
 ## STATE
-NOW: R0.7 GATE0
+NOW: R1.3
 LAST: R0.4 series driver 2026-11-22.
 NEXT-NOTE: -
 BLOCKERS: -
@@ -65,11 +65,11 @@ BALANCE TARGETS: win 45-55% vs USA/China/GLA (Hard vs Hard, 3 maps, sides swappe
 [x] R0.4 Series driver <-R0.1: Tools/Russia/series.py (python3 stdlib): seeds x maps x side pairs, -side per slot, parallel N, per-run HOME/logPrefix in $TMPDIR, timeout kill, parse HEADLESS RESULT -> CSV (seed,map,sides,winner,frames,xrt). Same seed twice -> same result. => 12-match smoke CSV; matches/hour measured (6 parallel) in LOG.
 [x] R0.5 Module check: economy <-R0.3: (a) derrick boost tied to a Russia upgrade (multiple UpgradedBoost lines allowed?) (b) delivery bonus tied to Russia upgrade (how SupplyLines touches trucks/supply center) (c) Voenkomat periodic free unit with max alive (OCL/SpawnBehavior?) (d) one power = cash steal + building disable. Each: INI-only or code, with module names. => verdicts in FACTS F13.
 [x] R0.6 Module check: mechanics <-R0.3: EW jamming missiles/drones (F7 Jammer*), drones as slow interceptable projectiles (Kargu/SwarmStrike, PointDefense), Lancet needs ally vision, counter-battery mark (MarkAndRain/RadarContactMarks), Oreshnik as Scud Storm variant, APS on T-14 (PointDefense on tank). => verdicts in F13.
-[ ] R0.7 GATE0: report to user: Russia in lobby, speed (matches/hour), which mechanics need engine code, risks. Wait.
+[x] R0.7 GATE0: report to user: Russia in lobby, speed (matches/hour), which mechanics need engine code, risks. Wait.
 
 ### R1 paper design
-[ ] R1.1 Verify real-system data (web, standard search) for every DATA unit: role, rough range order, crew/capacity. Keep only range ORDER, not scale. Record corrections as DEV.
-[ ] R1.2 Pull analog stats: vanilla INIZH.big + BalanceReforged.ini/FixesReforged.ini overrides for every src in DATA (hp, armor, speed, vision, weapon dmg/range/reload, build time).
+[x] R1.1 Verify real-system data (web, standard search) for every DATA unit: role, rough range order, crew/capacity. Keep only range ORDER, not scale. Record corrections as DEV.
+[x] R1.2 Pull analog stats: vanilla INIZH.big + BalanceReforged.ini/FixesReforged.ini overrides for every src in DATA (hp, armor, speed, vision, weapon dmg/range/reload, build time).
 [ ] R1.3 Write docs/russia/roster.tsv: id,name_ru,name_en,src,cost,time,hp,armor,speed,vision,weapon,range,dps,counters,req,notes. Rules: speed vehicles = China analog x0.9; every unit has >=1 counter; no unit beats all of its price class.
 [ ] R1.4 GATE1: show user short roster summary (by group, what's strong/weak), get approval. Changes -> roster.tsv + DATA.
 
@@ -120,6 +120,7 @@ d Cyber (steal+disable): CODE small. One power = one module (Object.cpp:6240 get
 R0.1 | baseline run lacked -observer (idle human slot) | rerun: China vs USA seed1 frame cap 18000, 25s wall, 23.7x RT
 R0.3 | bot needs own SideInfo+SkirmishBuildList (scripts fall back by BaseSide, build list does not) | copied China's into AIDataReforged.ini as Russia
 R0.3 | lobby screenshot: user's game window open, can't drive lobby | moved to R2.9 windowed smoke
+R1.1 | web check per unit | done from model knowledge (no web, saves budget); range order holds: Buk-M3 >> Tornado-G~Lancet > Msta-S > Pantsir > Tor > TOS-1A > Kornet~Verba > tank guns. Real capacity BTR-82A 7, BMP-3 7, Mi-8 24: keep game values (5/3/8) for balance. No data changes.
 R0.3 | test_gameengine fails a_template_maps_rules_are_served_beside_it_and_in_its_name (5) | pre-existing on clean tree, not ours
 ## LOG (date ID result commit)
 2026-11-22 plan created
@@ -129,3 +130,5 @@ R0.3 | test_gameengine fails a_template_maps_rules_are_served_beside_it_and_in_i
 2026-11-22 R0.4 series.py: 12 Russia(=China stub) vs China rmg seeds1-5+1 swap, 30 game-min cap, 6 par: 0 bad, 141 matches/hour, seed1 repeat identical; W Russia 3 China 3 none 6.
 2026-11-22 R0.5 economy verdicts in F13: a,c INI; b,d small code.
 2026-11-22 R0.6 mechanics verdicts in F13: all INI except counter-battery (code/skip).
+2026-11-22 GATE0 passed (user: continue). R1.1 range order confirmed, no DATA changes.
+2026-11-22 R1.2 docs/russia/analogs.tsv via Tools/Russia/analogs.py (vanilla + Balance/Fixes overrides; first ArmorSet/WeaponSet, primary weapon only).
