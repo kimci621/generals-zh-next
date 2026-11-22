@@ -17,8 +17,8 @@ P13 Upstream merges only by release tag (`git fetch upstream --tags; git merge v
 P14 Text for players: UI strings in game language (ru+en at least); Russian text on models. Code comments: match file (upstream uses English).
 
 ## STATE
-NOW: R2.9
-LAST: GATE1 roster approved 2026-11-22.
+NOW: R3.0 (GATE2 reported, wait)
+LAST: R2 skeleton verified 2026-11-22.
 NEXT-NOTE: -
 BLOCKERS: -
 
@@ -79,7 +79,7 @@ BALANCE TARGETS (user 2026-11-22: max 10 games per opponent general, iterate fas
 [x] R2.2 Units: MotorRifle RPG Engineer IMR3M Kamaz T72B3M BTR82A MstaS reskins (cost, time, hp, speed via own Locomotor only if needed, DisplayName). => INI loads.
 [x] R2.3 Command sets: Russia CC/IMR3M/Barracks/Supply/WF/Airfield sets naming Russia templates (copy China's, drop units not in roster). => buttons resolve (no missing-template log).
 [x] R2.4 Strings OBJECT:Russia* en (Patch.str) + ru (Russian/Generals.str). => no MISSING string in log.
-[ ] R2.9 Verify: 5 headless Russia-vs-China 30 game-min, no crash, bot builds base+factories+attacks (count from log), no INI errors; one windowed smoke with screenshot. GATE2 report.
+[x] R2.9 Verify: 5 headless Russia-vs-China 30 game-min, no crash, bot builds base+factories+attacks (count from log), no INI errors; one windowed smoke with screenshot. GATE2 report.
 
 ### R3 full roster + mechanics
 [ ] R3.0 Expand: remaining units, RussiaWeaponReforged.ini (own file, load like Turkiye's), upgrades, sciences/powers, talents, Oreshnik, mechanics AA/drones/EW (counter-battery last, optional).
@@ -142,3 +142,4 @@ R0.3 | test_gameengine fails a_template_maps_rules_are_served_beside_it_and_in_i
 2026-11-22 R1.3 docs/russia/roster.tsv 44 rows; vehicle speed = China class analog x0.9; every unit has counters.
 2026-11-22 user changed balance method: <=10 games per general.
 2026-11-22 R2.1-4 13 buildings + 8 units reskins, Russia command sets/buttons, strings en+ru; Russia vs China seed1 18000 frames ok, bot built all Russia types (RPG/T72/MstaS heavy, MotorRifle 3).
+2026-11-22 R2.9 5x Russia vs China seeds11-15 30min: 0 crash, China wins 5/5 (skeleton lacks Redguard/Overlord/Gattling etc. that China scripts ask for); windowed smoke ok, docs/russia/shots/r2-skeleton.jpg. GATE2.
