@@ -17,8 +17,8 @@ P13 Upstream merges only by release tag (`git fetch upstream --tags; git merge v
 P14 Text for players: UI strings in game language (ru+en at least); Russian text on models. Code comments: match file (upstream uses English).
 
 ## STATE
-NOW: R0.4
-LAST: R0.3 stub faction plays 2026-11-22.
+NOW: R0.5
+LAST: R0.4 series driver 2026-11-22.
 NEXT-NOTE: -
 BLOCKERS: -
 
@@ -39,7 +39,7 @@ F5 Turkiye pattern: `ObjectReskin TurkiyeX AmericaX` then `Object TurkiyeX` patc
 F6 Hardcoded side-name branches (UI prefix by side.startsWith): GroupPanel.cpp:296, InGameUI.cpp:416, AirliftPanel.cpp:210, ControlBarSidebar.cpp:224,1556,2033, ControlBar.cpp:6402. Generic fallbacks (no code needed?): SidesList.cpp:476, PlayerTemplate.cpp:325, Eva.cpp:550, GameAudio.cpp:280. Art archive list ArchiveFileSystem.cpp:182 (only for own HD art, later).
 F7 Engine modules already in fork (from Turkiye): JammerUpdate, RadarJamSpecialPower, SwarmStrikeSpecialPower (Kargu), MarkAndRainBehavior, RadarContactMarks, RadarCoverageBehavior, SightUpgrade, WeaponSetUpgrade, PointDefenseLaserUpdate. Check them first for EW/drones/counter-battery.
 F8 Vanilla refs: derrick 200/12s +1000 capture, `UpgradedBoost = UpgradeType:Upgrade_AmericaSupplyLines Boost:20`. Black Market 20/2s. Cash Hack 1000/2000/4000. Reloads: Nuke 360s, Scud 300s, Particle 240s. Extract vanilla INI: `python3 -I ~/Games/Generals/tools/bigx.py ~/Games/Generals/GeneralsZH/INIZH.big <out> <substr>`.
-F9 Balance tools (author): Tools/Balance/{unitmatrix,duel,siege,calibrate,compare,duel_report}.py; script tool Tools/ScbTool; ours ~/Games/Generals/tools/scb.py.
+F9 Series: `python3 Tools/Russia/series.py --seeds 1-6 --maps rmg|<map>,.. --pairs A:B,.. --swap --parallel 6 --maxframes 54000 --out $TMPDIR/x.csv` (winner from HEADLESS PLAYER WON; frame cap -> none). Balance tools (author): Tools/Balance/{unitmatrix,duel,siege,calibrate,compare,duel_report}.py; script tool Tools/ScbTool; ours ~/Games/Generals/tools/scb.py.
 F10 Strings: Data/Patch.str + Data/<Lang>/Generals.str (check which carries English in R0.2).
 F11 Disk tight (~19 GB free). Run dirs in $TMPDIR, delete after.
 
@@ -62,7 +62,7 @@ BALANCE TARGETS: win 45-55% vs USA/China/GLA (Hard vs Hard, 3 maps, sides swappe
 [x] R0.1 Baseline: build app (F1), one headless 2-player China vs USA match, 10 game-min cap. Record x-real-time, wall time, crash/no. => HEADLESS RESULT line present; numbers in LOG.
 [x] R0.2 Hook map <-R0.1: confirm F6 list by grep `startsWith( "` and `"Turkiye`, plus how strings (F10), cameos, faction picker, Eva, voices bind to side. Write result as table in FACTS F12 (place | what | Russia needs: now/later/no). => F12 written.
 [x] R0.3 Stub faction <-R0.2: new Data/INI/RussiaReforged.ini (ObjectReskin RussiaCommandCenter ChinaCommandCenter + patch Side=Russia), FactionRussia in PlayerTemplate (BaseSide China, RandomExcluded Yes, start building RussiaCommandCenter, display strings en+ru), load line in GameEngine.cpp next to Turkiye's, UI prefix branches -> map Russia to China look for now. => headless `-side 0 FactionRussia` vs China 10 game-min no crash, no INI errors in log; screenshot of lobby list with Russia (window-only capture `screencapture -l <winid>`, never full screen).
-[ ] R0.4 Series driver <-R0.1: Tools/Russia/series.py (python3 stdlib): seeds x maps x side pairs, -side per slot, parallel N, per-run HOME/logPrefix in $TMPDIR, timeout kill, parse HEADLESS RESULT -> CSV (seed,map,sides,winner,frames,xrt). Same seed twice -> same result. => 12-match smoke CSV; matches/hour measured (6 parallel) in LOG.
+[x] R0.4 Series driver <-R0.1: Tools/Russia/series.py (python3 stdlib): seeds x maps x side pairs, -side per slot, parallel N, per-run HOME/logPrefix in $TMPDIR, timeout kill, parse HEADLESS RESULT -> CSV (seed,map,sides,winner,frames,xrt). Same seed twice -> same result. => 12-match smoke CSV; matches/hour measured (6 parallel) in LOG.
 [ ] R0.5 Module check: economy <-R0.3: (a) derrick boost tied to a Russia upgrade (multiple UpgradedBoost lines allowed?) (b) delivery bonus tied to Russia upgrade (how SupplyLines touches trucks/supply center) (c) Voenkomat periodic free unit with max alive (OCL/SpawnBehavior?) (d) one power = cash steal + building disable. Each: INI-only or code, with module names. => verdicts in FACTS F13.
 [ ] R0.6 Module check: mechanics <-R0.3: EW jamming missiles/drones (F7 Jammer*), drones as slow interceptable projectiles (Kargu/SwarmStrike, PointDefense), Lancet needs ally vision, counter-battery mark (MarkAndRain/RadarContactMarks), Oreshnik as Scud Storm variant, APS on T-14 (PointDefense on tank). => verdicts in F13.
 [ ] R0.7 GATE0: report to user: Russia in lobby, speed (matches/hour), which mechanics need engine code, risks. Wait.
@@ -117,3 +117,4 @@ R0.3 | test_gameengine fails a_template_maps_rules_are_served_beside_it_and_in_i
 2026-11-22 R0.1 build ok; headless China vs USA randommap seed1 (cells 0): decided frame 8065, 8.0s logic, 33.5x RT, 11s wall, no crash. Winner not printed in stdout (find in R0.4).
 2026-11-22 R0.2 F12 written; 6 prefix one-liners + strings + load line needed now.
 2026-11-22 R0.3 FactionRussia+RussiaCommandCenter+AI list; Russia vs China seed1 18000 frames no crash, 30.8s 19.5x RT, bot built 78 (China 53); ReskinCheck: CC lacks CostModifierUpgrade x2 (check in R2).
+2026-11-22 R0.4 series.py: 12 Russia(=China stub) vs China rmg seeds1-5+1 swap, 30 game-min cap, 6 par: 0 bad, 141 matches/hour, seed1 repeat identical; W Russia 3 China 3 none 6.
