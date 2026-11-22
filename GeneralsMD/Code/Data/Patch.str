@@ -6958,3 +6958,27 @@ END
 OBJECT:RussiaInfantryReservist
 "Reservist"
 END
+
+UPGRADE:RussiaTax
+"Tax"
+END
+
+CONTROLBAR:UpgradeRussiaTax
+"&Tax"
+END
+
+CONTROLBAR:ToolTipUpgradeRussiaTax
+"Each KamAZ load pays 50 more at the Supply Depot."
+END
+
+UPGRADE:RussiaOilGas
+"Oil-Gas Complex"
+END
+
+CONTROLBAR:UpgradeRussiaOilGas
+"&Oil-Gas Complex"
+END
+
+CONTROLBAR:ToolTipUpgradeRussiaOilGas
+"Captured oil derricks pay 50% more."
+END

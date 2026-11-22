@@ -19148,3 +19148,27 @@ END
 OBJECT:RussiaInfantryReservist
 "Резервист"
 END
+
+UPGRADE:RussiaTax
+"Налог"
+END
+
+CONTROLBAR:UpgradeRussiaTax
+"Налог"
+END
+
+CONTROLBAR:ToolTipUpgradeRussiaTax
+"Каждый рейс КамАЗа приносит на 50 больше."
+END
+
+UPGRADE:RussiaOilGas
+"Нефтегазовый комплекс"
+END
+
+CONTROLBAR:UpgradeRussiaOilGas
+"Нефтегазовый комплекс"
+END
+
+CONTROLBAR:ToolTipUpgradeRussiaOilGas
+"Захваченные нефтевышки приносят на 50% больше."
+END

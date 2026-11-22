@@ -34,6 +34,7 @@
 
 #include "Common/StateMachine.h"
 #include "GameLogic/Module/AIUpdate.h"
+#include "GameLogic/Module/AutoDepositUpdate.h"
 
 //-------------------------------------------------------------------------------------------------
 /** Is there another box in this for the docker after the one just handed over?  Asked the moment a
@@ -181,6 +182,7 @@ public:
 	DurationFrames m_warehouseDelay;
 	Real m_warehouseScanDistance;
  	AudioEventRTS m_suppliesDepletedVoice;						///< Sound played when I take the last box.
+	std::list<upgradePair> m_upgradeBoost;		///< UpgradedBoost: a full load's bonus while the player owns the upgrade (Russia's Tax)
 
 	SupplyTruckAIUpdateModuleData()
 	{
@@ -201,6 +203,7 @@ public:
 			{ "SupplyWarehouseActionDelay", SPEED_FIELD( SupplyTruckAIUpdateModuleData, m_warehouseDelay ) },
 			{ "SupplyWarehouseScanDistance", INI::parseReal, NULL, offsetof( SupplyTruckAIUpdateModuleData, m_warehouseScanDistance ) },
  			{ "SuppliesDepletedVoice", INI::parseAudioEventRTS, NULL, offsetof( SupplyTruckAIUpdateModuleData, m_suppliesDepletedVoice) },
+			{ "UpgradedBoost",		parseUpgradePair,	NULL, offsetof( SupplyTruckAIUpdateModuleData, m_upgradeBoost ) },
 			{ 0, 0, 0, 0 }
 		};
     p.add(dataFieldParse);
@@ -274,7 +277,7 @@ public:
 
 	virtual ObjectID getPreferredDockID() const { return m_preferredDock; }
 	virtual UnsignedInt getActionDelayForDock( Object *dock );
-	virtual Int getUpgradedSupplyBoost() const { return 0; }
+	virtual Int getUpgradedSupplyBoost() const;
 	virtual Int getMaxBoxes() const { return getSupplyTruckAIUpdateModuleData()->m_maxBoxesData; }
 
 	virtual void noteDockActionWindow( UnsignedInt frames );

@@ -32,6 +32,7 @@
 #include "Common/Player.h"
 #include "Common/ResourceGatheringManager.h"
 #include "Common/ThingTemplate.h"
+#include "Common/Upgrade.h"
 #include "GameLogic/GameLogic.h"
 #include "GameLogic/Object.h"
 #include "GameLogic/PartitionManager.h"
@@ -225,6 +226,24 @@ void SupplyTruckAIUpdate::privateDock( Object *dock, CommandSourceType cmdSource
 }
 
 //----------------------------------------------------------------------------------------
+/** The bonus a full load pays on arrival: the first UpgradedBoost whose upgrade the player owns, as
+	* AutoDepositUpdate::getUpgradedSupplyBoost reads the derrick's.  None written, none paid. */
+Int SupplyTruckAIUpdate::getUpgradedSupplyBoost() const
+{
+	const Player *player = getObject()->getControllingPlayer();
+	if( player == NULL )
+		return 0;
+	const std::list<upgradePair> &boosts = getSupplyTruckAIUpdateModuleData()->m_upgradeBoost;
+	for( std::list<upgradePair>::const_iterator it = boosts.begin(); it != boosts.end(); ++it )
+	{
+		const UpgradeTemplate *upgrade = TheUpgradeCenter->findUpgrade( it->type.c_str() );
+		if( upgrade && player->hasUpgradeComplete( upgrade ) )
+			return it->amount;
+	}
+	return 0;
+}
+
+//-------------------------------------------------------------------------------------------------
 UnsignedInt SupplyTruckAIUpdate::getActionDelayForDock( Object *dock )
 {
 	// Decide whether to use my Center or Warehouse delay time

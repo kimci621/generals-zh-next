@@ -174,7 +174,7 @@ def main():
 
     sets = {"CommandCenter": "RussiaCommandCenterCommandSet", "VehicleIMR3M": "RussiaDozerCommandSet",
             "Barracks": "RussiaBarracksCommandSet", "SupplyCenter": "RussiaSupplyCenterCommandSet",
-            "WarFactory": "RussiaWarFactoryCommandSet", "Airfield": "RussiaAirfieldCommandSet"}
+            "WarFactory": "RussiaWarFactoryCommandSet", "Airfield": "RussiaAirfieldCommandSet", "ControlCenter": "RussiaControlCenterCommandSet"}
     objs, btns, strs = [], [], []
     stats = roster_stats(sys.argv[1])
     for i, src, c, t, req, en, ru, sb, *fac in BUILDINGS + UNITS:
@@ -207,7 +207,8 @@ def main():
     btns.append("\n".join(lines + ["  14 = Command_DisarmMinesAtPosition", "End"]) + "\n")
     cc = ["CommandSet RussiaCommandCenterCommandSet", "  1  = Command_ConstructRussiaVehicleIMR3M"]
     cc += [f"  {k} = {p}" for k, p in enumerate(CC_POWERS, 2)]
-    btns.append("\n".join(cc + ["  13 = Command_SetRallyPoint", "  14 = Command_Sell", "End"]) + "\n")
+    btns.append("\n".join(cc + ["  11 = Command_UpgradeRussiaTax", "  13 = Command_SetRallyPoint", "  14 = Command_Sell", "End"]) + "\n")
+    btns.append("CommandSet RussiaControlCenterCommandSet\n  1 = Command_UpgradeRussiaOilGas\n  14 = Command_Sell\nEnd\n")
     for fac in ("Barracks", "SupplyCenter", "WarFactory", "Airfield"):
         items = byfac.get(fac, [])
         assert len(items) <= 12, fac

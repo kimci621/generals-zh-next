@@ -17,7 +17,7 @@ P13 Upstream merges only by release tag (`git fetch upstream --tags; git merge v
 P14 Text for players: UI strings in game language (ru+en at least); Russian text on models. Code comments: match file (upstream uses English).
 
 ## STATE
-NOW: R3.5
+NOW: R3.6
 LAST: R2 skeleton verified 2026-11-22.
 NEXT-NOTE: -
 BLOCKERS: -
@@ -87,7 +87,7 @@ BALANCE TARGETS (user 2026-11-22: max 10 games per opponent general, iterate fas
 [x] R3.2 RussiaWeaponReforged.ini (own file, OVERWRITE, load line next to Turkiye's) + WeaponSet patches: Kornet, FPV (slow interceptable projectile), Verba air-only, BMPT, TOS thermobaric, Tornado salvo, Su34 FAB, Su35, Tor/Buk air-only, Pantsir cannon+missile. Orlan unarmed + SpotterSight. => loads, each unit fires in a match (KILLXP killer=Russia*).
 [x] R3.3 hp/speed per roster.tsv (Body ReplaceModule, own Locomotors). => values in INI match roster.
 [x] R3.4 Point defense: Pantsir/PantsirPos/T14 APS PointDefenseLaserUpdate vs SMALL_MISSILE; Krasukha JammerUpdate. => scripted/headless check drones intercepted.
-[ ] R3.5 Economy: Voenkomat SpawnBehavior (F13c); OilGas derrick boost (F13a); Tax code+INI (F13b). => reservists spawn; income delta measured.
+[x] R3.5 Economy: Voenkomat SpawnBehavior (F13c); OilGas derrick boost (F13a); Tax code+INI (F13b). => reservists spawn; income delta measured.
 [ ] R3.6 Upgrades Ratnik Thermal Relikt Cages Mobres PantsirMod GuidedFAB + buttons. => purchasable, effect visible in INI/log.
 [ ] R3.7 Sciences/powers/talents per DATA SCIENCE (Cyber code F13d, FAB, TornadoS, VDV, Reservists, EWSuppress, Kinzhal, TOS2, Veterans, OrlanRecon) + PlayerTemplate own sciences + AI SkillSets. => powers fire in headless.
 [ ] R3.8 Oreshnik superweapon (Scud Storm-like, 6 impacts). => fires in headless.
@@ -156,3 +156,4 @@ R0.3 | test_gameengine fails a_template_maps_rules_are_served_beside_it_and_in_i
 2026-11-22 R3.2 RussiaWeaponReforged.ini 14 weapons + WeaponSets (gen.py); no INI errors; Russia units score kills; China wins 3/3 seeds11-13 (frames 19-25k).
 2026-11-22 R3.3 hp (43 ReplaceModule) + SpeedScale (27) from roster.tsv via gen.py; no INI errors/missing strings seed11.
 2026-11-22 R3.4 PD on PantsirPos+T14 APS, Jammer on Krasukha (no gun); Pantsir/Tor keep Avenger PD. Loads clean vs USA seed12; interception NOT measured (no log line) -> R3.9 scenario.
+2026-11-22 R3.5 Tax engine code (SupplyTruckAIUpdate UpgradedBoost list) + CC button; OilGas derrick boost + ControlCenter button; Voenkomat SpawnBehavior needs DefaultProductionExitUpdate (propaganda has no exit). Reservist spawned f1844 seed11. Income delta NOT measured (AI never buys upgrades) -> R4/R3.9.
