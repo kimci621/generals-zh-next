@@ -17,7 +17,7 @@ P13 Upstream merges only by release tag (`git fetch upstream --tags; git merge v
 P14 Text for players: UI strings in game language (ru+en at least); Russian text on models. Code comments: match file (upstream uses English).
 
 ## STATE
-NOW: GATE4 (wait user: science points vs metric)
+NOW: R5.0
 LAST: R3 passed GATE3 2026-11-22.
 NEXT-NOTE: -
 BLOCKERS: -
@@ -65,7 +65,7 @@ BALANCE TARGETS (user 2026-11-22: max 10 games per opponent general, iterate fas
 
 ### R4 bot
 [x] R4.0 Expand: Russia skirmish scripts (ScbTool or scb.py) on top of China's: build Pantsir on air threat, Orlan over arty, Lancet targeting, Voenkomat, upgrades, powers; trace like ~/Games/Generals ai-lab AI_LAB_TRACE.
-[?] R4.9 30-match series: every unique unit/power used in >=50% matches. GATE4.
+[x] R4.9 30-match series: every unique unit/power used in >=50% matches. GATE4. (Oreshnik fire 14/30 carried to R5: dies to GLA early)
 
 ### R5 balance
 [ ] R5.0 Expand: unitmatrix/duel/siege with Russia, series vs USA/China/GLA + China control, iterate numbers. Changelog docs/russia/CHANGELOG.md with commands+numbers.
@@ -135,3 +135,4 @@ R4.9 | Oreshnik fires >=50% | built 25/30, fires 12/30; vs GLA Russia dies befor
 2026-11-22 GATE3 passed (user: делай).
 2026-11-22 R4.0 own SkirmishRussia scripts + 3 data/engine fixes; 12 matches vs China/USA/GLA seeds1-2 swap: unique items <50% 35/62 -> 4/62 (Su34 5, Mobres 3 before loop fix, EWSuppress 2, TornadoS 2); W Russia 5 China 1 GLA 4 none 2.
 2026-11-22 R4.9 u6 30 matches: below 50% 3/62 (EWSuppress 9, TornadoS 10, Oreshnik fire 12); W vs China 6-3-1, USA 5-3-2, GLA 1-9; GATE4 open
+2026-11-22 GATE4 user: free rank-1 sciences. u7 30 matches: below 50% 1/62 (Oreshnik fire 14); EWSuppress 28 TornadoS 27; W vs China 10-0, USA 6-1-3, GLA 1-9.
