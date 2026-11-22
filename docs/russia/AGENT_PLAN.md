@@ -55,7 +55,7 @@ SCIENCE: R1 (1pt each, unlocks): TOS2 "Тосочка" unit (faster/longer TOS) 
  TALENTS 6-10 (A|B): 6 reservist/40s | Tax +10% ; 7 T72/T90 +20% hp | arty +15% range ; 8 Pantsir/Tor intercept more | Buk +25% radius ; 9 FPV/Lancet +25% dmg | Orlan/radar +25% vision ; 10 Armata limit 3->5 | Oreshnik reload -60s
  SUPER: Oreshnik 6 impacts spread (Scud Storm-like), not interceptable, no contamination, 5000, reload 300s, counts in superweapon limit.
 IDENTITY: strong = layered AA, heavy arty/thermobaric, EW, drones; weak = speed -10% vs China, low armor vision, blind arty without Orlan/radar, weak early inf, late expensive air.
-BALANCE TARGETS (user 2026-11-22: max 10 games per opponent general, iterate fast): win 45-55% overall vs all 12 vanilla factions/generals (Hard vs Hard, 10 games each = 120, sides swapped 5/5); per-general 3-7 of 10 ok, outside -> look; control series China same seeds; income/min 90-110% of China (reservist=225); each unique unit/power used by bot in >=50% matches; duel/siege surviving-money share 0.4-0.6.
+BALANCE TARGETS (user 2026-11-22: max 10 games per opponent general, iterate fast): win 45-55% overall vs all 12 vanilla factions/generals (Hard vs Hard, 10 games each = 120, sides swapped 5/5); per-general 3-7 of 10 ok, outside -> look; THEN confirm at 100 games per general (1200 total, ~9h) once 10-game rounds look stable; control series China same seeds; income/min 90-110% of China (reservist=225); each unique unit/power used by bot in >=50% matches; duel/siege surviving-money share 0.4-0.6.
 
 ## TASKS
 ### R0 engine recon
@@ -87,7 +87,7 @@ BALANCE TARGETS (user 2026-11-22: max 10 games per opponent general, iterate fas
 
 ### R5 balance
 [ ] R5.0 Expand: unitmatrix/duel/siege with Russia, series vs USA/China/GLA + China control, iterate numbers. Changelog docs/russia/CHANGELOG.md with commands+numbers.
-[ ] R5.9 Targets met on 10/general series. GATE5.
+[ ] R5.9 Targets met on 10/general series, then confirmed on 100/general. GATE5.
 
 ### R6 UI+sound (later) / R7 models (later, open-ended): expand when reached.
 
