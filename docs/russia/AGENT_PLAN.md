@@ -17,7 +17,7 @@ P13 Upstream merges only by release tag (`git fetch upstream --tags; git merge v
 P14 Text for players: UI strings in game language (ru+en at least); Russian text on models. Code comments: match file (upstream uses English).
 
 ## STATE
-NOW: R0.6
+NOW: R0.7 GATE0
 LAST: R0.4 series driver 2026-11-22.
 NEXT-NOTE: -
 BLOCKERS: -
@@ -64,7 +64,7 @@ BALANCE TARGETS: win 45-55% vs USA/China/GLA (Hard vs Hard, 3 maps, sides swappe
 [x] R0.3 Stub faction <-R0.2: new Data/INI/RussiaReforged.ini (ObjectReskin RussiaCommandCenter ChinaCommandCenter + patch Side=Russia), FactionRussia in PlayerTemplate (BaseSide China, RandomExcluded Yes, start building RussiaCommandCenter, display strings en+ru), load line in GameEngine.cpp next to Turkiye's, UI prefix branches -> map Russia to China look for now. => headless `-side 0 FactionRussia` vs China 10 game-min no crash, no INI errors in log; screenshot of lobby list with Russia (window-only capture `screencapture -l <winid>`, never full screen).
 [x] R0.4 Series driver <-R0.1: Tools/Russia/series.py (python3 stdlib): seeds x maps x side pairs, -side per slot, parallel N, per-run HOME/logPrefix in $TMPDIR, timeout kill, parse HEADLESS RESULT -> CSV (seed,map,sides,winner,frames,xrt). Same seed twice -> same result. => 12-match smoke CSV; matches/hour measured (6 parallel) in LOG.
 [x] R0.5 Module check: economy <-R0.3: (a) derrick boost tied to a Russia upgrade (multiple UpgradedBoost lines allowed?) (b) delivery bonus tied to Russia upgrade (how SupplyLines touches trucks/supply center) (c) Voenkomat periodic free unit with max alive (OCL/SpawnBehavior?) (d) one power = cash steal + building disable. Each: INI-only or code, with module names. => verdicts in FACTS F13.
-[ ] R0.6 Module check: mechanics <-R0.3: EW jamming missiles/drones (F7 Jammer*), drones as slow interceptable projectiles (Kargu/SwarmStrike, PointDefense), Lancet needs ally vision, counter-battery mark (MarkAndRain/RadarContactMarks), Oreshnik as Scud Storm variant, APS on T-14 (PointDefense on tank). => verdicts in F13.
+[x] R0.6 Module check: mechanics <-R0.3: EW jamming missiles/drones (F7 Jammer*), drones as slow interceptable projectiles (Kargu/SwarmStrike, PointDefense), Lancet needs ally vision, counter-battery mark (MarkAndRain/RadarContactMarks), Oreshnik as Scud Storm variant, APS on T-14 (PointDefense on tank). => verdicts in F13.
 [ ] R0.7 GATE0: report to user: Russia in lobby, speed (matches/hour), which mechanics need engine code, risks. Wait.
 
 ### R1 paper design
@@ -109,6 +109,12 @@ Tests: test_gameengine.cpp:8844+ random pool / 25081 superweapon cap list per fa
 a derrick OilGas: INI. AutoDepositUpdate UpgradedBoost is a list (AutoDepositUpdate.cpp:74,206), first owned upgrade wins -> patch derrick object(s) with extra `UpgradedBoost = UpgradeType:Upgrade_RussiaOilGas Boost:100`.
 b delivery Tax: CODE small. SupplyCenterDockUpdate.cpp:113 adds truck getUpgradedSupplyBoost(); plain SupplyTruckAIUpdate returns 0 (SupplyTruckAIUpdate.h:277), Worker/Chinook hardcode their upgrade. Plan: add `UpgradedBoost` (reuse parseUpgradePair) to SupplyTruckAIUpdateModuleData, ~15 lines.
 c Voenkomat: INI. SpawnBehavior SpawnNumber 5, SpawnReplaceDelay 60000, SlavesHaveFreeWill Yes, SpawnedRequireSpawner No, InitialBurst 0/1. Check in R3: spawned units selectable/controllable; Mobres upgrade = second SpawnBehavior w/ upgrade trigger or delay swap (verify).
+EW Krasukha: INI. JammerUpdate (Radius, ScanRate): enemy drones/spotters blinded, guided missiles lose lock (MissileAIUpdate DistanceScatterWhenJammed). EWSuppress power = OCL temp object with JammerUpdate+LifetimeUpdate.
+Drones FPV/Lancet: INI. Projectile object with MissileAIUpdate, slow speed, KindOf SMALL_MISSILE -> Pantsir/Tor/APS PointDefenseLaserUpdate (PrimaryTargetTypes) shoot them, Krasukha jams them. SwarmStrikeSpecialPower (Radius, TargetCount, Weapon, Drone) for Lancet/FAB-style powers.
+Lancet needs vision: INI. Default engine: range > own ShroudClearingRange fires only at what player/ally sees; Orlan = SpotterSight (ThingTemplate.h:449) recon.
+APS T-14: INI. PointDefenseLaserUpdate on the tank (WeaponTemplate, PrimaryTargetTypes, ScanRange, RequiredUpgrade).
+Oreshnik: INI. Scud Storm copy: own SpecialPower+OCL, 6 warheads, no toxin, reload 300s; scud missiles are not intercepted by default.
+Counter-battery (Zoopark): CODE or skip. MarkAndRainBehavior = bonus on kills under an eye, not shooter reveal; RadarContactMarks is client UI. Optional per plan; decide in R3.
 d Cyber (steal+disable): CODE small. One power = one module (Object.cpp:6240 getSpecialPowerModule returns first). Plan: optional OCL field on CashHackSpecialPower fired at target (EMP-like OCL per level).
 ## DEV (expected | found | action)
 R0.1 | baseline run lacked -observer (idle human slot) | rerun: China vs USA seed1 frame cap 18000, 25s wall, 23.7x RT
@@ -122,3 +128,4 @@ R0.3 | test_gameengine fails a_template_maps_rules_are_served_beside_it_and_in_i
 2026-11-22 R0.3 FactionRussia+RussiaCommandCenter+AI list; Russia vs China seed1 18000 frames no crash, 30.8s 19.5x RT, bot built 78 (China 53); ReskinCheck: CC lacks CostModifierUpgrade x2 (check in R2).
 2026-11-22 R0.4 series.py: 12 Russia(=China stub) vs China rmg seeds1-5+1 swap, 30 game-min cap, 6 par: 0 bad, 141 matches/hour, seed1 repeat identical; W Russia 3 China 3 none 6.
 2026-11-22 R0.5 economy verdicts in F13: a,c INI; b,d small code.
+2026-11-22 R0.6 mechanics verdicts in F13: all INI except counter-battery (code/skip).
