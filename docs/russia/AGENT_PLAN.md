@@ -154,3 +154,4 @@ R5.0 | old note: Russia loses to GLA by own weakness | China control also 0-10 v
 2026-11-23 R6.2 picker insignia + SIDE:Russia string; lobby screenshot via -control clicks.
 2026-11-23 R6.3 18 own icons in game; headless Russia-China seed1 clean (seed2 rmg hangs in shell even China-USA: not Russia, reported).
 2026-11-23 R6.4-R6.5 voices: 434 unit lines (32 units) + 36 Eva, Qwen3-TTS local; whisper gate; build ok, no unknown Russia audio in log, headless Russia-China seed1 clean.
+2026-11-23 R6.3 redo (user: glyphs too primitive, not Generals): 20 icons + emblem as gritty realistic photos from Higgsfield z_image (output owned by user, commercial use ok per Higgsfield help center), sources Tools/Russia/art + PROMPTS.txt, icons.py builds atlas; +2 icons TOS/Veterans replace China art on science buttons; in-game screenshot ok.

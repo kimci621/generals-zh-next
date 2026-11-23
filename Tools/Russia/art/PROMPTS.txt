@@ -1,0 +1,25 @@
+Higgsfield, model z_image, 4:3 (emblem 1:1), 2026-11-23. Cropped to 5:4 and scaled to 480x384 here.
+Every icon prompt: "Gritty photorealistic military documentary photograph: <scene>. Harsh overcast light,
+desaturated muted colors, heavy film grain. Serious, adult, realistic. No text, no cartoon, no illustration."
+
+Tax         worn steel ammunition crate with bundles of ruble banknotes, field ledger, canvas sack, dusty ground
+OilGas      oil pumpjack and gas flare at a Siberian field, soldier on guard, pipeline in front
+Ratnik      soldier in Ratnik gear: helmet with goggles, armor plates, headset, balaclava
+Thermal     tank gunner thermal sight, white-hot soldiers and vehicle, crosshair
+Relikt      tank turret and hull covered in explosive reactive armor bricks, mud and soot
+Cages       tank with welded anti-drone cage over the turret, muddy road
+Mobres      column of mobilized reservists boarding army trucks at a muddy assembly point
+PantsirMod  Pantsir radar, autocannons and missile tubes, technicians fitting a new module
+GuidedFAB   heavy bomb with gliding wing kit under a Su-34 wing on an airfield
+Cyber       cyber warfare room, operator from behind, monitors with network maps and code
+FAB         three heavy FAB bombs falling from a bomber onto a smoky battlefield
+TornadoS    Tornado-G rocket launcher truck firing a salvo at dusk
+VDV         paratroopers jumping from an Il-76 ramp, round parachutes in grey sky
+Reservists  older reservists advancing through a muddy trench with Kalashnikovs
+EWSuppress  EW truck with raised jamming antenna array, drone falling from the sky
+Orlan       Orlan-10 recon drone flying low over foggy forest
+Kinzhal     MiG-31 in a climb launching a Kinzhal missile, flame and smoke trail
+Oreshnik    six hypersonic warheads streaking down at night onto a burning horizon
+TOS         TOS-2 thermobaric launcher on a wheeled chassis firing, fireball on horizon
+Veterans    chest and shoulder of a veteran sergeant: rank stripes, campaign medals
+Emblem      worn steel and olive enamel shield badge, red enamel star over crossed artillery shells, black background
