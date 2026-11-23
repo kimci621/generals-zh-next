@@ -134,6 +134,7 @@ R4.0 | Mobres bought once | ReplaceObjectUpgrade dropped AI build-list entry -> 
 R4.0 | all powers >=50% | 7 science points (ranks 1-5) for 9 picks (Orlan, TOS2, 6 powers, Kinzhal); set picked by AI role, set2 ~10/12 | TornadoS+EWSuppress only in set1 -> ask user at GATE4 (points or metric)
 R4.9 | Mobres bought by scripts | Upgrade_RussiaMobres was OBJECT; AIPlayer::buildUpgrade skips OBJECT upgrades | Type=PLAYER, button PLAYER_UPGRADE -> 25/30
 R6.1 | Russia HUD on China terraced build | pagoda eaves read Chinese | machined build (America layout, scheme+MappedImages copied from America), olive steel+brass; generators run on mac with WINDIR=dir holding Fonts/arialbd.ttf, launcher emblem.svg absent -> Logo pasted from America sheet
+R6.3 | smoke seed 2 | -randommap 2 2 0 never starts the match (frames climb, 0 AI groups) also China-USA | outside Russia; told user
 R4.9 | Oreshnik fires >=50% | built 25/30, fires 12/30; vs GLA Russia dies before first charge | balance, R5
 R5.0 | GLA bot beats every base faction (China 0-10, USA 0-8-2) | user chose own anti-GLA scripts; done: Buk off vs GLA, engine enemy-miss cache fix, air-only defenses out of AI defense ring; GLA still 0-10 -> 3-7 vs GLA unreachable without breaking others, report user |
 R5.0 | old note: Russia loses to GLA by own weakness | China control also 0-10 vs GLA same seeds; Russia trades 0.59 vs China's 0.49 | GLA fix = stronger own Russia scripts (not opponents'), ask user; vs China 10-0 too strong, suspect AA wall (CHANGELOG)
@@ -150,4 +151,4 @@ R5.0 | old note: Russia loses to GLA by own weakness | China control also 0-10 v
 2026-11-23 R5.9 648 matches: Russia 169-207-144, vs GLA 5/120 (USA 2/64, China 1/64); usage 61/62 (Oreshnik fire 5/24).
 2026-11-23 R6.1 Russia HUD own (olive/brass machined), 6 hooks own prefix; screenshot ok, 1 headless match clean.
 2026-11-23 R6.2 picker insignia + SIDE:Russia string; lobby screenshot via -control clicks.
-2026-11-23 R6.3 18 own icons in game; headless smoke clean.
+2026-11-23 R6.3 18 own icons in game; headless Russia-China seed1 clean (seed2 rmg hangs in shell even China-USA: not Russia, reported).
