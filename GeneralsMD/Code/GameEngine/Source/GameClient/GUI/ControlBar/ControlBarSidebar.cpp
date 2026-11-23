@@ -220,8 +220,8 @@ const Image *Sidebar_image( const char *piece )
 			return s_images[ i ].image;
 
 	const Bool gla = side.startsWith( "GLA" );
-	const char *prefix = side.startsWith( "China" ) || side.startsWith( "Boss" ) || side.startsWith( "Russia" ) ? "ChinaPro"
-		: gla ? "GLAPro" : side.startsWith( "Turkiye" ) ? "TurkiyePro" : "AmericaPro";
+	const char *prefix = side.startsWith( "China" ) || side.startsWith( "Boss" ) ? "ChinaPro"
+		: gla ? "GLAPro" : side.startsWith( "Turkiye" ) ? "TurkiyePro" : side.startsWith( "Russia" ) ? "RussiaPro" : "AmericaPro";
 	AsciiString name;
 	name.format( "%sSidebar%s", prefix, piece );
 	const Image *image = TheMappedImageCollection->findImageByName( name );
@@ -1553,7 +1553,7 @@ void Sidebar_showOrder( const std::vector< Int > &country, const std::vector< In
 /// is America's), anything else its own
 static AsciiString countryOf( const AsciiString &side )
 {
-	static const char *const COUNTRIES[] = { "America", "China", "GLA", "Turkiye", "Boss" };
+	static const char *const COUNTRIES[] = { "America", "China", "GLA", "Turkiye", "Russia", "Boss" };
 	for( Int i = 0; i < (Int)( sizeof( COUNTRIES ) / sizeof( COUNTRIES[ 0 ] ) ); i++ )
 		if( side.startsWith( COUNTRIES[ i ] ) )
 			return AsciiString( COUNTRIES[ i ] );
@@ -2029,8 +2029,8 @@ void Sidebar_update( void )
 	{
 		s_iconPlayer = player;
 		const AsciiString side = player->getSide();
-		const char *prefix = side.startsWith( "China" ) || side.startsWith( "Boss" ) || side.startsWith( "Russia" ) ? "China"
-			: side.startsWith( "GLA" ) ? "Gla" : side.startsWith( "Turkiye" ) ? "Turkiye" : "America";
+		const char *prefix = side.startsWith( "China" ) || side.startsWith( "Boss" ) ? "China"
+			: side.startsWith( "GLA" ) ? "Gla" : side.startsWith( "Turkiye" ) ? "Turkiye" : side.startsWith( "Russia" ) ? "Russia" : "America";
 		for( Int t = 0; t < SIDEBAR_TAB_COUNT; t++ )
 		{
 			AsciiString name;

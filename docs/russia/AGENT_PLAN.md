@@ -17,7 +17,7 @@ P13 Upstream merges only by release tag (`git fetch upstream --tags; git merge v
 P14 Text for players: UI strings in game language (ru+en at least); Russian text on models. Code comments: match file (upstream uses English).
 
 ## STATE
-NOW: R5.0
+NOW: R6.2
 LAST: R3 passed GATE3 2026-11-22.
 NEXT-NOTE: R5.9 series done (CHANGELOG 2026-11-23); GATE5 reported to user; next R6 UI+sound after user ok
 BLOCKERS: -
@@ -71,7 +71,12 @@ BALANCE TARGETS (user 2026-11-22: max 10 games per opponent general, iterate fas
 [x] R5.0 Expand: unitmatrix/duel/siege with Russia, series vs USA/China/GLA + China control, iterate numbers. Changelog docs/russia/CHANGELOG.md with commands+numbers.
 [x] R5.9 confirmation 50/30/16 per pair (user cut): vs USA/China in band except Tank 28%, GLA 4% vs controls 2-3%; overall 32% (GLA). GATE5 reported.
 
-### R6 UI+sound (later) / R7 models (later, open-ended): expand when reached.
+### R6 UI+sound (user 2026-11-23: no model changes). Pattern = Turkiye (F5): own HUD side via generators, own cameos/voices/Eva.
+[x] R6.1 HUD panel: Russia side in Tools/hud_command_bar.py + hud_sidebar.py (America "machined" build (see DEV), own steel/accents, no flag colours per tool rule), ReforgedHudRussia* dds+MappedImages, ControlBarScheme Russia8x6 (copy America8x6, RussiaPro names), hooks F12 Russia->own prefix, COUNTRIES[]. => generators' check() pass; build ok; headless 1 match clean; screenshot of Russia HUD in game.
+[ ] R6.2 Faction picker + load screen: own FactionPickerFactionRussia image (procedural insignia, no national emblem copy), LoadScreen crest. => lobby shows it (screenshot).
+[ ] R6.3 Icons: units keep source-model cameos (they show the real model, D2). Own procedural icons for Russia-only upgrades/powers/sciences (~25) in RUIcons atlas, no other mods' art. => every Russia button image maps to existing MappedImage (script check); screenshot.
+[?] R6.4 Voices + Eva in Russian: needs TTS source (no ElevenLabs key; macOS Milena = 1 female voice, licence for public repo unclear). Ask user.
+[ ] R6.5 GATE6: screenshots + list to user.
 
 ## F12 HOOKS (R0.2)
 place | what | Russia
@@ -128,6 +133,7 @@ R4.0 | Buk ok | Patriot AssistedTargetingUpdate used missing SECONDARY slot -> c
 R4.0 | Mobres bought once | ReplaceObjectUpgrade dropped AI build-list entry -> rebuild+rebuy loop (29x/match) | engine: ReplaceObjectUpgrade hands build-list entry to replacement
 R4.0 | all powers >=50% | 7 science points (ranks 1-5) for 9 picks (Orlan, TOS2, 6 powers, Kinzhal); set picked by AI role, set2 ~10/12 | TornadoS+EWSuppress only in set1 -> ask user at GATE4 (points or metric)
 R4.9 | Mobres bought by scripts | Upgrade_RussiaMobres was OBJECT; AIPlayer::buildUpgrade skips OBJECT upgrades | Type=PLAYER, button PLAYER_UPGRADE -> 25/30
+R6.1 | Russia HUD on China terraced build | pagoda eaves read Chinese | machined build (America layout, scheme+MappedImages copied from America), olive steel+brass; generators run on mac with WINDIR=dir holding Fonts/arialbd.ttf, launcher emblem.svg absent -> Logo pasted from America sheet
 R4.9 | Oreshnik fires >=50% | built 25/30, fires 12/30; vs GLA Russia dies before first charge | balance, R5
 R5.0 | GLA bot beats every base faction (China 0-10, USA 0-8-2) | user chose own anti-GLA scripts; done: Buk off vs GLA, engine enemy-miss cache fix, air-only defenses out of AI defense ring; GLA still 0-10 -> 3-7 vs GLA unreachable without breaking others, report user |
 R5.0 | old note: Russia loses to GLA by own weakness | China control also 0-10 vs GLA same seeds; Russia trades 0.59 vs China's 0.49 | GLA fix = stronger own Russia scripts (not opponents'), ask user; vs China 10-0 too strong, suspect AA wall (CHANGELOG)
@@ -142,3 +148,4 @@ R5.0 | old note: Russia loses to GLA by own weakness | China control also 0-10 v
 2026-11-22 R5.0 nerf T72 800, TOS2 1800, Veterans MotorRifle only; 20/pair: vs China 15-3-2 (was 18-0-2), vs USA 10-3-7; USA-China 3-3-14; GLA unchanged 0-10.
 2026-11-22 R5.0 powers reload up, 1 Voenkomat, Relikt 10%: vs China 11-5-4/20; 12 generals x10 35-55-30; vs GLA Russia 3-33-4, China 1-38-1, USA 0-31-9.
 2026-11-23 R5.9 648 matches: Russia 169-207-144, vs GLA 5/120 (USA 2/64, China 1/64); usage 61/62 (Oreshnik fire 5/24).
+2026-11-23 R6.1 Russia HUD own (olive/brass machined), 6 hooks own prefix; screenshot ok, 1 headless match clean.

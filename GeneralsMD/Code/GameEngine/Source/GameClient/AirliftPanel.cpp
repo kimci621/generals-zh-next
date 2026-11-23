@@ -203,8 +203,10 @@ static const Image *sidePiece( Player *player, const char *piece )
 {
 	const AsciiString side = player->getSide();
 	const char *prefix = "America";
-	if( side.startsWith( "China" ) || side.startsWith( "Boss" ) || side.startsWith( "Russia" ) )
+	if( side.startsWith( "China" ) || side.startsWith( "Boss" ) )
 		prefix = "China";
+	else if( side.startsWith( "Russia" ) )
+		prefix = "Russia";
 	else if( side.startsWith( "GLA" ) )
 		prefix = "Gla";
 	else if( side.startsWith( "Turkiye" ) )

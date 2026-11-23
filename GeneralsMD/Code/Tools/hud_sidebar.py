@@ -45,8 +45,8 @@ from hud_command_bar import (Painter, Offset, shade, bar_finish, plate, shape, g
                              BAR_LOOKS, COMMAND_TAB_OPEN, MOUNT_GLYPH, MOUNT_GLYPH_BUILD, BEZEL_SCALE, PAPER, GOLD,
                              TURQ, AMBER, SS)
 
-SIDES = ("America", "China", "Gla", "Turkiye")
-PREFIX = {"America": "AmericaPro", "China": "ChinaPro", "Gla": "GLAPro", "Turkiye": "TurkiyePro"}
+SIDES = ("America", "China", "Gla", "Turkiye", "Russia")
+PREFIX = {"America": "AmericaPro", "China": "ChinaPro", "Gla": "GLAPro", "Turkiye": "TurkiyePro", "Russia": "RussiaPro"}
 FONT_DIR = os.path.join(os.environ.get("WINDIR", "C:/Windows"), "Fonts")
 
 
@@ -180,7 +180,7 @@ PL = 8                                          # the plate is drawn 8 texels in
 #   each side's tiers: shell top, lip top, the lip's inset from the outline and its bevel.  America a thin satin lip
 #   on a wide shell, China a tall lip stepped up sharply (a terrace), the GLA a sheet edge barely bent, Turkiye one
 #   wide flat chamfer
-TIERS = {"America": (4, 7, 5, 2.6), "China": (4, 9, 6, 0.9), "Gla": (4, 7, 3, 0.9), "Turkiye": (4, 7, 6, 5.0)}
+TIERS = {"America": (4, 7, 5, 2.6), "China": (4, 9, 6, 0.9), "Gla": (4, 7, 3, 0.9), "Turkiye": (4, 7, 6, 5.0), "Russia": (4, 7, 5, 2.6)}
 FLOOR = (1606, 418, 1914, 1076)                 # the production well: tabs, rail, picker, cameos, arrows, 2 round the
                                                 # tab row; plain under the grid, where the code lays CameoWell under
                                                 # every cell
@@ -314,7 +314,7 @@ def sidebar_lights(img):
     return led(img, lines, lamps)
 
 
-SIDEBARS = {"America": sb_america, "China": sb_china, "Gla": sb_gla, "Turkiye": sb_turkiye}
+SIDEBARS = {"America": sb_america, "China": sb_china, "Gla": sb_gla, "Turkiye": sb_turkiye, "Russia": sb_america}
 
 
 def money_sign(img, x, y, size=20):
@@ -472,7 +472,7 @@ def st_turkiye(o, p):
     camo(p, 6)
 
 
-STRIPS = {"America": st_america, "China": st_china, "Gla": st_gla, "Turkiye": st_turkiye}
+STRIPS = {"America": st_america, "China": st_china, "Gla": st_gla, "Turkiye": st_turkiye, "Russia": st_america}
 
 
 def strip_plate(side):
@@ -563,7 +563,7 @@ def cd_turkiye(o, p):
     camo(p, 7)
 
 
-CARDS = {"America": cd_america, "China": cd_china, "Gla": cd_gla, "Turkiye": cd_turkiye}
+CARDS = {"America": cd_america, "China": cd_china, "Gla": cd_gla, "Turkiye": cd_turkiye, "Russia": cd_america}
 CARD_W, CARD_H = CARD[2] - CARD[0], CARD[3] - CARD[1]
 
 

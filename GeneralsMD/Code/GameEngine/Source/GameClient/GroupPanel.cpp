@@ -289,8 +289,10 @@ static AsciiString sidePrefix( void )
 	}
 
 	const AsciiString side = ThePlayerList->getLocalPlayer()->getSide();
-	if( side.startsWith( "China" ) || side.startsWith( "Boss" ) || side.startsWith( "Russia" ) )
+	if( side.startsWith( "China" ) || side.startsWith( "Boss" ) )
 		return AsciiString( "China" );
+	if( side.startsWith( "Russia" ) )
+		return AsciiString( "Russia" );
 	if( side.startsWith( "GLA" ) )
 		return AsciiString( "Gla" );
 	if( side.startsWith( "Turkiye" ) )

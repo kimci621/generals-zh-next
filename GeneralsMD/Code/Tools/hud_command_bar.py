@@ -69,6 +69,9 @@ SIDES = {
                 accent=(0xb0, 0x5a, 0x1e), accent2=(0x86, 0x84, 0x3c), scheme="GLA8x6"),
     "Turkiye": dict(build="faceted", steel=(118, 126, 124), glass=(10, 12, 14), glass_lo=(22, 25, 28),
                     accent=(0xc0, 0x2a, 0x2a), accent2=(0x50, 0x58, 0x62), scheme="Turkiye8x6"),
+    # Russia: China's terraced build in olive drab with brass and field green (docs/russia), no flag colours
+    "Russia": dict(build="machined", steel=(116, 122, 104), glass=(9, 13, 9), glass_lo=(18, 26, 17),
+                   accent=(0xc4, 0x96, 0x34), accent2=(0x4c, 0x62, 0x3c), scheme="Russia8x6"),
 }
 
 
@@ -575,6 +578,8 @@ BAR_LOOKS = {   # the bar's own steel, apart from SIDES, which the sheets, cards
                 accent=(52, 46, 32), accent2=(150, 154, 156), crest=(1.0, 0.84, 0.52), crest_k=0.4),
     "Turkiye": dict(build="faceted", steel=(100, 106, 94), glass=(8, 16, 18), glass_lo=(5, 10, 12),
                     accent=(40, 200, 190), accent2=(66, 72, 70), crest=(0.5, 1.0, 0.95), crest_k=0.3),
+    "Russia": dict(build="machined", steel=(96, 106, 84), glass=(12, 22, 12), glass_lo=(7, 13, 7),
+                   accent=(176, 132, 40), accent2=(70, 92, 54), crest=(1.0, 0.82, 0.36), crest_k=0.45),
 }
 # The watcher's HUD and the console tooltips (round 19, 2026-11-05): no side's, so the neutral steel family,
 # round 18's three tiers in the desk build.  Plain graphite steel with no hue, square on the screen's edges and
@@ -648,7 +653,7 @@ def tab_plate_box(solid, production_top):
 SIGNAL_KEY = (40, 30)
 SIGNAL_KINDS = ("Attack", "Defend", "Attention")
 SIGNAL_SEATS = [(8 + 44 * i, 761, 48 + 44 * i, 791) for i in range(3)]       # screen, at 100%
-SIGNAL_FOOT = {"America": 795, "China": 795, "Gla": 800, "Turkiye": 795}       # where the plate stands on the ledge
+SIGNAL_FOOT = {"America": 795, "China": 795, "Gla": 800, "Turkiye": 795, "Russia": 795}       # where the plate stands on the ledge
 SIGNAL_AT = (8, 732)                            # TabPanel sheet: the plate, the keys right of it (signal_boxes)
 
 
@@ -757,11 +762,11 @@ def signal_key(side_name, kind, state):
 # fixed top-left piece with the ledge, a fixed top-right and bottom-right corner, and edges that tile (never
 # stretch), so a ragged edge, a rivet row or the range ticks repeat whole.  Laid out round the glass well, the
 # picture's rect joined with the painted glass (5,832..327,1064), so the frame always covers the painted box.
-GROWN_RIGHT = {"America": 18, "China": 18, "Gla": 22, "Turkiye": 18}       # the right lip, the glass's edge to the box's
+GROWN_RIGHT = {"America": 18, "China": 18, "Gla": 22, "Turkiye": 18, "Russia": 18}       # the right lip, the glass's edge to the box's
 GROWN_TOP, GROWN_LEDGE, GROWN_HEAD = 20, 17, 24     # box top lip over the glass, ledge over the box, room above that
 GROWN_TLW, GROWN_TILE = 282, 120                    # the top-left piece's width (ledge and its point), edge tile
-GROWN_PERIOD = {"America": 100, "China": 104, "Gla": 120, "Turkiye": 80}  # the right edge's tile, its fittings' period
-GROWN_RUNS = {"America": 5, "China": 5, "Gla": 4, "Turkiye": 6}           # the right lip's tiles in the reference
+GROWN_PERIOD = {"America": 100, "China": 104, "Gla": 120, "Turkiye": 80, "Russia": 100}  # the right edge's tile, its fittings' period
+GROWN_RUNS = {"America": 5, "China": 5, "Gla": 4, "Turkiye": 6, "Russia": 5}           # the right lip's tiles in the reference
 # The pieces join because the reference is drawn for it.  Every run in it is whole tiles from corner to corner where
 # the outline or a fitting changes along it (the top across, three tiles; the right lip down), the outline is
 # straight along every run (a ragged edge or a jog stays in the corners and the ledge), so a run cut anywhere still
@@ -1298,7 +1303,7 @@ def led(img, lines, lamps):
     return Image.fromarray(a.astype(np.uint8), "RGBA")
 
 
-BARS = {"America": bar_america, "China": bar_china, "Gla": bar_gla, "Turkiye": bar_turkiye}
+BARS = {"America": bar_america, "China": bar_china, "Gla": bar_gla, "Turkiye": bar_turkiye, "Russia": bar_america}
 BAR_POST = {"Turkiye": bar_lights}
 
 
@@ -2117,7 +2122,7 @@ def put(sheet_img, img, box):
 # in the side's second accent of BAR_LOOKS and a flat glyph on it, as the prototypes drew them.  The
 # glyph is laid on after the light, antialiased: engraved and lit at this size it came out mottled.
 MOUNT_KINDS = ("General", "Minimize", "Maximize")
-MOUNT_GLYPH = {"America": INK, "China": INK, "Gla": INK, "Turkiye": (64, 226, 214)}
+MOUNT_GLYPH = {"America": INK, "China": INK, "Gla": INK, "Turkiye": (64, 226, 214), "Russia": INK}
 MOUNT_GLYPH_BUILD = {"terraced": "machined"}                    # China's minimise is the chevron and its bezel plain
 MOUNT_STATE = {"": 1.0, "H": 1.3, "P": 0.85, "I": 0.45}         # the face's brightness in each state
 
@@ -2204,7 +2209,7 @@ COMMAND_TAB_KINDS = ("Buildings", "Ground", "Aircraft")
 COMMAND_TAB_STATES = ("", "H", "P", "I")
 COMMAND_TAB_AT = (608, 216)                     # the Buildings up piece; states 3 apart across, kinds 3 down
 COMMAND_TAB_RIM = 1.5                           # the dark rim round the bezel
-COMMAND_TAB_OPEN = {"America": (70, 122, 232), "China": (204, 46, 30), "Gla": (214, 122, 40), "Turkiye": (44, 212, 198)}
+COMMAND_TAB_OPEN = {"America": (70, 122, 232), "China": (204, 46, 30), "Gla": (214, 122, 40), "Turkiye": (44, 212, 198), "Russia": (212, 160, 52)}
 
 
 def command_tab_boxes():
