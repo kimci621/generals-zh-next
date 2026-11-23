@@ -18,8 +18,8 @@ P14 Text for players: UI strings in game language (ru+en at least); Russian text
 
 ## STATE
 NOW: -
-LAST: R7 portraits done 2026-11-23.
-NEXT-NOTE: all stages R0-R6 done; next work only by user request.
+LAST: R8.1 own T-72B3M model done 2026-11-23 (user tested in game, likes it).
+NEXT-NOTE: R8 own models: next unit only by user request (pipeline F12).
 BLOCKERS: -
 
 ## DECISIONS (user-approved 2026-11-22, do not change without user)
@@ -41,6 +41,7 @@ F7 Engine modules already in fork (from Turkiye): JammerUpdate, RadarJamSpecialP
 F8 Vanilla refs: derrick 200/12s +1000 capture, `UpgradedBoost = UpgradeType:Upgrade_AmericaSupplyLines Boost:20`. Black Market 20/2s. Cash Hack 1000/2000/4000. Reloads: Nuke 360s, Scud 300s, Particle 240s. Extract vanilla INI: `python3 -I ~/Games/Generals/tools/bigx.py ~/Games/Generals/GeneralsZH/INIZH.big <out> <substr>`.
 F9 Series: `python3 Tools/Russia/series.py --seeds 1-6 --maps rmg|<map>,.. --pairs A:B,.. --swap --parallel 6 --maxframes 54000 --out $TMPDIR/x.csv` (winner from HEADLESS PLAYER WON; frame cap -> none). Balance tools (author): Tools/Balance/{unitmatrix,duel,siege,calibrate,compare,duel_report}.py; script tool Tools/ScbTool; ours ~/Games/Generals/tools/scb.py.
 F10 Strings: Data/Patch.str + Data/<Lang>/Generals.str (check which carries English in R0.2).
+F12 Own models (R8, D2 changed by user 2026-11-23: own models instead of reskins): Gemini ortho refs (side/top/front/rear + burnt) -> Tools/Russia/models/<unit>/config.json pixel landmarks -> `uv run Tools/Russia/models/contours.py <dir>` -> `uv run .../atlas.py <dir>` -> `blender -b --factory-startup --python .../build.py -- <dir>` -> `python3 -I .../make.py <dir> <retail W3D dir: avcrusader.W3D, NVBtMstr.W3D from W3DZH.big>` -> Art/W3D + Art/Textures. INI by hand below `;; RUSSIA MODELS` in RussiaReforged.ini. ReplaceModule must name the tag after Balance/Fixes Reforged (e.g. ModuleTag_01_Reforged), check log for 'was not found'. Budget ~3k tris (EA tanks 250-450).
 F11 Disk tight (~19 GB free). Run dirs in $TMPDIR, delete after.
 
 ## DATA (start values; R1 refines. src=reskin source; cost; req)
@@ -137,6 +138,8 @@ R6.3 | smoke seed 2 | -randommap 2 2 0 never starts the match (frames climb, 0 A
 R4.9 | Oreshnik fires >=50% | built 25/30, fires 12/30; vs GLA Russia dies before first charge | balance, R5
 R5.0 | GLA bot beats every base faction (China 0-10, USA 0-8-2) | user chose own anti-GLA scripts; done: Buk off vs GLA, engine enemy-miss cache fix, air-only defenses out of AI defense ring; GLA still 0-10 -> 3-7 vs GLA unreachable without breaking others, report user |
 R5.0 | old note: Russia loses to GLA by own weakness | China control also 0-10 vs GLA same seeds; Russia trades 0.59 vs China's 0.49 | GLA fix = stronger own Russia scripts (not opponents'), ask user; vs China 10-0 too strong, suspect AA wall (CHANGELOG)
+R8.1 | ReplaceModule ModuleTag_01 on T72 | BalanceReforged renamed Battlemaster draw to ModuleTag_01_Reforged, death to ModuleTag_12_Reforged + 2 AddModules | replace those tags; own hull object RussiaVehicleT72DeadHull + OCL_RussiaT72Toss/Wreck
+R8.1 | 5022 tris (Battlemaster 265) | contour_eps 8 -> 3162, same look; LOD only if user sees lag
 ## LOG (date ID result commit)
 2026-11-22 R0-R2: build ok, headless 33x RT, series 141/h; skeleton clean, China wins 5/5 vs skeleton.
 2026-11-22 R3: full roster+mechanics; powers fire (Cyber 13 FAB 18 Kinzhal 25 Orlan 77 ... EWSuppress 0); Oreshnik fires; talent effects and bot Oreshnik/EWSuppress/defenses NOT verified -> R4.
@@ -150,3 +153,4 @@ R5.0 | old note: Russia loses to GLA by own weakness | China control also 0-10 v
 2026-11-23 R5.9 648 matches: Russia 169-207-144, vs GLA 5/120 (USA 2/64, China 1/64); usage 61/62 (Oreshnik fire 5/24).
 2026-11-23 R6 done: HUD, picker, icons (redo x2 by user feedback: glyphs->photos, 5 action shots->static close-ups), voices+Eva Qwen3-TTS; headless Russia-China seed1 clean.
 2026-11-23 R7 portraits: 45 Gemini photos (T14 redone: no painted markings), atlas+wiring, in-game check HQ/dozer panels.
+2026-11-23 R8.1 own T-72B3M (RUT72): 3162 tris, alive/damaged/wreck/turret, treads+wheels+pitch; headless Russia-China clean; user tested in game: ok.
