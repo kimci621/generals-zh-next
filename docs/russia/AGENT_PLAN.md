@@ -17,9 +17,9 @@ P13 Upstream merges only by release tag (`git fetch upstream --tags; git merge v
 P14 Text for players: UI strings in game language (ru+en at least); Russian text on models. Code comments: match file (upstream uses English).
 
 ## STATE
-NOW: R6.6
-LAST: R3 passed GATE3 2026-11-22.
-NEXT-NOTE: R5.9 series done (CHANGELOG 2026-11-23); GATE5 reported to user; next R6 UI+sound after user ok
+NOW: -
+LAST: R6 passed GATE6 2026-11-23.
+NEXT-NOTE: all stages R0-R6 done; next work only by user request.
 BLOCKERS: -
 
 ## DECISIONS (user-approved 2026-11-22, do not change without user)
@@ -72,12 +72,7 @@ BALANCE TARGETS (user 2026-11-22: max 10 games per opponent general, iterate fas
 [x] R5.9 confirmation 50/30/16 per pair (user cut): vs USA/China in band except Tank 28%, GLA 4% vs controls 2-3%; overall 32% (GLA). GATE5 reported.
 
 ### R6 UI+sound (user 2026-11-23: no model changes). Pattern = Turkiye (F5): own HUD side via generators, own cameos/voices/Eva.
-[x] R6.1 HUD panel: Russia side in Tools/hud_command_bar.py + hud_sidebar.py (America "machined" build (see DEV), own steel/accents, no flag colours per tool rule), ReforgedHudRussia* dds+MappedImages, ControlBarScheme Russia8x6 (copy America8x6, RussiaPro names), hooks F12 Russia->own prefix, COUNTRIES[]. => generators' check() pass; build ok; headless 1 match clean; screenshot of Russia HUD in game.
-[x] R6.2 Faction picker: own FactionPickerFactionRussia (olive shield, brass star, chevrons; ReforgedFactionRussia.tga), SIDE:Russia string en+ru (was MISSING in picker). Load screen stays China (Turkiye also keeps America's). => screenshot ok.
-[x] R6.3 Icons: units/buildings keep source-model cameos (D2). 18 own glyph icons (9 upgrades, 9 powers) by Tools/Russia/icons.py -> RUIcons.tga/ini; 52 ButtonImage refs (upgrades, powers, shortcuts, science buys). TOS2/Veterans science buttons keep retail. => all RUIcon refs mapped (comm check 0), in-game screenshot ok.
-[x] R6.4 Voices (user 2026-11-23: Piper rejected as flat; chose local Qwen3-TTS-12Hz-1.7B-VoiceDesign MLX 8bit, Apache-2.0). Tools/Russia/voices.py: voice by text description (branch + unit character + mood per line kind), professional tone (user: not "uncle Petya"), per-unit reference voice by VoiceDesign then all lines cloned by Qwen3-TTS-1.7B-Base-8bit (VoiceDesign alone changes voice per line), whisper best-of-4 gate; fx by branch: inf dry+comp, arm intercom+diesel rumble, veh radio, air oxygen mask. Stress marks (U+0301) make it worse -> rephrase words with wrong stress (svyazi, ispravna, Msta gotova). wavs Data/Audio/Sounds/r<code><kind><n>.wav 22050 mono s16 -16 LUFS, AudioEvents in VoiceReforged.ini, Voice*/UnitSpecificSounds patches in RussiaReforged.ini (UnitSpecificSounds clears map -> copy source entries). => whisper transcript ~ text; in-game select plays; headless clean.
-[x] R6.5 Eva in Russian: 36 events (EvaReforged.ini Side=Russia), Qwen3-TTS reference + clone, female ops officer voice, 'pod atakoi' -> 'atakovan'. => whisper 36/36; user approved by ear; no missing audio in log. Event trigger in game (low power) not checked.
-[ ] R6.6 GATE6: screenshots + list to user.
+[x] R6 done: own HUD panel + picker insignia (R6.1-2); 20 icons + emblem as realistic photos (Higgsfield z_image, Tools/Russia/art, icons.py); 434 unit lines + 36 Eva in Russian (Qwen3-TTS local, voices.py, whisper gate). GATE6 user ok 2026-11-23. Eva in-game trigger not checked.
 
 ## F12 HOOKS (R0.2)
 place | what | Russia
@@ -150,8 +145,4 @@ R5.0 | old note: Russia loses to GLA by own weakness | China control also 0-10 v
 2026-11-22 R5.0 nerf T72 800, TOS2 1800, Veterans MotorRifle only; 20/pair: vs China 15-3-2 (was 18-0-2), vs USA 10-3-7; USA-China 3-3-14; GLA unchanged 0-10.
 2026-11-22 R5.0 powers reload up, 1 Voenkomat, Relikt 10%: vs China 11-5-4/20; 12 generals x10 35-55-30; vs GLA Russia 3-33-4, China 1-38-1, USA 0-31-9.
 2026-11-23 R5.9 648 matches: Russia 169-207-144, vs GLA 5/120 (USA 2/64, China 1/64); usage 61/62 (Oreshnik fire 5/24).
-2026-11-23 R6.1 Russia HUD own (olive/brass machined), 6 hooks own prefix; screenshot ok, 1 headless match clean.
-2026-11-23 R6.2 picker insignia + SIDE:Russia string; lobby screenshot via -control clicks.
-2026-11-23 R6.3 18 own icons in game; headless Russia-China seed1 clean (seed2 rmg hangs in shell even China-USA: not Russia, reported).
-2026-11-23 R6.4-R6.5 voices: 434 unit lines (32 units) + 36 Eva, Qwen3-TTS local; whisper gate; build ok, no unknown Russia audio in log, headless Russia-China seed1 clean.
-2026-11-23 R6.3 redo (user: glyphs too primitive, not Generals): 20 icons + emblem as gritty realistic photos from Higgsfield z_image (output owned by user, commercial use ok per Higgsfield help center), sources Tools/Russia/art + PROMPTS.txt, icons.py builds atlas; +2 icons TOS/Veterans replace China art on science buttons; in-game screenshot ok.
+2026-11-23 R6 done: HUD, picker, icons (redo x2 by user feedback: glyphs->photos, 5 action shots->static close-ups), voices+Eva Qwen3-TTS; headless Russia-China seed1 clean.
