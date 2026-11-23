@@ -474,6 +474,11 @@ static UnicodeString cashText( const GameInfo *game )
 	* three brings its own lobby glyph or nothing. */
 static const Image *sideCrest( const PlayerTemplate *side )
 {
+	// a side of its own may name its crest LoadCrest<template> before falling back to its base side
+	AsciiString own;
+	own.format( "LoadCrest%s", side->getName().str() );
+	if( const Image *crest = TheMappedImageCollection->findImageByName( own ) )
+		return crest;
 	const AsciiString base = side->getBaseSide();
 	if( base.compareNoCase( "USA" ) == 0 )
 		return TheMappedImageCollection->findImageByName( "SAFactionLogo144_US" );
@@ -490,6 +495,11 @@ static const Image *sideEmblem( const PlayerTemplate *side )
 	const GeneralPersona *general = TheChallengeGenerals->getGeneralByTemplateName( side->getName() );
 	if( general && general->getBioPortraitSmall() )
 		return general->getBioPortraitSmall();
+	// likewise its portrait, LoadPortrait<template>
+	AsciiString own;
+	own.format( "LoadPortrait%s", side->getName().str() );
+	if( const Image *portrait = TheMappedImageCollection->findImageByName( own ) )
+		return portrait;
 	return sideCrest( side );
 }
 
