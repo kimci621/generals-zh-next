@@ -3375,6 +3375,10 @@ SIDE:Turkiye
 "Turkiye (Experimental)"
 END
 
+SIDE:Russia
+"Russia (Experimental)"
+END
+
 TOOLTIP:BioStrategyLong_Turkiye
 "Turkiye kills from range but cannot see for itself: its artillery fires 600 and sees 100, so a spotter, a UAV or a radar tower has to find the target"
 END

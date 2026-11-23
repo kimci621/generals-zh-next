@@ -17,7 +17,7 @@ P13 Upstream merges only by release tag (`git fetch upstream --tags; git merge v
 P14 Text for players: UI strings in game language (ru+en at least); Russian text on models. Code comments: match file (upstream uses English).
 
 ## STATE
-NOW: R6.2
+NOW: R6.3
 LAST: R3 passed GATE3 2026-11-22.
 NEXT-NOTE: R5.9 series done (CHANGELOG 2026-11-23); GATE5 reported to user; next R6 UI+sound after user ok
 BLOCKERS: -
@@ -73,7 +73,7 @@ BALANCE TARGETS (user 2026-11-22: max 10 games per opponent general, iterate fas
 
 ### R6 UI+sound (user 2026-11-23: no model changes). Pattern = Turkiye (F5): own HUD side via generators, own cameos/voices/Eva.
 [x] R6.1 HUD panel: Russia side in Tools/hud_command_bar.py + hud_sidebar.py (America "machined" build (see DEV), own steel/accents, no flag colours per tool rule), ReforgedHudRussia* dds+MappedImages, ControlBarScheme Russia8x6 (copy America8x6, RussiaPro names), hooks F12 Russia->own prefix, COUNTRIES[]. => generators' check() pass; build ok; headless 1 match clean; screenshot of Russia HUD in game.
-[ ] R6.2 Faction picker + load screen: own FactionPickerFactionRussia image (procedural insignia, no national emblem copy), LoadScreen crest. => lobby shows it (screenshot).
+[x] R6.2 Faction picker: own FactionPickerFactionRussia (olive shield, brass star, chevrons; ReforgedFactionRussia.tga), SIDE:Russia string en+ru (was MISSING in picker). Load screen stays China (Turkiye also keeps America's). => screenshot ok.
 [ ] R6.3 Icons: units keep source-model cameos (they show the real model, D2). Own procedural icons for Russia-only upgrades/powers/sciences (~25) in RUIcons atlas, no other mods' art. => every Russia button image maps to existing MappedImage (script check); screenshot.
 [?] R6.4 Voices + Eva in Russian: needs TTS source (no ElevenLabs key; macOS Milena = 1 female voice, licence for public repo unclear). Ask user.
 [ ] R6.5 GATE6: screenshots + list to user.
@@ -149,3 +149,4 @@ R5.0 | old note: Russia loses to GLA by own weakness | China control also 0-10 v
 2026-11-22 R5.0 powers reload up, 1 Voenkomat, Relikt 10%: vs China 11-5-4/20; 12 generals x10 35-55-30; vs GLA Russia 3-33-4, China 1-38-1, USA 0-31-9.
 2026-11-23 R5.9 648 matches: Russia 169-207-144, vs GLA 5/120 (USA 2/64, China 1/64); usage 61/62 (Oreshnik fire 5/24).
 2026-11-23 R6.1 Russia HUD own (olive/brass machined), 6 hooks own prefix; screenshot ok, 1 headless match clean.
+2026-11-23 R6.2 picker insignia + SIDE:Russia string; lobby screenshot via -control clicks.
