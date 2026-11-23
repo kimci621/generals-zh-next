@@ -4,14 +4,14 @@
 """Атлас текстуры из ортогональных видов: чистый, повреждённый, обгоревший + полоса гусеницы.
 Пишет в <dir>/out: <NAME>.tga, <NAME>_D.tga, <NAME>_B.tga, <NAME>Trk.tga, <NAME>TrkB.tga, atlas.json.
 
-  uv run Tools/Russia/models/atlas.py Tools/Russia/models/t72b3m [size]
+  uv run Tools/Russia/models/atlas.py Tools/Russia/models/t72b3m [size, по умолчанию 1024]
 """
 import json, os, sys
 import numpy as np
 from PIL import Image, ImageFilter
 from scipy import ndimage
 
-D = sys.argv[1]; N = int(sys.argv[2]) if len(sys.argv) > 2 else 2048
+D = sys.argv[1]; N = int(sys.argv[2]) if len(sys.argv) > 2 else 1024  # 1024: решение пользователя 2026-11-23 (вес репозитория)
 C = json.load(open(os.path.join(D, 'config.json'))); P = json.load(open(os.path.join(D, 'parts.json')))
 O = os.path.join(D, 'out'); os.makedirs(O, exist_ok=True)
 ref = lambda n: Image.open(os.path.join(D, 'ref', n)).convert('RGB')

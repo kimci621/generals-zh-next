@@ -19,7 +19,7 @@ P14 Text for players: UI strings in game language (ru+en at least); Russian text
 ## STATE
 NOW: -
 LAST: R8.1 own T-72B3M model done 2026-11-23 (user tested in game, likes it).
-NEXT-NOTE: R8 own models: next unit only by user request (pipeline F12).
+NEXT-NOTE: R8 queue (user-approved 2026-11-23): 1 T-72 upgrade parts (cages, Relikt via SubObjectsUpgrade) 2 missiles+drones 3 buildings w/ animation (W3D anim writer needed; footprint = source Geometry) 4 vehicles 1/session 5 weapon sounds 6 aircraft 7 infantry (decide: rig or keep reskins). Every model: _D, wreck, debris, shadow check; user review every 2-3 models.
 BLOCKERS: -
 
 ## DECISIONS (user-approved 2026-11-22, do not change without user)
@@ -41,7 +41,7 @@ F7 Engine modules already in fork (from Turkiye): JammerUpdate, RadarJamSpecialP
 F8 Vanilla refs: derrick 200/12s +1000 capture, `UpgradedBoost = UpgradeType:Upgrade_AmericaSupplyLines Boost:20`. Black Market 20/2s. Cash Hack 1000/2000/4000. Reloads: Nuke 360s, Scud 300s, Particle 240s. Extract vanilla INI: `python3 -I ~/Games/Generals/tools/bigx.py ~/Games/Generals/GeneralsZH/INIZH.big <out> <substr>`.
 F9 Series: `python3 Tools/Russia/series.py --seeds 1-6 --maps rmg|<map>,.. --pairs A:B,.. --swap --parallel 6 --maxframes 54000 --out $TMPDIR/x.csv` (winner from HEADLESS PLAYER WON; frame cap -> none). Balance tools (author): Tools/Balance/{unitmatrix,duel,siege,calibrate,compare,duel_report}.py; script tool Tools/ScbTool; ours ~/Games/Generals/tools/scb.py.
 F10 Strings: Data/Patch.str + Data/<Lang>/Generals.str (check which carries English in R0.2).
-F12 Own models (R8, D2 changed by user 2026-11-23: own models instead of reskins): Gemini ortho refs (side/top/front/rear + burnt) -> Tools/Russia/models/<unit>/config.json pixel landmarks -> `uv run Tools/Russia/models/contours.py <dir>` -> `uv run .../atlas.py <dir>` -> `blender -b --factory-startup --python .../build.py -- <dir>` -> `python3 -I .../make.py <dir> <retail W3D dir: avcrusader.W3D, NVBtMstr.W3D from W3DZH.big>` -> Art/W3D + Art/Textures. INI by hand below `;; RUSSIA MODELS` in RussiaReforged.ini. ReplaceModule must name the tag after Balance/Fixes Reforged (e.g. ModuleTag_01_Reforged), check log for 'was not found'. Budget ~3k tris (EA tanks 250-450).
+F12 Own models (R8, D2 changed by user 2026-11-23: own models instead of reskins): Gemini ortho refs (side/top/front/rear + burnt) -> Tools/Russia/models/<unit>/config.json pixel landmarks -> `uv run Tools/Russia/models/contours.py <dir>` -> `uv run .../atlas.py <dir>` -> `blender -b --factory-startup --python .../build.py -- <dir>` -> `python3 -I .../make.py <dir> <retail W3D dir: avcrusader.W3D, NVBtMstr.W3D from W3DZH.big>` -> Art/W3D + Art/Textures. INI by hand below `;; RUSSIA MODELS` in RussiaReforged.ini. ReplaceModule must name the tag after Balance/Fixes Reforged (e.g. ModuleTag_01_Reforged), check log for 'was not found'. Budget ~3k tris (EA tanks 250-450). Atlas 1024 (user 2026-11-23, repo size).
 F11 Disk tight (~19 GB free). Run dirs in $TMPDIR, delete after.
 
 ## DATA (start values; R1 refines. src=reskin source; cost; req)
