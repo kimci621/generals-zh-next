@@ -83,12 +83,6 @@ def emblem(path):
     out.resize((128, 128), Image.LANCZOS).save(path)
 
 
-def portrait(path):
-    """портрет министра для экрана загрузки, 256x256"""
-    im = Image.open(os.path.join(ART, "Minister.jpg")).convert("RGB").resize((256, 256), Image.LANCZOS)
-    im.filter(ImageFilter.UnsharpMask(radius=1, percent=60, threshold=2)).convert("RGBA").save(path)
-
-
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--preview")
@@ -103,12 +97,9 @@ def main():
                 "  Status = NONE", "End", ""]
     atlas.save(os.path.join(ROOT, "Art", "Textures", "RUIcons.tga"))
     emblem(os.path.join(ROOT, "Art", "Textures", "ReforgedFactionRussia.tga"))
-    portrait(os.path.join(ROOT, "Art", "Textures", "RULoadPortrait.tga"))
-    # экран загрузки (LoadScreen.cpp ищет LoadPortrait<шаблон> и LoadCrest<шаблон>)
-    for name, tex, size in (("LoadPortraitFactionRussia", "RULoadPortrait.tga", 256),
-                            ("LoadCrestFactionRussia", "ReforgedFactionRussia.tga", 128)):
-        ini += ["MappedImage " + name, "  Texture = " + tex, "  TextureWidth = %d" % size, "  TextureHeight = %d" % size,
-                "  Coords = Left:0 Top:0 Right:%d Bottom:%d" % (size, size), "  Status = NONE", "End", ""]
+    # эмблема на экране загрузки (LoadScreen.cpp ищет LoadCrest<шаблон>)
+    ini += ["MappedImage LoadCrestFactionRussia", "  Texture = ReforgedFactionRussia.tga", "  TextureWidth = 128",
+            "  TextureHeight = 128", "  Coords = Left:0 Top:0 Right:128 Bottom:128", "  Status = NONE", "End", ""]
     with open(os.path.join(ROOT, "INI", "MappedImages", "HandCreated", "RUIcons.ini"), "w", newline="\n") as f:
         f.write("\n".join(ini))
     cam, n = cameos()

@@ -495,11 +495,6 @@ static const Image *sideEmblem( const PlayerTemplate *side )
 	const GeneralPersona *general = TheChallengeGenerals->getGeneralByTemplateName( side->getName() );
 	if( general && general->getBioPortraitSmall() )
 		return general->getBioPortraitSmall();
-	// likewise its portrait, LoadPortrait<template>
-	AsciiString own;
-	own.format( "LoadPortrait%s", side->getName().str() );
-	if( const Image *portrait = TheMappedImageCollection->findImageByName( own ) )
-		return portrait;
 	return sideCrest( side );
 }
 
