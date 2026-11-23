@@ -201,6 +201,7 @@ def main():
         assert m, srcname
         body = re.sub(r"(\n\s*Object\s*=\s*)\S+", r"\g<1>" + obj, "\n" + m.group(1))
         body = re.sub(r"(\n\s*TextLabel\s*=\s*)\S+", r"\g<1>CONTROLBAR:" + newname.replace("Command_", ""), body)
+        body = re.sub(r"(\n\s*ButtonImage\s*=\s*)\S+", r"\g<1>" + obj.replace("Russia", "RUCameo", 1), body)
         return "CommandButton " + newname + body.rstrip("\n") + "\nEnd\n"
 
     sets = {"CommandCenter": "RussiaCommandCenterCommandSet", "VehicleIMR3M": "RussiaDozerCommandSet",
@@ -214,6 +215,8 @@ def main():
         o = f"ObjectReskin {n} {src}\nEnd\n\nObject {n}\n  Side = Russia\n"
         if i in sets:
             o += f"  CommandSet = {sets[i]}\n"
+        # портреты: Tools/Russia/icons.py, RUCameo<id> - кнопка, _L - портрет выбранного
+        o += f"  SelectPortrait = RUCameo{i}_L\n  ButtonImage = RUCameo{i}\n"
         o += f"  DisplayName = OBJECT:{n}\n  BuildCost = {c}\n  BuildTime = {t}.0\n"
         if req:
             kind = "Science = " + req if req.startswith("SCIENCE_") else "Object = Russia" + req

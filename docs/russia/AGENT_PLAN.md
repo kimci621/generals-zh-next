@@ -18,7 +18,7 @@ P14 Text for players: UI strings in game language (ru+en at least); Russian text
 
 ## STATE
 NOW: -
-LAST: R6 passed GATE6 2026-11-23.
+LAST: R7 portraits done 2026-11-23.
 NEXT-NOTE: all stages R0-R6 done; next work only by user request.
 BLOCKERS: -
 
@@ -73,6 +73,9 @@ BALANCE TARGETS (user 2026-11-22: max 10 games per opponent general, iterate fas
 
 ### R6 UI+sound (user 2026-11-23: no model changes). Pattern = Turkiye (F5): own HUD side via generators, own cameos/voices/Eva.
 [x] R6 done: own HUD panel + picker insignia (R6.1-2); 20 icons + emblem as realistic photos (Higgsfield z_image, Tools/Russia/art, icons.py); 434 unit lines + 36 Eva in Russian (Qwen3-TTS local, voices.py, whisper gate). GATE6 user ok 2026-11-23. Eva in game checked 2026-11-23: Russia match, enemy tanks at base -> erbase/erlost/erbsto/erbcap opened (lsof), no China Eva files.
+
+### R7 portraits (user 2026-11-23: build buttons and selection portraits show source models, e.g. T-90 = China tank)
+[x] R7 done: 45 unit/building photos (Gemini Pro web via playwriter, 3 Google profiles; Higgsfield credits short) in Tools/Russia/art/cameo + PROMPTS.tsv; icons.py -> RUCameos.tga 2048 (240x192 portraits, 120x96 buttons) + RUCameos.ini; gen.py sets SelectPortrait/ButtonImage + build buttons; Mobres by hand. Grep: 0 Russia buttons/objects with source cameo. Windowed game: HQ/IMR-3M portraits, IMR button, dozer build panel all own.
 
 ## F12 HOOKS (R0.2)
 place | what | Russia
@@ -146,3 +149,4 @@ R5.0 | old note: Russia loses to GLA by own weakness | China control also 0-10 v
 2026-11-22 R5.0 powers reload up, 1 Voenkomat, Relikt 10%: vs China 11-5-4/20; 12 generals x10 35-55-30; vs GLA Russia 3-33-4, China 1-38-1, USA 0-31-9.
 2026-11-23 R5.9 648 matches: Russia 169-207-144, vs GLA 5/120 (USA 2/64, China 1/64); usage 61/62 (Oreshnik fire 5/24).
 2026-11-23 R6 done: HUD, picker, icons (redo x2 by user feedback: glyphs->photos, 5 action shots->static close-ups), voices+Eva Qwen3-TTS; headless Russia-China seed1 clean.
+2026-11-23 R7 portraits: 45 Gemini photos (T14 redone: no painted markings), atlas+wiring, in-game check HQ/dozer panels.
