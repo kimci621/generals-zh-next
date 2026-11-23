@@ -72,7 +72,7 @@ BALANCE TARGETS (user 2026-11-22: max 10 games per opponent general, iterate fas
 [x] R5.9 confirmation 50/30/16 per pair (user cut): vs USA/China in band except Tank 28%, GLA 4% vs controls 2-3%; overall 32% (GLA). GATE5 reported.
 
 ### R6 UI+sound (user 2026-11-23: no model changes). Pattern = Turkiye (F5): own HUD side via generators, own cameos/voices/Eva.
-[x] R6 done: own HUD panel + picker insignia (R6.1-2); 20 icons + emblem as realistic photos (Higgsfield z_image, Tools/Russia/art, icons.py); 434 unit lines + 36 Eva in Russian (Qwen3-TTS local, voices.py, whisper gate). GATE6 user ok 2026-11-23. Eva in-game trigger not checked.
+[x] R6 done: own HUD panel + picker insignia (R6.1-2); 20 icons + emblem as realistic photos (Higgsfield z_image, Tools/Russia/art, icons.py); 434 unit lines + 36 Eva in Russian (Qwen3-TTS local, voices.py, whisper gate). GATE6 user ok 2026-11-23. Eva in game checked 2026-11-23: Russia match, enemy tanks at base -> erbase/erlost/erbsto/erbcap opened (lsof), no China Eva files.
 
 ## F12 HOOKS (R0.2)
 place | what | Russia
