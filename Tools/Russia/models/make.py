@@ -17,7 +17,7 @@ retail = dict(solid=(cru, 'CHASSIS'), house=(cru, 'HOUSECOLOR01'), treads=(cru, 
 rot = {'MUZZLEFX01': (0.7071068, 0, 0, 0.7071068)}
 turret = {'TURRET01', 'BARREL01'}
 alive = names - {'RING'} | {'MUZZLEFX01'}
-hull = {n for n in names if n not in turret and not n.startswith('HOUSECOLOR')}
+hull = {n for n in names if n not in turret and not n.startswith(('HOUSECOLOR', 'CAGES', 'RELIKT'))}
 V = {
     N: (alive, dict(solid=f'{N}.tga', house='Housecolor.tga', treads=f'{N}Trk.tga')),
     f'{N}_D': (alive, dict(solid=f'{N}_D.tga', house='Housecolor.tga', treads=f'{N}Trk.tga')),

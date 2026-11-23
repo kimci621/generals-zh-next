@@ -18,8 +18,8 @@ P14 Text for players: UI strings in game language (ru+en at least); Russian text
 
 ## STATE
 NOW: -
-LAST: R8.1 own T-72B3M model done 2026-11-23 (user tested in game, likes it).
-NEXT-NOTE: R8 queue (user-approved 2026-11-23): 1 T-72 upgrade parts (cages, Relikt via SubObjectsUpgrade) 2 missiles+drones 3 buildings w/ animation (W3D anim writer needed; footprint = source Geometry) 4 vehicles 1/session 5 weapon sounds 6 aircraft 7 infantry (decide: rig or keep reskins). Every model: _D, wreck, debris, shadow check; user review every 2-3 models.
+LAST: R8.4 T-72 cages+Relikt parts 2026-11-23 (in-game look NOT checked by user yet).
+NEXT-NOTE: R8 queue (user-approved 2026-11-23): 1 done (R8.4) 2 missiles+drones 3 buildings w/ animation (W3D anim writer needed; footprint = source Geometry) 4 vehicles 1/session 5 weapon sounds 6 aircraft 7 infantry (decide: rig or keep reskins). Every model: _D, wreck, debris, shadow check; user review every 2-3 models.
 BLOCKERS: -
 
 ## DECISIONS (user-approved 2026-11-22, do not change without user)
@@ -77,6 +77,9 @@ BALANCE TARGETS (user 2026-11-22: max 10 games per opponent general, iterate fas
 
 ### R7 portraits (user 2026-11-23: build buttons and selection portraits show source models, e.g. T-90 = China tank)
 [x] R7 done: 45 unit/building photos (Gemini Pro web via playwriter, 3 Google profiles; Higgsfield credits short) in Tools/Russia/art/cameo + PROMPTS.tsv; icons.py -> RUCameos.tga 2048 (240x192 portraits, 120x96 buttons) + RUCameos.ini; gen.py sets SelectPortrait/ButtonImage + build buttons; Mobres by hand. Grep: 0 Russia buttons/objects with source cameo. Windowed game: HQ/IMR-3M portraits, IMR button, dozer build panel all own.
+
+### R8 own models (queue in STATE NEXT-NOTE)
+[x] R8.4 T-72 upgrade parts: slat cages + Relikt blocks as hidden sub-objects, SubObjectsUpgrade shows them => headless match with both upgrades clean, sub-objects in W3D, preview renders with/without.
 
 ## F12 HOOKS (R0.2)
 place | what | Russia
@@ -154,4 +157,5 @@ R8.1 | 5022 tris (Battlemaster 265) | contour_eps 8 -> 3162, same look; LOD only
 2026-11-23 R6 done: HUD, picker, icons (redo x2 by user feedback: glyphs->photos, 5 action shots->static close-ups), voices+Eva Qwen3-TTS; headless Russia-China seed1 clean.
 2026-11-23 R7 portraits: 45 Gemini photos (T14 redone: no painted markings), atlas+wiring, in-game check HQ/dozer panels.
 2026-11-23 R8.1 own T-72B3M (RUT72): 3162 tris, alive/damaged/wreck/turret, treads+wheels+pitch; headless Russia-China clean; user tested in game: ok.
+2026-11-23 R8.4 T-72 parts: CAGES01/02 (slats hull sides+rear, turret basket) RELIKT01/02 (skirts, glacis, turret roof+front), +1884 tris only when bought; hidden in default state, SubObjectsUpgrade x2; 3 headless Russia-China rmg clean, bot bought Cages 3/3 Relikt 2/3; headless draws nothing -> look checked only in Blender preview.
 2026-11-23 R8.2 tooltip audit vs INI: Cages renamed + text, Relikt 20%->10% text, Veterans RPG removed from text; rest match.

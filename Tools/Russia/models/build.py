@@ -148,6 +148,78 @@ def project(o, force=None, hole=False):
 project(hull); project(tur); project(barrel)
 for _, _, w in wheels: project(w, force='side')
 
+# ---- детали улучшений (скрыты, пока не куплено): блоки "Реликт" и решётчатые экраны
+def ray(o, org, d):
+    r = o.ray_cast(Vector(org), Vector(d), depsgraph=bpy.context.evaluated_depsgraph_get())
+    return (r[1], r[2].normalized()) if r[0] else None
+def box(bm, c, n, su, sv, st, u=None):
+    """Брусок: центр c, нормаль n (толщина st), полуразмеры su вдоль u (по умолчанию горизонталь), sv поперёк."""
+    n = Vector(n).normalized()
+    if u is None: u = Vector((0, 0, 1)).cross(n) if abs(n.z) < 0.9 else Vector((1, 0, 0))
+    u = Vector(u).normalized(); v = n.cross(u)
+    vs = [bm.verts.new(Vector(c) + u * a * su + v * b * sv + n * e * st) for a in (-1, 1) for b in (-1, 1) for e in (-1, 1)]
+    for q in ((0, 1, 3, 2), (4, 6, 7, 5), (0, 4, 5, 1), (2, 3, 7, 6), (0, 2, 6, 4), (1, 5, 7, 3)):
+        bm.faces.new([vs[i] for i in q])
+def era(bm, o, org, d, su, sv, st):
+    h = ray(o, org, d)
+    if h: box(bm, h[0] + h[1] * st, h[1], su, sv, st)
+def done(bm, name):
+    bmesh.ops.recalc_face_normals(bm, faces=bm.faces); bmesh.ops.triangulate(bm, faces=bm.faces)
+    return obj_from_bm(bm, name)
+hv = [v.co for v in hull.data.vertices]; tv = [v.co for v in tur.data.vertices]
+TZ0 = P['turret_z']; ty = max(abs(v.y) for v in tv); tx0 = min(v.x for v in tv)
+# Реликт на корпусе: бортовые экраны (две группы, как на фото) и верхний лобовой лист
+bm = bmesh.new()
+for sgn in (1, -1):
+    for xa, xb in ((0.41, 1.35), (2.0, 2.95)):
+        for i in range(3):
+            for k in range(4):
+                x = xa + (xb - xa) * (i + 0.5) / 3; z = 0.98 + 0.15 * k
+                era(bm, hull, (x, sgn * 4, z), (0, -sgn, 0), 0.14, 0.065, 0.045)
+for y in (-1.15, -0.75, -0.35, 0.35, 0.75, 1.15):
+    for z in (1.25, 1.45):
+        era(bm, hull, (8, y, z), (-1, 0, 0), 0.18, 0.09, 0.045)
+relikt_h = done(bm, 'RELIKT02')
+# Реликт на башне: клинья на крыше и лобовые блоки
+bm = bmesh.new()
+for sgn in (1, -1):
+    for x in (0.75, 1.1):
+        for y in (0.45, 0.8):
+            era(bm, tur, (x, sgn * y, 6), (0, 0, -1), 0.15, 0.11, 0.05)
+    for y in (0.55, 0.95):
+        era(bm, tur, (8, sgn * y, TZ0 + 0.22), (-1, 0, 0), 0.1, 0.13, 0.06)
+relikt_t = done(bm, 'RELIKT01')
+project(relikt_h); project(relikt_t)
+# решётки: вертикальные прутья с шагом GAP, две горизонтальные планки
+B2, GAP = 0.025, 0.22
+def slats(bm, a, b, z0, z1):
+    """Решётка в вертикальной плоскости от точки a до b (x, y), нормаль n."""
+    a, b = Vector((a[0], a[1], 0)), Vector((b[0], b[1], 0)); L = (b - a).length; u = (b - a) / L
+    for i in range(int(L / GAP) + 1):
+        p = a + u * (i * L / int(L / GAP)); bar(bm, (p.x, p.y, z0), (p.x, p.y, z1))
+    for z in (z0, z1): bar(bm, (a.x, a.y, z), (b.x, b.y, z))
+def bar(bm, p, q):
+    p, q = Vector(p), Vector(q); d = q - p
+    side = d.cross(Vector((0, 0, 1))) if abs(d.normalized().z) < 0.9 else Vector((1, 0, 0))
+    box(bm, (p + q) / 2, side, d.length / 2 + B2, B2, B2, u=d)
+bm = bmesh.new()
+for sgn in (1, -1):  # борта моторного отделения, на отлёте 0.2 м
+    h = ray(hull, (-1.8, sgn * 4, 1.25), (0, -sgn, 0)); y = (h[0].y if h else sgn * TO) + sgn * 0.2
+    slats(bm, (-3.3, y), (-0.5, y), 0.85, 1.6)
+    for x in (-3.2, -1.9, -0.6): bar(bm, (x, y, 1.55), (x, y - sgn * 0.22, 1.55))
+h = ray(hull, (-8, 0, 1.0), (1, 0, 0)); xr = (h[0].x if h else min(v.x for v in hv)) - 0.25
+slats(bm, (xr, -TO), (xr, TO), 0.7, 1.3)
+cages_h = done(bm, 'CAGES02')
+bm = bmesh.new()
+for sgn in (1, -1):  # корзина вокруг кормы башни
+    slats(bm, (tx0 + 1.0, sgn * (ty + 0.15)), (tx0 - 0.15, sgn * (ty + 0.15)), TZ0 + 0.05, TZ0 + 0.6)
+slats(bm, (tx0 - 0.15, -(ty + 0.15)), (tx0 - 0.15, ty + 0.15), TZ0 + 0.05, TZ0 + 0.6)
+cages_t = done(bm, 'CAGES01')
+CAGE_UV = to_uv('side', -1.5, 1.5)  # однотонный оливковый с борта
+for o in (cages_h, cages_t):
+    o.data.uv_layers.new(name='UVMap')
+    for d in o.data.uv_layers.active.data: d.uv = CAGE_UV
+
 # ---- кости (метры, мир), без поворотов
 TZ = P['turret_z']; trn = P['trunnion']; mx = keep[-1][0]
 B = [('ROOTTRANSFORM', -1, (0, 0, 0)), ('CHASSIS', 0, (0, 0, 0)), ('TURRET01', 1, (0, 0, TZ)),
@@ -191,6 +263,7 @@ tex, trk = f'{NAME}.tga', f'{NAME}Trk.tga'
 meshes = [export(hull, 'CHASSIS', tex), export(tur, 'TURRET01', tex), export(barrel, 'BARREL01', tex)]
 meshes += [export(w, nm, tex) for nm, _, w in wheels]
 meshes += [export(t, 'CHASSIS', trk, 'treads') for t in treads]
+meshes += [export(relikt_h, 'CHASSIS', tex), export(relikt_t, 'TURRET01', tex), export(cages_h, 'CHASSIS', tex), export(cages_t, 'TURRET01', tex)]
 # погон без башни (только у подбитого корпуса): тёмный круг на палубе
 bm = bmesh.new(); uvr = bm.loops.layers.uv.new('UVMap')
 rv = [bm.verts.new((1.15 * math.cos(2 * math.pi * k / 20), 1.15 * math.sin(2 * math.pi * k / 20), TZ + 0.004)) for k in range(20)]
