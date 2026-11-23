@@ -37,3 +37,11 @@ Result vs China 11-5-4 (band 6-14).
 
 10 per general (seeds 1-5 swap, maxframes 54000), W-L-D: USA 3-2-5, AirForce 4-1-5, Laser 3-3-4, SuperWeapon 1-2-7, China 5-3-2, Infantry 7-0-3, Nuke 6-4-0, Tank 3-7-0, GLA 0-9-1, Demolition 1-9-0, Stealth 2-5-3, Toxin 0-10-0. Total 35-55-30.
 GLA controls same seeds: China vs GLA four factions 1-38-1, USA 0-31-9. Russia vs GLA four 3-33-4: not worse than China/USA (user target).
+
+## 2026-11-23 R5.9 confirmation series (user cut 100/general to 50/30/16)
+Command: `bash $TMPDIR/r59/run.sh` = series.py --swap --parallel 3 --maxframes 54000, chunks of 5 seeds; Russia vs 8 USA/China factions seeds 1-25 (50 each), vs 4 GLA factions seeds 1-15 (30 each), controls China/USA vs 4 GLA seeds 1-8 (16 each). 648 matches, 0 bad.
+
+W-L-D: USA 15-8-27, AirForce 21-4-25, Laser 13-14-23, SuperWeapon 12-6-32; China 29-13-8, Infantry 31-8-11, Nuke 29-14-7, Tank 14-35-1; GLA 0-29-1, Demolition 2-27-1, Stealth 2-20-8, Toxin 1-29-0. Total 169-207-144 (32% wins; without GLA 164-102-134, decided 62%).
+Controls vs 4 GLA factions: USA 2-45-17 (3%), China 1-60-3 (2%); Russia 5-105-10 (4%): not worse (user target met).
+Usage (24 logged matches vs China/USA/GLA seeds 1-4 swap): 61/62 items >=50%; Oreshnik fired 5/24 (built 12/24). China's own nuke fired 0 in R5.0 logs: accepted.
+Not met: overall 45-55% (GLA bot beats all base factions); vs USA ~half the matches hit the 30-min cap, so USA balance is measured weakly.

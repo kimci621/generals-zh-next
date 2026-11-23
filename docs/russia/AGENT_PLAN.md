@@ -19,7 +19,7 @@ P14 Text for players: UI strings in game language (ru+en at least); Russian text
 ## STATE
 NOW: R5.0
 LAST: R3 passed GATE3 2026-11-22.
-NEXT-NOTE: R5.0 done; R5.9 100/general running (user 2026-11-22: run without asking, report only 100-game result)
+NEXT-NOTE: R5.9 series done (CHANGELOG 2026-11-23); GATE5 reported to user; next R6 UI+sound after user ok
 BLOCKERS: -
 
 ## DECISIONS (user-approved 2026-11-22, do not change without user)
@@ -69,7 +69,7 @@ BALANCE TARGETS (user 2026-11-22: max 10 games per opponent general, iterate fas
 
 ### R5 balance
 [x] R5.0 Expand: unitmatrix/duel/siege with Russia, series vs USA/China/GLA + China control, iterate numbers. Changelog docs/russia/CHANGELOG.md with commands+numbers.
-[~] R5.9 Targets met on 10/general series, then confirmed on 100/general. GATE5.
+[x] R5.9 confirmation 50/30/16 per pair (user cut): vs USA/China in band except Tank 28%, GLA 4% vs controls 2-3%; overall 32% (GLA). GATE5 reported.
 
 ### R6 UI+sound (later) / R7 models (later, open-ended): expand when reached.
 
@@ -141,3 +141,4 @@ R5.0 | old note: Russia loses to GLA by own weakness | China control also 0-10 v
 2026-11-22 R5.0 baseline 30 matches: Russia-GLA 1-9, China-GLA 0-10, Russia-China 10-0; income 92-108% of China; asked user.
 2026-11-22 R5.0 nerf T72 800, TOS2 1800, Veterans MotorRifle only; 20/pair: vs China 15-3-2 (was 18-0-2), vs USA 10-3-7; USA-China 3-3-14; GLA unchanged 0-10.
 2026-11-22 R5.0 powers reload up, 1 Voenkomat, Relikt 10%: vs China 11-5-4/20; 12 generals x10 35-55-30; vs GLA Russia 3-33-4, China 1-38-1, USA 0-31-9.
+2026-11-23 R5.9 648 matches: Russia 169-207-144, vs GLA 5/120 (USA 2/64, China 1/64); usage 61/62 (Oreshnik fire 5/24).
