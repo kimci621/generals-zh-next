@@ -19210,19 +19210,19 @@ CONTROLBAR:UpgradeRussiaRelikt
 END
 
 CONTROLBAR:ToolTipUpgradeRussiaRelikt
-"Т-72Б3М и Т-90М получают +20% здоровья."
+"Т-72Б3М и Т-90М получают +10% здоровья."
 END
 
 UPGRADE:RussiaCages
-"Противодроновые решётки"
+"Решётчатые экраны"
 END
 
 CONTROLBAR:UpgradeRussiaCages
-"&Противодроновые решётки"
+"&Решётчатые экраны"
 END
 
 CONTROLBAR:ToolTipUpgradeRussiaCages
-"Танки, БТР и БМП получают вдвое меньше урона от дронов и гранатомётов."
+"Т-72Б3М, Т-90М, «Армата», БТР и БМП получают вдвое меньше урона от гранатомётов, пехотных ракет и дронов, БМПТ вчетверо меньше."
 END
 
 UPGRADE:RussiaMobres
@@ -19438,7 +19438,7 @@ SCIENCE:RussiaVeterans
 END
 
 CONTROLBAR:ToolTipRussiaScienceVeterans
-"Мотострелки и гранатомётчики выходят ветеранами."
+"Мотострелки выходят ветеранами."
 END
 
 OBJECT:RussiaVehicleTOS2

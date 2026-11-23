@@ -7020,19 +7020,19 @@ CONTROLBAR:UpgradeRussiaRelikt
 END
 
 CONTROLBAR:ToolTipUpgradeRussiaRelikt
-"T-72B3M and T-90M get 20% more health."
+"T-72B3M and T-90M get 10% more health."
 END
 
 UPGRADE:RussiaCages
-"Anti-drone Cages"
+"Cage Armor"
 END
 
 CONTROLBAR:UpgradeRussiaCages
-"&Anti-drone Cages"
+"&Cage Armor"
 END
 
 CONTROLBAR:ToolTipUpgradeRussiaCages
-"Tanks, BTR and BMP take half damage from drones and RPG warheads."
+"T-72B3M, T-90M, Armata, BTR and BMP take half damage from RPGs, infantry missiles and drones; BMPT a quarter."
 END
 
 UPGRADE:RussiaMobres
@@ -7248,7 +7248,7 @@ SCIENCE:RussiaVeterans
 END
 
 CONTROLBAR:ToolTipRussiaScienceVeterans
-"Motor riflemen and RPG gunners are trained as veterans."
+"Motor riflemen are trained as veterans."
 END
 
 OBJECT:RussiaVehicleTOS2
