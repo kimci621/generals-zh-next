@@ -1,0 +1,11 @@
+# R8.8: own tank plant with a power plant, one BTR-82A queued so the gates open, the BTR drives out and
+# the gates close (door states of the China factory's ProductionUpdate: open ~frame 240-320, out ~340).
+# The factory takes no order for 1.5 s after it appears, so the order comes at frame 100. Draws, so -win:
+#
+#   generals -win -xres 1280 -yres 720 -quickstart -noshellmap -observer -multiInstance
+#     -map "Maps\Twilight Flame\Twilight Flame.map" -autoskirmish 3 -takeover
+#     -side 0 FactionRussia -side 1 FactionRussia -side 2 FactionRussia -seed 7
+#     -scenario russia_warfactory -cinema nohud -freecam 3560 3790 220 160 -35 -video 100 400 wf
+20    spawn    0  RussiaPowerPlant   1  3300 3990
+20    spawn    0  RussiaWarFactory   1  3400 3880
+100   produce  0  RussiaWarFactory   RussiaVehicleBTR82A 1

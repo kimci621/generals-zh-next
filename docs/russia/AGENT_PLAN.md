@@ -18,7 +18,7 @@ P14 Text for players: UI strings in game language (ru+en at least); Russian text
 
 ## STATE
 NOW: -
-LAST: R8.7b projectile UV flip fixed 2026-11-24. User has not seen R8.4-R8.7 in game yet.
+LAST: R8.8 WarFactory with gates 2026-11-24. User has not seen R8.4-R8.8 in game yet -> asked for review.
 NEXT-NOTE: R8 queue (user-approved 2026-11-23): 1 done (R8.4) 2 done (R8.5) 3 buildings w/ animation (R8.6 Zoopark, R8.7 PowerPlant done; next WarFactory, Pantsir pos, rest, one per session; bld.py) 4 vehicles 1/session 5 weapon sounds 6 aircraft 7 infantry (decide: rig or keep reskins). Every model: _D, wreck, debris, shadow check; user review every 2-3 models.
 BLOCKERS: -
 
@@ -84,7 +84,8 @@ BALANCE TARGETS (user 2026-11-22: max 10 games per opponent general, iterate fas
 [x] R8.6 buildings w/ animation (queue item 3), first = Zoopark radar: w3d.py writes ANIMATION chunk (Q channels per pivot); Tools/Russia/models/bld.py builds buildings from primitives + procedural 512 atlas (alive/_D damaged/_E rubble, bones Smoke01/02 Flame01 Spark01). Zoopark: pad, cabin, generator, pedestal, phased-array antenna rotating (loop). Draw ReplaceModule ModuleTag_01 (construction ModuleTag_02 kept), Geometry unchanged. => W3D roundtrip + anim frames parse, Blender preview, windowed game screenshot shows model (anim visible across 2 shots), headless match clean. Next buildings one per session: PowerPlant (turbine fans), WarFactory (door), Pantsir position, rest.
 [x] R8.7 PowerPlant own model (gas turbine plant): bld.py powerplant(), turbine hall + stacks + air-cooler fans turning (anim), _D/_E; Draw ReplaceModule ModuleTag_01 (scaffold 02-04 kept), POWER_PLANT_UPGRADED (Overcharge) spins fans faster + sparks. => W3D roundtrip, Blender preview, windowed scenario shot, headless match clean.
 [x] R8.7b proj.py UVs: swatch_uv v = 1 - y/128 (as bld.ruv), preview reads v as is; 6 projectiles rebuilt (textures unchanged). => in-game spawn shot: Buk/Tor white fins light, Lancet blgrey, Kornet/Grad dkolive (before: rows 0-2 read mirrored, row 0 hit empty row 3 -> white/olive/grey parts black).
-[ ] R8.8 WarFactory own model (Завод бронетехники): bld.py warfactory(), hall + gate door animated on unit exit (DOOR_1_OPENING/CLOSING like China WF), _D/_E. Check source WF Draw condition states + door bones first. => W3D roundtrip, Blender preview, windowed scenario shot with door open/closed, headless match clean.
+[x] R8.8 WarFactory own model RUWARFACT (Завод бронетехники): assembly hall with swing gates on the exit side (+X, Y -27), second hall, brick offices, boiler stack; gates on DOOR01/02 open outward 90 deg in 1 s, driven by China WF's existing door states (ProductionUpdate NumDoorAnimations 1, timing unchanged): DOOR_1_OPENING ONCE / WAITING_OPEN MANUAL last / CLOSING ONCE_BACKWARDS. RemoveModule 02/05/06 (China crane, extras), scaffolds 03/04/07 kept. _E: walls stubs, roof slabs fallen, stack broken, one leaf down. => W3D roundtrip, Blender preview, windowed video Scenarios/russia_warfactory.txt (gates open, BTR out, gates close), 2 headless Russia-China rmg clean, WF built.
+[ ] R8.9 Pantsir position own model (next building, queue item 3). Before it: user review of R8.4-R8.8 in game.
 
 
 ## F12 HOOKS (R0.2)
@@ -150,6 +151,7 @@ R5.0 | old note: Russia loses to GLA by own weakness | China control also 0-10 v
 R8.1 | ReplaceModule ModuleTag_01 on T72 | BalanceReforged renamed Battlemaster draw to ModuleTag_01_Reforged, death to ModuleTag_12_Reforged + 2 AddModules | replace those tags; own hull object RussiaVehicleT72DeadHull + OCL_RussiaT72Toss/Wreck
 R8.1 | 5022 tris (Battlemaster 265) | contour_eps 8 -> 3162, same look; LOD only if user sees lag
 R8.7 | bld.py UVs right (Zoopark looked ok in shots) | ruv wrote v = y/A, W3D v is bottom-up (T-72 export uses Blender v) -> every atlas region read from the mirrored row: pad showed olive panels, red test fill landed on cooler top | ruv v = 1 - y/A, preview reads v as is; Zoopark W3D rebuilt (textures unchanged); proj.py likely same -> R8.7b
+R8.8 | scenario produce RussiaVehicleTigrM at RussiaWarFactory | queued 0 (canMakeUnit refuses), BTR82A queues fine | not checked, outside task; bot builds Tigr per R4.9 usage -> look if user sees Tigr missing
 ## LOG (date ID result commit)
 2026-11-22 R0-R2: build ok, headless 33x RT, series 141/h; skeleton clean, China wins 5/5 vs skeleton.
 2026-11-22 R3: full roster+mechanics; powers fire (Cyber 13 FAB 18 Kinzhal 25 Orlan 77 ... EWSuppress 0); Oreshnik fires; talent effects and bot Oreshnik/EWSuppress/defenses NOT verified -> R4.
@@ -171,3 +173,4 @@ R8.7 | bld.py UVs right (Zoopark looked ok in shots) | ruv wrote v = y/A, W3D v 
 2026-11-23 R8.2 tooltip audit vs INI: Cages renamed + text, Relikt 20%->10% text, Veterans RPG removed from text; rest match.
 2026-11-24 R8.7 RUPOWER 684 tris (hall, 2 stacks, filters, 2 transformers, cooler with FAN01-03 1.5 s/turn, 3 s damaged, x2 Overcharge), _E hall caved, stack down, 1 fan; turned 180 so stacks stand behind in the usual view; pad 5 deep. Windowed shots N/S: textures right after UV fix, fans turn (frames 200/205); 2 headless Russia-China rmg clean, PP built; _D/_E seen only in Blender preview.
 2026-11-24 R8.7b proj UV fix, 6 W3D rebuilt; in-game scenario shot confirms light parts no longer black.
+2026-11-24 R8.8 RUWARFACT 198 tris (_E 226), gates DOOR01/02 30 frames; video: open, BTR out, close; headless seed1 timeout, seed3 Russia won, WF built both.

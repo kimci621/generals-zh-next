@@ -180,7 +180,58 @@ def powerplant(state):
         anim = (n, 30, {b: [(0, 0, math.sin(math.pi * f / n + 0.4 * k), math.cos(math.pi * f / n + 0.4 * k)) for f in range(n)] for k, b in enumerate(fans)})
     return bones, meshes, anim
 
-MODELS = dict(RUZOOPARK=zoopark, RUPOWER=powerplant)
+# ---------------------------------------------------------------- Завод бронетехники
+def warfactory(state):
+    """Площадка 110x118 (у китайского завода 114x122): сборочный цех вдоль X с распашными воротами на +X
+    (юнит появляется в (0, -27) и выезжает к +X), второй цех, кирпичная заводоуправа и котельная с трубой.
+    Створки на костях DOOR01/DOOR02 (петли по краям проёма) открываются наружу на 90 градусов за 1 с;
+    закрытие - та же анимация задом наперёд. В разбитом виде цех просел, труба обломана, одна створка лежит."""
+    E = state == 'E'
+    GX, GY, GW, GH = 40.0, -27.0, 16.0, 13.0                                     # ворота: плоскость, центр, ширина, высота
+    hh = 4.0 if E else 20.0                                                       # высота сборочного цеха (у руин - слой завала)
+    base = [box((0, 0, -1.5), (110, 118, 5.0), 'curb', 'concrete'),
+            box((-3, -27, 0.6 + hh / 2), (86, 44, hh), 'cabin', 'dark' if E else 'roof'),
+            box((-12, 22, 7.6), (66, 34, 14), 'cabin', 'roof'),                   # второй цех
+            box((38, 33, 6.6), (22, 30, 12), 'array', 'roof', front='grille'),    # заводоуправление, окна на фасаде
+            box((-46, 50, 4.6), (14, 12, 8), 'array', 'dark'),                    # котельная
+            box((49, -27, 0.85), (18, 22, 0.5), 'dark')]                          # площадка перед воротами
+    if not E:
+        base += [box((-3, -27, hh + 1.6), (70, 8, 2.0), 'cabin', 'roof'),         # фонарь на крыше цеха
+                 box((GX + 0.4, GY, 0.6 + GH + 1.0), (1.0, GW + 2, 2.0), 'dark')]  # притолока
+        base += [box((GX + 0.4, GY + s * (GW / 2 + 0.6), 0.6 + GH / 2), (1.0, 1.2, GH), 'dark') for s in (-1, 1)]  # косяки
+        base.append(box((GX + 0.15, GY, 0.6 + GH / 2), (0.3, GW, GH), 'dark'))  # тёмный проём за створками
+    chim = [(0.6, 3.2), (36.0, 2.2), (37.0, 2.5)] if not E else [(0.6, 3.2), (12.0, 2.9)]
+    base.append(post((-46, 42), chim, 'array', 10))
+    if E:
+        base.append(xform(post((0, 0), [(0, 2.9), (22, 2.3)], 'array', 10), rx=math.radians(86), rz=math.radians(30), d=(-40, 38, 2.6)))
+        base += [box((-45.5, -27, 5.6), (1.0, 44, 10), 'cabin'), box((-3, -48.5, 4.1), (86, 1.0, 7), 'cabin'),   # уцелевшие стены
+                 box((40.5, -42, 6.6), (1.0, 14, 12), 'cabin'), box((-20, -5.5, 3.1), (40, 1.0, 5), 'cabin')]
+        for x, rx, ry, rz in ((-30, 0.35, 0.10, 0.05), (-5, -0.30, -0.08, -0.10), (20, 0.25, 0.15, 0.20)):  # рухнувшие плиты кровли
+            base.append(xform(box((0, 0, 0), (22, 30, 1.0), 'roof', 'roof'), rx=rx, ry=ry, rz=rz, d=(x, -27, 6.0)))
+    house = [box((-3, -27, hh - 1.2), (86.3, 44.3, 1.6), 'house'), box((-12, 22, 13.0), (66.2, 34.2, 1.0), 'house')]
+    bones = [dict(name='ROOTTRANSFORM', parent=-1, pos=[0, 0, 0]),
+             dict(name='DOOR01', parent=0, pos=[GX + 0.6, GY - GW / 2, 0.6]),
+             dict(name='DOOR02', parent=0, pos=[GX + 0.6, GY + GW / 2, 0.6])]
+    meshes = [('BASE', 'ROOTTRANSFORM', 'solid', merge(base)), ('HOUSECOLOR01', 'ROOTTRANSFORM', 'house', merge(house))]
+    # створка: от петли вдоль +Y (DOOR01) или -Y (DOOR02), толщина 0.5, лицо 'door' наружу (+X)
+    for k, sg in ((1, 1), (2, -1)):
+        leaf = box((0.25, sg * GW / 4, GH / 2), (0.5, GW / 2, GH), 'dark', 'dark', front='door')
+        if E and k == 1: continue                                                 # сорвана: лежит перед воротами
+        meshes.append((f'DOOR{k}', f'DOOR0{k}', 'solid', leaf))
+    if E:
+        meshes[0] = ('BASE', 'ROOTTRANSFORM', 'solid', merge([meshes[0][3], xform(box((0, 0, 0), (GW / 2, 0.5, GH), 'door'), rx=math.radians(88), d=(GX + 8, GY - 4, 1.0))]))
+    bones += [dict(name='SMOKE01', parent=0, pos=[-46, 42, 37.5 if not E else 12.5]), dict(name='SMOKE02', parent=0, pos=[-20, -27, hh + 1]),
+              dict(name='SMOKE03', parent=0, pos=[-12, 22, 15]), dict(name='SMOKE04', parent=0, pos=[38, 33, 13]),
+              dict(name='FIRE01', parent=0, pos=[10, -30, hh + 0.5]), dict(name='FIRE02', parent=0, pos=[-30, 20, 14.8])]
+    anim = None
+    if not E:
+        n = 30   # открытие за 1 с, плавно; DOOR01 поворачивается на -90 (к +X), DOOR02 на +90
+        ease = [0.5 - 0.5 * math.cos(math.pi * f / (n - 1)) for f in range(n)]
+        anim = (n, 30, {'DOOR01': [(0, 0, -math.sin(math.pi / 4 * e), math.cos(math.pi / 4 * e)) for e in ease],
+                        'DOOR02': [(0, 0, math.sin(math.pi / 4 * e), math.cos(math.pi / 4 * e)) for e in ease]})
+    return bones, meshes, anim
+
+MODELS = dict(RUZOOPARK=zoopark, RUPOWER=powerplant, RUWARFACT=warfactory)
 
 # ---------------------------------------------------------------- текстуры
 def textures(name):
@@ -224,6 +275,19 @@ def textures(name):
         t[:12, :] = (40, 38, 36)                                                          # копоть на срезе
         d = fill('door', olive); d[:, 4::10] -= 22; d[:, 5::10] += 10                   # ворота зала: рулонные
         d[24:128, 20:108] = (84, 88, 80); d[26:128:5, 20:108] -= 22; d[24:26, 18:110] = 40
+    if name == 'RUWARFACT':
+        t = fill('array', (128, 62, 46), 6, 8)                                          # кирпич: ряды 8 px со сдвигом
+        t[::8, :] = (150, 140, 128)
+        for r in range(0, 128, 16): t[r:r + 8, ::16] = (150, 140, 128); t[r + 8:r + 16, 8::16] = (150, 140, 128)
+        k = fill('cabin', (138, 136, 124), 5, 8); k[:, ::6] -= 14                        # цех: профлист, светлый
+        k[18:42, :] = (70, 82, 88); k[18:42, ::16] = (50, 52, 50); k[18:20, :] = 60; k[40:42, :] = 60   # ленточное остекление
+        g = fill('grille', (128, 62, 46), 6, 8)                                         # фасад управления: окна по этажам
+        for y in range(10, 128, 40):
+            for x in range(8, 128, 24): g[y:y + 22, x:x + 14] = (66, 80, 88); g[y + 10:y + 11, x:x + 14] = 50
+        d = fill('door', (84, 92, 64), 4, 6)                                            # створка: стальной лист с рамой и диагональю
+        d[:6, :] = d[-6:, :] = d[:, :6] = d[:, -6:] = (56, 62, 44)
+        for i in range(128): d[i, max(0, i - 3):i + 3] = (64, 70, 50)
+        d[60:68, 100:110] = 150
     clean = np.clip(a, 0, 255)
     soot = np.clip(noise(A, A, 48, 1.0), 0, None)
     dam = np.clip(clean * (1 - 0.55 * np.clip(soot, 0, 1)[..., None]) * 0.85, 0, 255)
@@ -294,6 +358,7 @@ def preview():
             o = bpy.data.objects.new(v + m['name'], me); col.objects.link(o)
             p = Vector(bp[m['bone']]); o.location = p + Vector((0, (i * 22 - 33) * k, 0))
             if (m['bone'] == 'ANTENNA01' or m['bone'].startswith('FAN')) and turn: o.rotation_euler = (0, 0, math.radians(turn))
+            if m['bone'].startswith('DOOR') and turn: o.rotation_euler = (0, 0, math.radians(-turn if m['bone'] == 'DOOR01' else turn))
     sc = bpy.context.scene; sc.render.resolution_x, sc.render.resolution_y = 1600, 800
     w = bpy.data.worlds.new('w'); sc.world = w; w.color = (0.5, 0.5, 0.5)
     sun = bpy.data.objects.new('sun', bpy.data.lights.new('sun', 'SUN')); sun.data.energy = 3.5; sun.rotation_euler = (0.7, 0.3, 2.4); col.objects.link(sun)
