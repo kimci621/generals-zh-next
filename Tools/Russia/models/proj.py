@@ -20,7 +20,8 @@ PAL = dict(olive=(86, 96, 58), dkolive=(58, 64, 40), grey=(150, 154, 150), white
            blgrey=(118, 128, 132), metal=(120, 120, 116), glass=(20, 34, 44), green=(70, 88, 62))
 NAMES = list(PAL)
 def swatch_uv(c):
-    i = NAMES.index(c); return ((i % 4) * 32 + 16) / 128, ((i // 4) * 32 + 16) / 128
+    # v в W3D снизу вверх (как в bld.ruv): строка y картинки -> v = 1 - y / 128
+    i = NAMES.index(c); return ((i % 4) * 32 + 16) / 128, 1 - ((i // 4) * 32 + 16) / 128
 
 # ---------- геометрия: список (verts, normals, uvs, tris) на часть
 def rot_x(p, a):
@@ -242,7 +243,7 @@ def preview():
             uv = me.uv_layers.new(name='UVMap')
             for poly in me.polygons:
                 for li in poly.loop_indices:
-                    u = m['uvs'][me.loops[li].vertex_index]; uv.data[li].uv = (u[0], 1 - u[1])
+                    u = m['uvs'][me.loops[li].vertex_index]; uv.data[li].uv = (u[0], u[1])
             me.materials.append(mr if m['kind'] == 'rotor' else ms)
             o = bpy.data.objects.new(name + m['name'], me); col.objects.link(o)
             o.location = ((i % 3) * 20 - 20, -(i // 3) * 14 + 7, 0)
