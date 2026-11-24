@@ -74,6 +74,12 @@ def dump(path):
                     for t2, so in arr:
                         if t2 == 0x704:
                             bi, = struct.unpack_from('<I', so); print('  SUB', 'bone', bi, cstr(so[4:36]), '(aggregate)' if tt == 0x706 else '')
+        elif t == 0x200:
+            h = one(d, 0x201); print('ANIM', cstr(h[4:20]), 'hier', cstr(h[20:36]), 'frames/fps', struct.unpack_from('<II', h, 36))
+            for tt, c in d:
+                if tt == 0x202:
+                    f0, f1, vl, ty, piv, _ = struct.unpack_from('<6H', c)
+                    print(f'  CHAN pivot {piv} type {ty} frames {f0}-{f1} first {tuple(round(x, 3) for x in struct.unpack_from(f"<{vl}f", c, 12))}')
         elif t == 0x740:
             print('BOX', cstr(d[8:40]), 'center', struct.unpack_from('<3f', d, 52), 'extent', struct.unpack_from('<3f', d, 64))
         else:
@@ -128,10 +134,21 @@ def make_mesh(tpl, container, m, tex):
                        [0x48, [[0x49, struct.pack('<I', 0)], [0x4A, b''.join(struct.pack('<2f', *u) for u in U)]]]]])
     return out
 
-def build(mesh_json, out_path, name, tex, keep, retail, rot=None, origin=None):
+def anim_chunk(name, nframes, fps, quats):
+    """ANIMATION (0x200): имя анимации = имя иерархии; quats = {индекс кости: [(x, y, z, w) на каждый кадр]}.
+    Поворот канала Q движок кладёт поверх базового поворота кости."""
+    hdr = struct.pack('<I', 0x00040001) + name16(name) + name16(name) + struct.pack('<II', nframes, fps)
+    ch = [[0x201, hdr]]
+    for piv, qs in sorted(quats.items()):
+        assert len(qs) == nframes, (piv, len(qs))
+        ch.append([0x202, struct.pack('<6H', 0, nframes - 1, 4, 6, piv, 0) + b''.join(struct.pack('<4f', *q) for q in qs)])
+    return [0x200, ch]
+
+def build(mesh_json, out_path, name, tex, keep, retail, rot=None, origin=None, anim=None):
     """Пишет <name>.W3D: иерархия из костей mesh.json, меши из keep (имена), текстуры tex[kind].
     retail: dict(solid=, house=, treads=, muzzle=) -> (chunks, mesh name) шаблоны и вспышка выстрела.
-    origin: кость, которая встаёт в начало координат (обломок крутится вокруг себя, а не вокруг земли)."""
+    origin: кость, которая встаёт в начало координат (обломок крутится вокруг себя, а не вокруг земли).
+    anim: (кадров, fps, {имя кости: [кватернионы по кадрам]}) -> анимация <name>.<name> в том же файле."""
     import json
     M = json.load(open(mesh_json)); bones = M['bones']; bi = {b['name']: i for i, b in enumerate(bones)}
     rot = rot or {}
@@ -153,6 +170,8 @@ def build(mesh_json, out_path, name, tex, keep, retail, rot=None, origin=None):
         chunks.append([0x00, mm]); subs.append((bi['MUZZLEFX01'], f'{name}.MUZZLEFX01'))
     arr = [[0x703, struct.pack('<If', len(subs), 3.4028235e38)]] + [[0x704, struct.pack('<I', b) + name16(n, 32)] for b, n in subs]
     chunks.append([0x700, [[0x701, struct.pack('<II', 0x00010000, 1) + name16(name) + name16(name)], [0x702, arr]]])
+    if anim:
+        nf, fps, q = anim; chunks.append(anim_chunk(name, nf, fps, {bi[b]: v for b, v in q.items()}))
     open(out_path, 'wb').write(ser(chunks))
     return len(subs)
 

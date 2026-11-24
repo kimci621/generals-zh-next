@@ -1,0 +1,16 @@
+# R8.6: three own Zoopark radars for a picture, power plants behind so the arrays turn. The health
+# action skips structures (no AI), so the damaged models are seen with a scratch INI overlay that sets
+# RUZOOPARK_D / RUZOOPARK_E as the default model. Draws, so -win:
+#
+#   generals -win -xres 1600 -yres 900 -quickstart -noshellmap -observer -multiInstance
+#     -map "Maps\Twilight Flame\Twilight Flame.map" -autoskirmish 3 -takeover
+#     -side 0 FactionRussia -side 1 FactionRussia -side 2 FactionRussia -seed 7
+#     -scenario russia_zoopark -cinema nohud -freecam 3300 3760 300 50 -45 -screenshot 200 -maxframes 210
+#
+# Two runs with -screenshot 200 and 240 show the array turned by 60 degrees.
+20    spawn      0  RussiaPowerPlant      1   3360 3960
+20    spawn      1  RussiaPowerPlant      1   3420 3960
+20    spawn      2  RussiaPowerPlant      1   3480 3960
+20    spawn      0  RussiaZoopark         1   3340 3880
+20    spawn      1  RussiaZoopark         1   3400 3880
+20    spawn      2  RussiaZoopark         1   3460 3880
