@@ -76,8 +76,9 @@ CC_POWERS = ["Command_RussiaFAB", "Command_RussiaKinzhal", "Command_RussiaVDV", 
 WEAPONS = [
     ("RussiaAK12", "RangerAdvancedCombatRifle", {"PrimaryDamage": 4.0, "AttackRange": 100.0}),
     ("RussiaVerbaMissile", "MissileDefenderMissileWeapon", {"PrimaryDamage": 45.0, "AttackRange": 225.0, "AntiGround": "No"}),
-    ("RussiaKornetMissile", "ChinaInfantryTankHunterMissileLauncher", {"PrimaryDamage": 60.0, "AttackRange": 250.0}),
-    ("RussiaFPVDrone", "ChinaInfantryTankHunterMissileLauncher", {"PrimaryDamage": 50.0, "AttackRange": 300.0}),
+    ("RussiaKornetMissile", "ChinaInfantryTankHunterMissileLauncher", {"PrimaryDamage": 60.0, "AttackRange": 250.0, "ProjectileObject": "RussiaKornetProjectile"}),
+    ("RussiaFPVDrone", "ChinaInfantryTankHunterMissileLauncher", {"PrimaryDamage": 50.0, "AttackRange": 300.0, "ProjectileObject": "RussiaFPVDroneProjectile",
+                                                                     "ProjectileExhaust": None, "VeterancyProjectileExhaust": None}),
     ("RussiaGRURifle", "RangerAdvancedCombatRifle", {"PrimaryDamage": 3.0, "AttackRange": 150.0}),
     ("RussiaBTR30mm", "HumveeGun", {"PrimaryDamage": 7.0, "AttackRange": 175.0}),
     ("RussiaBMP3Gun", "CrusaderTankGun", {"PrimaryDamage": 45.0, "DelayBetweenShots": 1000}),
@@ -86,11 +87,13 @@ WEAPONS = [
     ("RussiaTOS2Salvo", "InfernoCannonGun", {"PrimaryDamage": 100.0, "PrimaryDamageRadius": 50.0, "AttackRange": 250.0, "DelayBetweenShots": 1800}),
     ("RussiaMstaShell", "NukeCannonGun", {"PrimaryDamage": 140.0, "PrimaryDamageRadius": 30.0, "DelayBetweenShots": 4000, "ProjectileDetonationOCL": None}),
     ("RussiaTornadoSalvo", "TomahawkMissileWeapon", {"PrimaryDamage": 50.0, "PrimaryDamageRadius": 30.0, "AttackRange": 400.0,
-                                                    "ClipSize": 4, "DelayBetweenShots": 200, "ClipReloadTime": 8000}),
+                                                    "ClipSize": 4, "DelayBetweenShots": 200, "ClipReloadTime": 8000,
+                                                    "ProjectileObject": "RussiaGradRocket"}),
     ("RussiaLancetMunition", "TomahawkMissileWeapon", {"PrimaryDamage": 80.0, "AttackRange": 450.0, "ClipReloadTime": 6000,
-                                                   "DamageType": "INFANTRY_MISSILE"}),  # решётки режут INFANTRY_MISSILE
-    ("RussiaTorMissile", "PatriotMissileWeaponAir", {"PrimaryDamage": 30.0, "AttackRange": 300.0}),
-    ("RussiaBukMissile", "PatriotMissileWeaponAir", {"PrimaryDamage": 35.0, "AttackRange": 400.0}),
+                                                   "DamageType": "INFANTRY_MISSILE", "ProjectileObject": "RussiaLancetProjectile",
+                                                   "ProjectileExhaust": None, "VeterancyProjectileExhaust": None}),  # решётки режут INFANTRY_MISSILE
+    ("RussiaTorMissile", "PatriotMissileWeaponAir", {"PrimaryDamage": 30.0, "AttackRange": 300.0, "ProjectileObject": "RussiaTorProjectile"}),
+    ("RussiaBukMissile", "PatriotMissileWeaponAir", {"PrimaryDamage": 35.0, "AttackRange": 400.0, "ProjectileObject": "RussiaBukProjectile"}),
     ("RussiaSu34GuidedFAB", "AuroraBombWeapon", {"AttackRange": 450.0}),  # апгрейд УМПК, ручной WeaponSet
 ]
 # R3.8 Орешник: 6 пусков (OCL) крылатой ракеты с разбросом, боеголовка Scud Storm без отравления

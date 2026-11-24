@@ -18,8 +18,8 @@ P14 Text for players: UI strings in game language (ru+en at least); Russian text
 
 ## STATE
 NOW: -
-LAST: R8.4 T-72 cages+Relikt parts 2026-11-23 (in-game look NOT checked by user yet).
-NEXT-NOTE: R8 queue (user-approved 2026-11-23): 1 done (R8.4) 2 missiles+drones 3 buildings w/ animation (W3D anim writer needed; footprint = source Geometry) 4 vehicles 1/session 5 weapon sounds 6 aircraft 7 infantry (decide: rig or keep reskins). Every model: _D, wreck, debris, shadow check; user review every 2-3 models.
+LAST: R8.5 own projectiles 2026-11-24 (in-game look of R8.4+R8.5 NOT checked by user yet).
+NEXT-NOTE: R8 queue (user-approved 2026-11-23): 1 done (R8.4) 2 done (R8.5) 3 buildings w/ animation (W3D anim writer needed; footprint = source Geometry) 4 vehicles 1/session 5 weapon sounds 6 aircraft 7 infantry (decide: rig or keep reskins). Every model: _D, wreck, debris, shadow check; user review every 2-3 models.
 BLOCKERS: -
 
 ## DECISIONS (user-approved 2026-11-22, do not change without user)
@@ -41,7 +41,7 @@ F7 Engine modules already in fork (from Turkiye): JammerUpdate, RadarJamSpecialP
 F8 Vanilla refs: derrick 200/12s +1000 capture, `UpgradedBoost = UpgradeType:Upgrade_AmericaSupplyLines Boost:20`. Black Market 20/2s. Cash Hack 1000/2000/4000. Reloads: Nuke 360s, Scud 300s, Particle 240s. Extract vanilla INI: `python3 -I ~/Games/Generals/tools/bigx.py ~/Games/Generals/GeneralsZH/INIZH.big <out> <substr>`.
 F9 Series: `python3 Tools/Russia/series.py --seeds 1-6 --maps rmg|<map>,.. --pairs A:B,.. --swap --parallel 6 --maxframes 54000 --out $TMPDIR/x.csv` (winner from HEADLESS PLAYER WON; frame cap -> none). Balance tools (author): Tools/Balance/{unitmatrix,duel,siege,calibrate,compare,duel_report}.py; script tool Tools/ScbTool; ours ~/Games/Generals/tools/scb.py.
 F10 Strings: Data/Patch.str + Data/<Lang>/Generals.str (check which carries English in R0.2).
-F12 Own models (R8, D2 changed by user 2026-11-23: own models instead of reskins): Gemini ortho refs (side/top/front/rear + burnt) -> Tools/Russia/models/<unit>/config.json pixel landmarks -> `uv run Tools/Russia/models/contours.py <dir>` -> `uv run .../atlas.py <dir>` -> `blender -b --factory-startup --python .../build.py -- <dir>` -> `python3 -I .../make.py <dir> <retail W3D dir: avcrusader.W3D, NVBtMstr.W3D from W3DZH.big>` -> Art/W3D + Art/Textures. INI by hand below `;; RUSSIA MODELS` in RussiaReforged.ini. ReplaceModule must name the tag after Balance/Fixes Reforged (e.g. ModuleTag_01_Reforged), check log for 'was not found'. Budget ~3k tris (EA tanks 250-450). Atlas 1024 (user 2026-11-23, repo size).
+F12 Own models (R8, D2 changed by user 2026-11-23: own models instead of reskins): Gemini ortho refs (side/top/front/rear + burnt) -> Tools/Russia/models/<unit>/config.json pixel landmarks -> `uv run Tools/Russia/models/contours.py <dir>` -> `uv run .../atlas.py <dir>` -> `blender -b --factory-startup --python .../build.py -- <dir>` -> `python3 -I .../make.py <dir> <retail W3D dir: avcrusader.W3D, NVBtMstr.W3D from W3DZH.big>` -> Art/W3D + Art/Textures. INI by hand below `;; RUSSIA MODELS` in RussiaReforged.ini. ReplaceModule must name the tag after Balance/Fixes Reforged (e.g. ModuleTag_01_Reforged), check log for 'was not found'. Budget ~3k tris (EA tanks 250-450). Atlas 1024 (user 2026-11-23, repo size). Projectiles: `uv run Tools/Russia/models/proj.py <dir with avcrusader.W3D>` (primitives, no refs), preview `blender -b --factory-startup --python .../proj.py -- preview`; objects under `; Projectiles` in RUSSIA MODELS, ProjectileObject set in gen.py WEAPONS.
 F11 Disk tight (~19 GB free). Run dirs in $TMPDIR, delete after.
 
 ## DATA (start values; R1 refines. src=reskin source; cost; req)
@@ -80,6 +80,8 @@ BALANCE TARGETS (user 2026-11-22: max 10 games per opponent general, iterate fas
 
 ### R8 own models (queue in STATE NEXT-NOTE)
 [x] R8.4 T-72 upgrade parts: slat cages + Relikt blocks as hidden sub-objects, SubObjectsUpgrade shows them => headless match with both upgrades clean, sub-objects in W3D, preview renders with/without.
+[x] R8.5 own projectiles (queue item 2): Tools/Russia/models/proj.py builds W3D from primitives (lathe, fins, boxes, rotor discs; swatch texture RUProj). Models: FPV quad, Lancet, Kornet ATGM, Tornado-G rocket, Buk 9M317, Tor 9M338. Objects = ObjectReskin of current vanilla projectile + own Draw (behaviour unchanged); gen.py sets ProjectileObject. Out of scope: Verba (tiny), Oreshnik/Kinzhal (power visuals), Orlan-10 -> aircraft item 6. => W3D roundtrip ok, previews look right, headless series with all 6 weapons fired, no INI/model errors.
+
 
 ## F12 HOOKS (R0.2)
 place | what | Russia
@@ -158,4 +160,5 @@ R8.1 | 5022 tris (Battlemaster 265) | contour_eps 8 -> 3162, same look; LOD only
 2026-11-23 R7 portraits: 45 Gemini photos (T14 redone: no painted markings), atlas+wiring, in-game check HQ/dozer panels.
 2026-11-23 R8.1 own T-72B3M (RUT72): 3162 tris, alive/damaged/wreck/turret, treads+wheels+pitch; headless Russia-China clean; user tested in game: ok.
 2026-11-23 R8.4 T-72 parts: CAGES01/02 (slats hull sides+rear, turret basket) RELIKT01/02 (skirts, glacis, turret roof+front), +1884 tris only when bought; hidden in default state, SubObjectsUpgrade x2; 3 headless Russia-China rmg clean, bot bought Cages 3/3 Relikt 2/3; headless draws nothing -> look checked only in Blender preview.
+2026-11-24 R8.5 proj.py: RUFPV 412 tris, RULANCET 292, RUKORNET 212, RUGRAD 248, RUBUKM 256, RUTORM 236; RUProj.tga 128 swatches + RUProjRotor.tga alpha (shader from TRKARGU.ROTORS); FPV/Lancet lost smoke exhaust; 6 headless Russia vs USA/China rmg clean, all 6 launchers built 5-6/6, Lancet/FPV projectiles seen in AI DEFLOSS; headless draws nothing -> look checked only in Blender preview.
 2026-11-23 R8.2 tooltip audit vs INI: Cages renamed + text, Relikt 20%->10% text, Veterans RPG removed from text; rest match.
