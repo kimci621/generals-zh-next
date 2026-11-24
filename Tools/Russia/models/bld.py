@@ -21,7 +21,8 @@ REG = dict(concrete=(0, 0, 256, 256), cabin=(256, 0, 384, 128), olive=(384, 0, 5
            curb=(128, 384, 256, 512), door=(256, 384, 384, 512), house=(384, 384, 512, 512))
 
 def ruv(reg, s, t):
-    x0, y0, x1, y1 = REG[reg]; return ((x0 + 1 + s * (x1 - x0 - 2)) / A, (y0 + 1 + t * (y1 - y0 - 2)) / A)
+    # v в W3D снизу вверх, как в Blender (у Т-72 так же): строка y картинки -> v = 1 - y / A
+    x0, y0, x1, y1 = REG[reg]; return ((x0 + 1 + s * (x1 - x0 - 2)) / A, 1 - (y0 + 1 + t * (y1 - y0 - 2)) / A)
 
 def quad(p, reg):
     """Четырёхугольник p[0..3] (против часовой снаружи), область reg растянута на грань."""
@@ -44,20 +45,27 @@ def box(c, s, side, top=None, front=None, bottom=False):
     if bottom: f.append(quad([P(0, 1, 0), P(1, 1, 0), P(1, 0, 0), P(0, 0, 0)], side))
     return merge(f)
 
-def post(c, prof, reg, seg=8):
-    """Многогранный столб вокруг вертикали через c: prof [(z, r)], грани плоские, крышка сверху."""
+def post(c, prof, reg, seg=8, cap=True):
+    """Многогранный столб вокруг вертикали через c: prof [(z, r)], грани плоские, крышка сверху (cap=False - кольцо)."""
     f = []
     for (z0, r0), (z1, r1) in zip(prof, prof[1:]):
         for k in range(seg):
             a0, a1 = 2 * math.pi * k / seg, 2 * math.pi * (k + 1) / seg
             p = lambda a, z, r: (c[0] + r * math.cos(a), c[1] + r * math.sin(a), z)
             f.append(quad([p(a0, z0, r0), p(a1, z0, r0), p(a1, z1, r1), p(a0, z1, r1)], reg))
+    if not cap: return merge(f)
     z, r = prof[-1]
     cap = [(c[0] + r * math.cos(2 * math.pi * k / seg), c[1] + r * math.sin(2 * math.pi * k / seg), z) for k in range(seg)]
     m = merge(f); i0 = len(m['V'])
     m['V'] += cap; m['N'] += [(0, 0, 1)] * seg; m['U'] += [ruv(reg, 0.5 + 0.5 * math.cos(2 * math.pi * k / seg), 0.5 + 0.5 * math.sin(2 * math.pi * k / seg)) for k in range(seg)]
     m['T'] += [(i0, i0 + k, i0 + k + 1) for k in range(1, seg - 1)]
     return m
+
+def twosided(m):
+    """Добавляет изнанку (кольцо видно и изнутри)."""
+    o = len(m['V'])
+    return dict(V=m['V'] * 2, N=m['N'] + [tuple(-x for x in n) for n in m['N']], U=m['U'] * 2,
+                T=m['T'] + [(a + o, c + o, b + o) for a, b, c in m['T']])
 
 def merge(parts):
     V, N, U, T = [], [], [], []
@@ -119,10 +127,63 @@ def zoopark(state):
         anim = (n, 30, {'ANTENNA01': [(0, 0, math.sin(math.pi * f / n), math.cos(math.pi * f / n)) for f in range(n)]})
     return bones, meshes, anim
 
-MODELS = dict(RUZOOPARK=zoopark)
+# ---------------------------------------------------------------- Газотурбинная электростанция
+def powerplant(state):
+    """Площадка 52x66 (у китайской станции 54x68): машинный зал вдоль Y с воротами на +X, фильтры воздухозабора
+    на -X, две выхлопные трубы сзади, трансформаторы и блок воздушного охлаждения (АВО) с тремя вентиляторами.
+    Вентиляторы на костях FAN01-03 крутятся вокруг вертикали; в разбитом виде зал просел, труба лежит, лопастей нет."""
+    E = state == 'E'
+    hh = 7.0 if E else 14.0                                                      # высота зала
+    # площадка уходит в грунт на 4: на склоне земля не проступает сквозь бетон
+    base = [box((0, 0, -1.5), (52, 66, 5.0), 'curb', 'concrete'),
+            box((-6, 4, 0.6 + hh / 2), (26, 40, hh), 'cabin', 'dark' if E else 'roof', front='door'),
+            box((-22, 4, 5.6), (6, 30, 10), 'grille', 'olive'),                  # фильтры воздухозабора
+            box((-6, -18, 4.6), (4, 4, 8), 'olive', 'dark'), box((-6, -21, 4.6), (12, 3, 3), 'olive', 'dark'),  # газоходы к трубам
+            box((17, 10, 2.6), (14, 30, 4.0), 'grille', 'back'),                 # корпус АВО
+            box((17, -22, 3.1), (7, 5, 5), 'grille', 'olive'), box((17, -14.5, 3.1), (7, 5, 5), 'grille', 'olive'),  # трансформаторы
+            box((-20, -27, 2.6), (8, 8, 4), 'cabin', 'roof', front='door'),      # пункт управления
+            box((4, -27, 0.9), (14, 0.6, 0.6), 'dark'), box((10, -18, 0.9), (0.6, 16, 0.6), 'dark')]  # кабельные лотки
+    for y in (-22, -14.5):                                                       # изоляторы на трансформаторах
+        base += [post((x, y + d), [(5.6, 0.35), (7.4, 0.25)], 'dark', 6) for x in (15.5, 18.5) for d in (-1, 1)]
+    for k, x in enumerate((-12, 0)):                                             # выхлопные трубы
+        tall = [(0.6, 2.8), (30.0, 2.2), (31.0, 2.4)]
+        if E and k == 1: tall = [(0.6, 2.8), (9.0, 2.6)]                         # обломанная
+        base.append(post((x, -24), tall, 'array', 10))
+    if E:                                                                        # упавшая верхушка второй трубы
+        base.append(xform(post((0, 0), [(0, 2.6), (20, 2.2)], 'array', 10), rx=math.radians(84), rz=math.radians(-35), d=(4, -22, 2.4)))
+        base.append(box((-6, 4, 1.4), (22, 30, 1.6), 'dark'))                   # завал внутри зала
+    # обечайки вентиляторов (кольца без крышки) и ступицы на корпусе АВО
+    for y in (0, 10, 20):
+        base.append(twosided(post((17, y), [(4.6, 4.6), (6.0, 4.6)], 'olive', 12, cap=False)))
+    house = [box((-6, 4, hh - 0.9), (26.3, 40.3, 1.2), 'house'), box((-22, 4, 10.8), (6.1, 30.1, 0.4), 'house')]
+    # всё размечено трубами к -Y; разворот на 180 градусов ставит трубы назад (к +Y), АВО налево, чтобы
+    # в обычном ракурсе трубы не закрывали зал
+    bones = [dict(name='ROOTTRANSFORM', parent=-1, pos=[0, 0, 0])]
+    meshes = [('BASE', 'ROOTTRANSFORM', 'solid', xform(merge(base), rz=math.pi)), ('HOUSECOLOR01', 'ROOTTRANSFORM', 'house', xform(merge(house), rz=math.pi))]
+    fans = []
+    for k, y in enumerate((0, 10, 20)):
+        b = f'FAN0{k + 1}'; bones.append(dict(name=b, parent=0, pos=[17, y, 5.2])); fans.append(b)
+        if E and k != 1: continue                                                # в руинах осталась одна крыльчатка
+        blades = [post((0, 0), [(-0.2, 0.7), (0.5, 0.5)], 'dark', 8)]
+        blades += [xform(box((2.3, 0, 0), (3.6, 1.1, 0.12), 'curb'), rx=math.radians(18), rz=math.pi / 2 * j) for j in range(4)]
+        fan = merge(blades)
+        if E: fan = xform(fan, rx=math.radians(25), d=(0, 0, -0.6))
+        meshes.append((f'FAN{k + 1}', b, 'solid', fan))
+    bones += [dict(name='SMOKE01', parent=0, pos=[-12, -24, 31.5]), dict(name='SMOKE02', parent=0, pos=[0, -24, 9.5 if E else 31.5]),
+              dict(name='SMOKE03', parent=0, pos=[-10, 10, hh + 0.5]), dict(name='SMOKE04', parent=0, pos=[17, 10, 5]),
+              dict(name='FIRE01', parent=0, pos=[-2, 0, hh + 0.5]), dict(name='FIRE02', parent=0, pos=[17, -22, 5.8])]
+    bones += [dict(name=f'SPARK0{i + 1}', parent=0, pos=[x, y, 7.6]) for i, (x, y) in enumerate(((15.5, -23), (18.5, -21), (15.5, -15.5), (18.5, -13.5)))]
+    for b in bones: b['pos'] = [-b['pos'][0], -b['pos'][1], b['pos'][2]]
+    anim = None
+    if not E:
+        n = 45 if state == '' else 90   # оборот за 1.5 с, у повреждённой за 3 с; фазы вентиляторов разные
+        anim = (n, 30, {b: [(0, 0, math.sin(math.pi * f / n + 0.4 * k), math.cos(math.pi * f / n + 0.4 * k)) for f in range(n)] for k, b in enumerate(fans)})
+    return bones, meshes, anim
+
+MODELS = dict(RUZOOPARK=zoopark, RUPOWER=powerplant)
 
 # ---------------------------------------------------------------- текстуры
-def textures():
+def textures(name):
     import numpy as np
     from PIL import Image
     rng = np.random.default_rng(7)
@@ -158,6 +219,11 @@ def textures():
     m = fill('mast', olive); m[::24, :] -= 25; m[12::24, 6::16] += 40
     fill('curb', (130, 128, 120), 7, 10)
     fill('house', (200, 200, 200), 2, 0)
+    if name == 'RUPOWER':
+        t = fill('array', (118, 116, 110), 5, 8); t[::21, :] -= 30; t[1::21, :] += 12   # труба: сталь, кольца швов
+        t[:12, :] = (40, 38, 36)                                                          # копоть на срезе
+        d = fill('door', olive); d[:, 4::10] -= 22; d[:, 5::10] += 10                   # ворота зала: рулонные
+        d[24:128, 20:108] = (84, 88, 80); d[26:128:5, 20:108] -= 22; d[24:26, 18:110] = 40
     clean = np.clip(a, 0, 255)
     soot = np.clip(noise(A, A, 48, 1.0), 0, None)
     dam = np.clip(clean * (1 - 0.55 * np.clip(soot, 0, 1)[..., None]) * 0.85, 0, 255)
@@ -186,7 +252,8 @@ def build(ret):
     retail = dict(solid=(cru, 'CHASSIS'), house=(cru, 'HOUSECOLOR01'))
     os.makedirs(OUT, exist_ok=True)
     for name, fn in MODELS.items():
-        tex = textures()
+        if len(sys.argv) > 2 and name not in sys.argv[2:]: continue
+        tex = textures(name)
         for suf, im in tex.items():
             im.save(os.path.join(OUT, f'{name}{suf}.png')); dds(im, os.path.join(ART, 'Textures', f'{name}{suf}.dds'))
         for st, tsuf in (('', ''), ('D', '_D'), ('E', '_B')):
@@ -213,6 +280,8 @@ def preview():
         bs = nt.nodes['Principled BSDF']; nt.links.new(t.outputs[0], bs.inputs['Base Color']); bs.inputs['Roughness'].default_value = 0.8
         mats[path] = m; return m
     name = sys.argv[sys.argv.index('--') + 2] if len(sys.argv) > sys.argv.index('--') + 2 else 'RUZOOPARK'
+    M0 = json.load(open(os.path.join(OUT, f'{name}.json')))
+    k = max(1.0, max(abs(x[1]) for x in M0['meshes'][0]['verts']) / 7.5)   # масштаб сцены по размеру здания
     for i, (v, tex, turn) in enumerate(((name, '', 0), (name, '', 90), (name + '_D', '_D', 0), (name + '_E', '_B', 0))):
         M = json.load(open(os.path.join(OUT, f'{v}.json'))); bp = {b['name']: b['pos'] for b in M['bones']}
         for m in M['meshes']:
@@ -220,16 +289,16 @@ def preview():
             uv = me.uv_layers.new(name='UVMap')
             for poly in me.polygons:
                 for li in poly.loop_indices:
-                    u = m['uvs'][me.loops[li].vertex_index]; uv.data[li].uv = (u[0], 1 - u[1])
+                    u = m['uvs'][me.loops[li].vertex_index]; uv.data[li].uv = (u[0], u[1])
             me.materials.append(mat(os.path.join(OUT, f'{name}{tex}.png') if m['kind'] == 'solid' else os.path.join(OUT, f'{name}.png')))
             o = bpy.data.objects.new(v + m['name'], me); col.objects.link(o)
-            p = Vector(bp[m['bone']]); o.location = p + Vector((0, i * 22 - 33, 0))
-            if m['bone'] == 'ANTENNA01' and turn: o.rotation_euler = (0, 0, math.radians(turn))
+            p = Vector(bp[m['bone']]); o.location = p + Vector((0, (i * 22 - 33) * k, 0))
+            if (m['bone'] == 'ANTENNA01' or m['bone'].startswith('FAN')) and turn: o.rotation_euler = (0, 0, math.radians(turn))
     sc = bpy.context.scene; sc.render.resolution_x, sc.render.resolution_y = 1600, 800
     w = bpy.data.worlds.new('w'); sc.world = w; w.color = (0.5, 0.5, 0.5)
     sun = bpy.data.objects.new('sun', bpy.data.lights.new('sun', 'SUN')); sun.data.energy = 3.5; sun.rotation_euler = (0.7, 0.3, 2.4); col.objects.link(sun)
-    cam = bpy.data.objects.new('c', bpy.data.cameras.new('c')); col.objects.link(cam); cam.data.type = 'ORTHO'; cam.data.ortho_scale = 100
-    cam.location = Vector((60, -20, 50)); cam.rotation_euler = (Vector((0, 0, 6)) - cam.location).to_track_quat('-Z', 'Y').to_euler(); sc.camera = cam
+    cam = bpy.data.objects.new('c', bpy.data.cameras.new('c')); col.objects.link(cam); cam.data.type = 'ORTHO'; cam.data.ortho_scale = 100 * k
+    cam.location = Vector((60, -20, 50)) * k; cam.rotation_euler = (Vector((0, 0, 6 * k)) - cam.location).to_track_quat('-Z', 'Y').to_euler(); sc.camera = cam
     sc.render.filepath = os.path.join(OUT, f'{name}_preview.png'); bpy.ops.render.render(write_still=True)
 
 if __name__ == '__main__':

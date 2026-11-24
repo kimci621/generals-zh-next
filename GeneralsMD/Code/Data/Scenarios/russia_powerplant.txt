@@ -1,0 +1,11 @@
+# R8.7: three own gas turbine power plants for a picture (air-cooler fans turn, stacks steam). Draws, so -win:
+#
+#   generals -win -xres 1600 -yres 900 -quickstart -noshellmap -observer -multiInstance
+#     -map "Maps\Twilight Flame\Twilight Flame.map" -autoskirmish 3 -takeover
+#     -side 0 FactionRussia -side 1 FactionRussia -side 2 FactionRussia -seed 7
+#     -scenario russia_powerplant -cinema nohud -freecam 3330 3700 260 60 -40 -screenshot 200 -maxframes 210
+#
+# Runs with -screenshot 200 and 205 show the fans turned by 40 degrees.
+20    spawn      0  RussiaPowerPlant      1   3360 3900
+20    spawn      1  RussiaPowerPlant      1   3440 3900
+20    spawn      2  RussiaPowerPlant      1   3520 3900

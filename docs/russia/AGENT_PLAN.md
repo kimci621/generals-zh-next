@@ -18,8 +18,8 @@ P14 Text for players: UI strings in game language (ru+en at least); Russian text
 
 ## STATE
 NOW: -
-LAST: R8.6 Zoopark radar own model + W3D anim 2026-11-24 (in-game look of R8.4-R8.6 NOT checked by user yet).
-NEXT-NOTE: R8 queue (user-approved 2026-11-23): 1 done (R8.4) 2 done (R8.5) 3 buildings w/ animation (R8.6 Zoopark done; next PowerPlant, WarFactory, Pantsir pos, rest, one per session; bld.py) 4 vehicles 1/session 5 weapon sounds 6 aircraft 7 infantry (decide: rig or keep reskins). Every model: _D, wreck, debris, shadow check; user review every 2-3 models.
+LAST: R8.7 PowerPlant own model 2026-11-24; bld.py UV flip fixed (Zoopark textures were upside down in game). User has not seen R8.4-R8.7 in game yet.
+NEXT-NOTE: R8 queue (user-approved 2026-11-23): 1 done (R8.4) 2 done (R8.5) 3 buildings w/ animation (R8.6 Zoopark, R8.7 PowerPlant done; next WarFactory, Pantsir pos, rest, one per session; bld.py) 4 vehicles 1/session 5 weapon sounds 6 aircraft 7 infantry (decide: rig or keep reskins). Every model: _D, wreck, debris, shadow check; user review every 2-3 models.
 BLOCKERS: -
 
 ## DECISIONS (user-approved 2026-11-22, do not change without user)
@@ -82,6 +82,8 @@ BALANCE TARGETS (user 2026-11-22: max 10 games per opponent general, iterate fas
 [x] R8.4 T-72 upgrade parts: slat cages + Relikt blocks as hidden sub-objects, SubObjectsUpgrade shows them => headless match with both upgrades clean, sub-objects in W3D, preview renders with/without.
 [x] R8.5 own projectiles (queue item 2): Tools/Russia/models/proj.py builds W3D from primitives (lathe, fins, boxes, rotor discs; swatch texture RUProj). Models: FPV quad, Lancet, Kornet ATGM, Tornado-G rocket, Buk 9M317, Tor 9M338. Objects = ObjectReskin of current vanilla projectile + own Draw (behaviour unchanged); gen.py sets ProjectileObject. Out of scope: Verba (tiny), Oreshnik/Kinzhal (power visuals), Orlan-10 -> aircraft item 6. => W3D roundtrip ok, previews look right, headless series with all 6 weapons fired, no INI/model errors.
 [x] R8.6 buildings w/ animation (queue item 3), first = Zoopark radar: w3d.py writes ANIMATION chunk (Q channels per pivot); Tools/Russia/models/bld.py builds buildings from primitives + procedural 512 atlas (alive/_D damaged/_E rubble, bones Smoke01/02 Flame01 Spark01). Zoopark: pad, cabin, generator, pedestal, phased-array antenna rotating (loop). Draw ReplaceModule ModuleTag_01 (construction ModuleTag_02 kept), Geometry unchanged. => W3D roundtrip + anim frames parse, Blender preview, windowed game screenshot shows model (anim visible across 2 shots), headless match clean. Next buildings one per session: PowerPlant (turbine fans), WarFactory (door), Pantsir position, rest.
+[x] R8.7 PowerPlant own model (gas turbine plant): bld.py powerplant(), turbine hall + stacks + air-cooler fans turning (anim), _D/_E; Draw ReplaceModule ModuleTag_01 (scaffold 02-04 kept), POWER_PLANT_UPGRADED (Overcharge) spins fans faster + sparks. => W3D roundtrip, Blender preview, windowed scenario shot, headless match clean.
+[ ] R8.7b proj.py UVs: same V flip as bld.py had (swatch_uv row y -> v = y/128, game reads v bottom-up like T-72 export) -> projectile colours likely shifted a row; fix like bld.ruv, rebuild 6 projectiles, windowed check. Then next building WarFactory.
 
 
 ## F12 HOOKS (R0.2)
@@ -146,6 +148,7 @@ R5.0 | GLA bot beats every base faction (China 0-10, USA 0-8-2) | user chose own
 R5.0 | old note: Russia loses to GLA by own weakness | China control also 0-10 vs GLA same seeds; Russia trades 0.59 vs China's 0.49 | GLA fix = stronger own Russia scripts (not opponents'), ask user; vs China 10-0 too strong, suspect AA wall (CHANGELOG)
 R8.1 | ReplaceModule ModuleTag_01 on T72 | BalanceReforged renamed Battlemaster draw to ModuleTag_01_Reforged, death to ModuleTag_12_Reforged + 2 AddModules | replace those tags; own hull object RussiaVehicleT72DeadHull + OCL_RussiaT72Toss/Wreck
 R8.1 | 5022 tris (Battlemaster 265) | contour_eps 8 -> 3162, same look; LOD only if user sees lag
+R8.7 | bld.py UVs right (Zoopark looked ok in shots) | ruv wrote v = y/A, W3D v is bottom-up (T-72 export uses Blender v) -> every atlas region read from the mirrored row: pad showed olive panels, red test fill landed on cooler top | ruv v = 1 - y/A, preview reads v as is; Zoopark W3D rebuilt (textures unchanged); proj.py likely same -> R8.7b
 ## LOG (date ID result commit)
 2026-11-22 R0-R2: build ok, headless 33x RT, series 141/h; skeleton clean, China wins 5/5 vs skeleton.
 2026-11-22 R3: full roster+mechanics; powers fire (Cyber 13 FAB 18 Kinzhal 25 Orlan 77 ... EWSuppress 0); Oreshnik fires; talent effects and bot Oreshnik/EWSuppress/defenses NOT verified -> R4.
@@ -165,3 +168,4 @@ R8.1 | 5022 tris (Battlemaster 265) | contour_eps 8 -> 3162, same look; LOD only
 2026-11-24 R8.6 bld.py + w3d anim: RUZOOPARK 218 tris (pad, cabin, generator, mast, phased array on ANTENNA01 turning 8 s / 12 s damaged), _E array torn off lying on ground; 3 headless Russia-China rmg clean, Zoopark built in all 3; windowed scenario shots: frames 200/240 array turned, _D/_E via scratch INI overlay ok.
 2026-11-24 R8.6 user: Zoopark ok, but red rings. Rings = inherited China PropagandaTower pulse; unpowered tower showed none in a recorded run. PulseFX None (heal kept), video: no rings, powered array turns, unpowered stands.
 2026-11-23 R8.2 tooltip audit vs INI: Cages renamed + text, Relikt 20%->10% text, Veterans RPG removed from text; rest match.
+2026-11-24 R8.7 RUPOWER 684 tris (hall, 2 stacks, filters, 2 transformers, cooler with FAN01-03 1.5 s/turn, 3 s damaged, x2 Overcharge), _E hall caved, stack down, 1 fan; turned 180 so stacks stand behind in the usual view; pad 5 deep. Windowed shots N/S: textures right after UV fix, fans turn (frames 200/205); 2 headless Russia-China rmg clean, PP built; _D/_E seen only in Blender preview.
