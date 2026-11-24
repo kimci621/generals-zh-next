@@ -1,0 +1,12 @@
+# R8.9: image-to-3D tank plant (Tools/Russia/models/wf3d.py) beside the China war factory (Reforged art),
+# one BTR-82A queued so the gates open (~frame 240-320). Usual game camera from the south. Draws, so -win:
+#
+#   generals -win -xres 1600 -yres 900 -quickstart -noshellmap -observer -multiInstance
+#     -map "Maps\Twilight Flame\Twilight Flame.map" -autoskirmish 3 -takeover
+#     -side 0 FactionRussia -side 1 FactionChina -side 2 FactionRussia -seed 7
+#     -scenario russia_wf3d -cinema nohud -freecam 3470 3660 300 90 -40 -screenshot 200
+20    spawn    0  RussiaPowerPlant   1  3380 4010
+20    spawn    1  ChinaPowerPlant    1  3560 4010
+20    spawn    0  RussiaWarFactory   1  3380 3880
+20    spawn    1  ChinaWarFactory    1  3560 3880
+100   produce  0  RussiaWarFactory   RussiaVehicleBTR82A 1
