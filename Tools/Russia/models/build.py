@@ -228,6 +228,8 @@ rear_x = min(p.x for p in loop)
 B += [('TREADFX01', 1, (rear_x, -TO + TW / 2, 0.1)), ('TREADFX02', 1, (rear_x, TO - TW / 2, 0.1)),
       ('SMOKE01', 2, (-1.0, 0.6, TZ + 0.5)), ('SMOKE02', 1, (-2.4, 0.5, 1.7)), ('SMOKE03', 1, (2.5, -0.4, 1.5))]
 for nm, pos, _ in wheels: B.append((nm, 1, pos))
+# у каждой детали улучшения своя кость без детей: движок прячет деталь вместе со всем, что висит ниже её кости
+B += [('RELIKT02', 1, (0, 0, 0)), ('RELIKT01', 2, (0, 0, TZ)), ('CAGES02', 1, (0, 0, 0)), ('CAGES01', 2, (0, 0, TZ))]
 bi = {b[0]: i for i, b in enumerate(B)}
 
 def export(o, bone, tex, kind='solid'):
@@ -263,7 +265,7 @@ tex, trk = f'{NAME}.tga', f'{NAME}Trk.tga'
 meshes = [export(hull, 'CHASSIS', tex), export(tur, 'TURRET01', tex), export(barrel, 'BARREL01', tex)]
 meshes += [export(w, nm, tex) for nm, _, w in wheels]
 meshes += [export(t, 'CHASSIS', trk, 'treads') for t in treads]
-meshes += [export(relikt_h, 'CHASSIS', tex), export(relikt_t, 'TURRET01', tex), export(cages_h, 'CHASSIS', tex), export(cages_t, 'TURRET01', tex)]
+meshes += [export(relikt_h, 'RELIKT02', tex), export(relikt_t, 'RELIKT01', tex), export(cages_h, 'CAGES02', tex), export(cages_t, 'CAGES01', tex)]
 # погон без башни (только у подбитого корпуса): тёмный круг на палубе
 bm = bmesh.new(); uvr = bm.loops.layers.uv.new('UVMap')
 rv = [bm.verts.new((1.15 * math.cos(2 * math.pi * k / 20), 1.15 * math.sin(2 * math.pi * k / 20), TZ + 0.004)) for k in range(20)]
