@@ -1,4 +1,4 @@
-# R8.9: image-to-3D tank plant (Tools/Russia/models/wf3d.py) beside the China war factory (Reforged art),
+# R8.11: tank plant (Tools/Russia/models/wf3.py, blocks textured from ref.png) beside the China war factory (Reforged art),
 # one BTR-82A queued so the gates open (~frame 240-320). Usual game camera from the south. Draws, so -win:
 #
 #   generals -win -xres 1600 -yres 900 -quickstart -noshellmap -observer -multiInstance

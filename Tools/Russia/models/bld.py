@@ -180,7 +180,7 @@ def powerplant(state):
         anim = (n, 30, {b: [(0, 0, math.sin(math.pi * f / n + 0.4 * k), math.cos(math.pi * f / n + 0.4 * k)) for f in range(n)] for k, b in enumerate(fans)})
     return bones, meshes, anim
 
-MODELS = dict(RUZOOPARK=zoopark, RUPOWER=powerplant)   # RUWARFACT: models/wf3d.py (image-to-3D)
+MODELS = dict(RUZOOPARK=zoopark, RUPOWER=powerplant)   # RUWARFACT: models/wf3.py
 
 # ---------------------------------------------------------------- текстуры
 def textures(name):
