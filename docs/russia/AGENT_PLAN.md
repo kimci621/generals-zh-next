@@ -181,3 +181,4 @@ R8.8b | scenario shiftupgrade RussiaWarFactory Upgrade_RussiaCages | money uncha
 2026-11-24 R8.8b user review: T-72 turret hidden by parts' bone (fixed), Oreshnik too fast (dive from 900, 2x flight time), buildings too primitive -> R8.9 [?].
 2026-11-24 R8.9 RUWARFACT image-to-3D: Hunyuan3D-2mini (MPS), 7968 tris, 1024 baked texture, silhouette IoU 0.959; in game next to Reforged China WF: textured hall, brick office, smoking chimney, gates open; 3 headless Russia-China rmg clean (seed1 timeout, seed2 China won), WF built. Gate leaf backs use gate texture.
 2026-11-25 R8.11 RUWARFACT v3 wf3.py: 736 tris (_E 706), 1024 atlas from ref.png by homography, 3D chimney/6 vents/pipes/boxes, painted vents removed; user OK on look; 2 headless Russia-China rmg clean (seed1 timeout, seed2 China won).
+2026-11-25 R8.11b user: painted pipes still on roof. Flat roofs (office, boiler, low) interior from clean ref patch, annex hoods inpainted, 3D hoods 2x; in-game roof shot clean.

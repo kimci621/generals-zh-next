@@ -192,23 +192,36 @@ def faces():
     vents = [on(luv, lpx, (HX[0], EAVE, HZ[1]), (0, 0, -1), evl, p) for p in ((1010, 215), (910, 262), (762, 342), (622, 432))]
     vents += [on_cam((HX[1], EAVE, HZ[1]), nr, p) for p in ((1250, 268), (1068, 400))]
     # нарисованные вентиляторы на скатах: их рамки на ref.png; цвет оттуда берём со сдвигом вдоль конька
-    VBOX = [(986, 168, 1036, 226), (886, 218, 936, 274), (736, 300, 790, 356), (594, 376, 650, 446),
-            (1224, 224, 1280, 290), (1041, 348, 1097, 414)]
-    along = unit((1172 - 628, 180 - 487))
-    def clean(f):
+    # (рамка x0, y0, x1, y1, знак сдвига): задние (у торца) сдвигаем к воротам, чтобы не уйти с крыши
+    VBOX = [(986, 168, 1036, 226, -1), (886, 218, 936, 274, 1), (736, 300, 790, 356, 1), (594, 376, 650, 446, 1),
+            (1224, 224, 1280, 290, -1), (1041, 348, 1097, 414, 1)]
+    HBOX = [(1150, 575, 1215, 635, 1), (1272, 467, 1328, 522, -1)]    # колпаки на крыше пристройки
+    def clean(f, boxes, along, dist):
         def g(u, v):
             q = f(u, v)
             for _ in range(2):
                 m = np.zeros(q.shape[:-1], bool)
                 sh = np.zeros(q.shape[:-1])
-                for x0, y0, x1, y1 in VBOX:      # с тенью ниже рамки; задние (у торца) сдвигаем к воротам, чтобы не уйти с крыши
+                for x0, y0, x1, y1, sg in boxes:      # с тенью ниже рамки
                     k = (q[..., 0] > x0 - 4) & (q[..., 0] < x1 + 10) & (q[..., 1] > y0) & (q[..., 1] < y1 + 16)
-                    m |= k; sh = np.where(k, -1.0 if x0 > 950 else 1.0, sh)
-                q = np.where(m[..., None], q + 75 * sh[..., None] * along, q)
+                    m |= k; sh = np.where(k, float(sg), sh)
+                q = np.where(m[..., None], q + dist * sh[..., None] * along, q)
             return q
         return g
+    # плоские крыши: на ref там нарисованы трубопроводы, кондиционер и короба (они есть объёмными),
+    # поэтому середину крыши кроем чистым куском покрытия с ref (зеркальный повтор), край с парапетом оставляем
+    def plain(f, W, H, x0, y0, w, h, m=0.012, k=700.0):
+        mir = lambda t, n: np.where(np.mod(t, 2 * n) < n, np.mod(t, n), n - np.mod(t, n))
+        def g(u, v):
+            q = f(u, v); inn = (u > m) & (u < W - m) & (v > m) & (v < H - m)
+            pq = np.stack([x0 + mir(u * k, w), y0 + mir(v * k, h)], -1)
+            return np.where(inn[..., None], pq, q)
+        return g
     for f in F:
-        if f.name in ('roof_l', 'roof_r'): f.sample = clean(f.sample)
+        if f.name in ('roof_l', 'roof_r'): f.sample = clean(f.sample, VBOX, unit((1172 - 628, 180 - 487)), 75)
+        if f.name == 'annex_r': f.sample = clean(f.sample, HBOX, unit((1282 - 1040, 408 - 668)), 70)
+        if f.name in ('office_r', 'low_r'): f.sample = plain(f.sample, f.W, f.H, 200, 515, 45, 33)
+        if f.name == 'boil_r': f.sample = plain(f.sample, f.W, f.H, 360, 310, 50, 25)
     for v in vents:
         cyl.append(('vent', v - (0, 0.01, 0), v + (0, 0.035, 0), 0.016, 0.016, 8, False))
         cyl.append(('vent', v + (0, 0.035, 0), v + (0, 0.07, 0), 0.026, 0.02, 10, True))
@@ -230,7 +243,7 @@ def faces():
     cyl.append(('vent', on(buv, bpx, bo, (1, 0, 0), (0, 0, -1), (430, 302)), on(buv, bpx, bo, (1, 0, 0), (0, 0, -1), (430, 302)) + (0, 0.035, 0), 0.012, 0.012, 8, True))
     auv = [(0, 0), (0, rl), (ad, rl), (ad, 0)]; apx = [(1040, 668), (1180, 710), (1415, 455), (1282, 408)]
     for p in ((1178, 628), (1290, 498)):
-        box_.append(('hood', on(auv, apx, (AX[0], AHI, AZ[1]), (0, 0, -1), rev, p), (0.035, 0.03, 0.035)))
+        box_.append(('hood', on(auv, apx, (AX[0], AHI, AZ[1]), (0, 0, -1), rev, p), (0.07, 0.055, 0.07)))
     fuv = [(0, oh), (ow, oh), (ow, 0), (0, 0)]; fpx = [(38, 548), (390, 588), (390, 868), (40, 822)]
     dc = on(fuv, fpx, (OX[0], G, OZ[1]), (1, 0, 0), (0, 1, 0), (207, 770))
     box_ += [('canopy', (dc[0], dc[1], OZ[1] + 0.03), (0.15, 0.01, 0.06)),
